@@ -1,19 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const filepath = document.getElementById("filepath")
     const result = document.getElementById("result")
+    const preview = document.getElementById("preview")
     if (localStorage.Tools4BlogHatenaFilePath) {
         filepath.value = localStorage.Tools4BlogHatenaFilePath
     }
-
-    Tools4Blog.setOption({
-        formatter: {
-            tex: {
-                texStart: "[tex:",
-                texEnd: "]"
-            }
-        }
-    })
-
 
     setInterval(exec, 5000)
     exec()
@@ -28,7 +19,25 @@ document.addEventListener("DOMContentLoaded", () => {
         elem.onload = () => {
             localStorage.Tools4BlogHatenaFilePath = filepath.value
             // try {
-            result.value = Tools4Blog.exec().buildTree().innerHTML
+            const doc = Tools4Blog.exec()
+            result.value = doc.buildTree({
+                formatter: {
+                    tex: {
+                        texStart: "[tex:",
+                        texEnd: "]"
+                    }
+                }
+            }).innerHTML
+            preview.innerHTML = ""
+            preview.append(doc.buildTree({
+                formatter: {
+                    tex: {
+                        texStart: "\\( ",
+                        texEnd: "\\)"
+                    }
+                }
+            }))
+            MathJax.typesetPromise([preview])
             // } catch (e) {
             //     console.error("エラーが発生しました。" + e.message) // コンソールに沢山出ると嫌なのでまとめられるようにしておく
             // }

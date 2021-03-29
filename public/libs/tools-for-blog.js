@@ -10,7 +10,7 @@
 /**
  * @typedef {{
  *  formatter: Tools4BlogFormatter
- * }} Tools4BlogOption
+ * }} OutputOptions
  */
 
 const Tools4Blog = (() => {
@@ -46,7 +46,7 @@ const Tools4Blog = (() => {
         }
     })()
     class Doc {
-        /** @type {Tools4BlogOption} */
+        /** @type {OutputOptions} */
         _opt
         /**
          * @type {(P|Table|Header)[]}
@@ -120,8 +120,11 @@ const Tools4Blog = (() => {
         read(txt) {
             return this
         }
-        buildTree() {
-            return toElem("div", this._children)
+        /**
+         * @param {OutputOptions} options 
+         */
+        buildTree(options) {
+            return toElem("div", this._children, options)
         }
         a(...values) {
             const a = new A
@@ -130,16 +133,23 @@ const Tools4Blog = (() => {
         }
     }
     /**
-     * @typedef {Txt|Tex|B|Span} Inline
+     * @typedef {Txt|Tex|MultipeInlineContainer} Inline
      */
 
     // ======================================================================
 
-    function toElem(tagName, children) {
+    /**
+     * 
+     * @param {string} tagName 
+     * @param {(Inline)[]} children 
+     * @param {OutputOptions} options 
+     * @returns 
+     */
+    function toElem(tagName, children, options) {
         /** @type {HTMLElement} */
         const elem = document.createElement(tagName)
         children.forEach(child => {
-            elem.appendChild(child._toElem())
+            elem.appendChild(child._toElem(options))
         })
         return elem
     }
@@ -160,16 +170,9 @@ const Tools4Blog = (() => {
             this._children.push(new Txt(txt))
             return this
         }
-        tex(txt) {
-            this._children.push(new Tex(txt))
-            return this
-        }
         br() {
             this._children.push(new Br)
         }
-        /**
-         * @returns {string}
-         */
         tex(txt) {
             this._children.push(new Tex(txt))
             return this
@@ -212,8 +215,11 @@ const Tools4Blog = (() => {
         //     }
         //     return this
         // }
-        _toElem() {
-            return toElem(this._tagName, this._children)
+        /**
+         * @param {OutputOptions} options 
+         */
+        _toElem(options) {
+            return toElem(this._tagName, this._children, options)
         }
     }
     class Br {
@@ -235,15 +241,15 @@ const Tools4Blog = (() => {
                 } else if (typeof value == "string") {
                     return value
                 }
-            })/*.map(replaceTexTxt)*/.join("")
+            }).join("")
         }
         toString() {
             return this._txt
         }
-        _toElem() {
+        _toElem(/** @type {OutputOptions} */options) {
             return document.createTextNode(
                 options.formatter.tex.texStart
-                + replaceTexTxt(this._txt)
+                + replaceTexTxt(this._txt, options)
                 + options.formatter.tex.texEnd
             )
         }
@@ -266,8 +272,8 @@ const Tools4Blog = (() => {
             this._href = href
             return this
         }
-        _toElem() {
-            const elem = super._toElem()
+        _toElem(/** @type {OutputOptions} */options) {
+            const elem = super._toElem(options)
             elem.target = "_blank"
             elem.href = this._href
             return elem
@@ -298,8 +304,8 @@ const Tools4Blog = (() => {
             callback(tr)
             return this
         }
-        _toElem() {
-            return toElem("table", this._children)
+        _toElem(/** @type {OutputOptions} */options) {
+            return toElem("table", this._children, options)
         }
     }
 
@@ -330,8 +336,8 @@ const Tools4Blog = (() => {
             // });
             return this
         }
-        _toElem() {
-            return toElem("tr", this._children)
+        _toElem(/** @type {OutputOptions} */options) {
+            return toElem("tr", this._children, options)
         }
     }
 
@@ -363,38 +369,71 @@ const Tools4Blog = (() => {
         });
     }
 
-    /**
-     * @param {string} txt 
-     * @returns {string}
-     */
-    function replaceTexTxt(txt) {
-        // TODO とりあえずの実装。整形
-        return txt.replace(/φ/g, "\\varphi")
-            .replace(/｛/g, "\\{")
-            .replace(/｝/g, "\\}")
-            .replace(/<=/g, "\\le")
-            .replace(/</g, "\\lt")
-            .replace(/>=/g, "\\ge")
-            .replace(/\]/g, "\\]")
-            .replace(/∈/g, " \\in ")
+    const texReplaceMap = {
+        "≦": "\\le ",
+        "≧": "\\ge ",
+        "｛": "\\{",
+        "｝": "\\}",
+        "∈": " \\in ",
+        "∋": " \\ni ",
+        "φ": "\\varphi ",
+        "≡": "\\equiv ",
+        "<": "\\lt ",
+        ">": "\\gt ",
     }
 
     /**
-     * @type {Tools4BlogOption}
+     * @param {string} txt 
+     * @param {OutputOptions} options
+     * @returns {string}
      */
-    let options
+    function replaceTexTxt(txt, options) {
+        const result = []
+        const map = { ...texReplaceMap }
+        if (options.formatter.tex.texEnd.indexOf("]") >= 0) {
+            map["]"] = "\\]"
+        }
+        for (let i = 0; i < txt.length; i++) {
+            let replaced = map[txt[i]];
+            result.push(replaced == null ? txt[i] : replaced)
+        }
+        return result.join("")
+        // // TODO とりあえずの実装。整形
+        // let replaced = txt
+        // texReplaceMaps.forEach(map => {
+        //     for (var before in map) {
+        //         replaced = txt.replace(new RegExp(before, "g"))
+        //     }
+        // })
+        // let text = txt.replace(/φ/g, "\\varphi")
+        //     .replace(/｛/g, "\\{")
+        //     .replace(/｝/g, "\\}")
+        //     .replace(/<=/g, "\\le")
+        //     .replace(/</g, "\\lt")
+        //     .replace(/>=/g, "\\ge")
+        //     .replace(/∈/g, " \\in ")
+        // if (options.formatter.tex.texEnd.indexOf("]") >= 0) {
+        //     replaced = replaced.replace(/\]/g, "\\]")
+        // }
+        // return replaced
+    }
+
+    // /**
+    //  * @type {OutputOptions}
+    //  */
+    // let options
     /**
      * @type {() => Doc}
      */
     let executor
 
     return {
-        /**
-         * @param {Tools4BlogOption} v 
-         */
-        setOption(v) {
-            options = v
-        },
+        // /**
+        //  * @param {OutputOptions} v 
+        //  */
+        // setOption(v) {
+        //     options = v
+        // },
         Tex: {
             tex(...values) {
                 return new Tex(...values)
