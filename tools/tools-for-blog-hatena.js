@@ -16,31 +16,29 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         const elem = document.createElement("script")
         elem.src = filepath.value
+        localStorage.Tools4BlogHatenaFilePath = filepath.value
         elem.onload = () => {
-            localStorage.Tools4BlogHatenaFilePath = filepath.value
             // try {
-            const doc = Tools4Blog.exec()
-            result.value = doc.buildTree({
+            // はてな用
+            result.value = MultipePlatformBlogData.build({
                 formatter: {
                     tex: {
-                        texStart: "[tex:",
-                        texEnd: "]"
+                        texStart: " [tex:",
+                        texEnd: "] "
                     }
                 }
             }).innerHTML
+            // プレビュー用
             preview.innerHTML = ""
-            preview.append(doc.buildTree({
+            preview.append(MultipePlatformBlogData.build({
                 formatter: {
                     tex: {
-                        texStart: "\\( ",
-                        texEnd: "\\)"
+                        texStart: " \\( ",
+                        texEnd: "\\) "
                     }
                 }
             }))
             MathJax.typesetPromise([preview])
-            // } catch (e) {
-            //     console.error("エラーが発生しました。" + e.message) // コンソールに沢山出ると嫌なのでまとめられるようにしておく
-            // }
         }
         elem.onerror = () => {
             console.error("スクリプトの読み込みに失敗")
