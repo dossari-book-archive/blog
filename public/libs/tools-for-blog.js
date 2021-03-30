@@ -18,7 +18,7 @@ const MultipePlatformBlogData = (() => {
     const dataKey = Symbol("data")
 
     /**
-     * @typedef {string|Elem|Tex} ValueType
+     * @typedef {string|Elem|Tex|Attr} ValueType
      */
 
     class Elem {
@@ -63,6 +63,9 @@ const MultipePlatformBlogData = (() => {
                 ))
             } else if (child instanceof Elem) {
                 htmlElem.append(buildHTML(child, options))
+            } else if (child instanceof Attr) {
+                const data = child[dataKey]
+                htmlElem.setAttribute(data.key, data.value)
             }
         })
         return htmlElem
@@ -83,8 +86,10 @@ const MultipePlatformBlogData = (() => {
         }
     }
 
-    class Style {
-
+    class Attr {
+        constructor(key, value) {
+            this[dataKey] = { key, value }
+        }
     }
 
     const enabledTagNames = ("section nav article aside h1 h2 h3 h4 h5 h6 header footer address"
@@ -166,7 +171,7 @@ const MultipePlatformBlogData = (() => {
          * @param {(
          *   doc: ((...values: any) => void) & {
          *    tex: TexFunc,
-         *    style: () => Style,
+         *    attr: (key: string, value: string) => Style,
          *    el: {table: ElemFunc, tr: ElemFunc, p: ElemFunc},
          *   }
          * ) => void} callback 
@@ -181,7 +186,7 @@ const MultipePlatformBlogData = (() => {
             }
             doc.tex = texFunc
             doc.el = Elems
-            doc.style = () => new Style
+            doc.attr = (key, value = "") => new Attr(key, value)
             callback(doc)
             latestRootElem = rootElem
         },
