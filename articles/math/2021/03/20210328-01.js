@@ -69,6 +69,6 @@ MultipePlatformBlogData.register(doc => {
         p(textCenter, tex("d = φ^n + a_1φ^{n-1} + … + a_n,　　　a_i∈I^i　(1≦i<n),　a_n∈A")),
         p("であることがわかる（証明終）"),
         h4("参考"),
-        p("松村英之. 復刊 可換環論: 共立出版 p16 定理2.2（NAK）")
+        p("松村英之. 復刊 可換環論: 共立出版 p9 定理2.1")
     )
 })
