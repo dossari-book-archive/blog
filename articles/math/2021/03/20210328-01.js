@@ -15,18 +15,18 @@ MultipePlatformBlogData.register(doc => {
         tex.vvector(["m_1", "m_2", "：", "m_n"]),
         "= 0",
     ))
+    doc.articleId("20210328-01")
     doc.title("行列式の技巧")
     doc.body(
         h4("記号の定義"),
         div(justifyCenter,
             table(
-                tr(td(A), td("可換環")),
-                tr(td(I), td(A, "のイデアル")),
-                tr(td(φ), td(M, "の自己準同型")),
-                tr(td(E), td(
-                    φ, "で生成される", M, "の自己準同型の部分環", tex(`A[φ]=｛aφ^n|a∈A,n∈Ｎ｝`),
+                [A, "可換環"],
+                [I, [A, "のイデアル"]],
+                [φ, [M, "の自己準同型"]],
+                [E, [φ, "で生成される", M, "の自己準同型の部分環", tex(`A[φ]=｛aφ^n|a∈A,n∈Ｎ｝`),
                     br(), "（", a("こちら"), "の記事参照）"
-                )),
+                ]]
             ),
         ),
         h4("雰囲気"),

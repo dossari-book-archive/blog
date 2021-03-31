@@ -113,6 +113,15 @@ const MultipePlatformBlogData = (() => {
         enabledTagNames.forEach(tagName => {
             result[tagName] = (...values) => new Elem(tagName, values)
         })
+        // 特殊処理
+        result.table = (...values) => new Elem("table", values.map(value => {
+            if (Array.isArray(value)) {
+                return new Elem("tr", value.map(td => new Elem("td", Array.isArray(td) ? td : [td])))
+            } else {
+                return value
+            }
+        }))
+
         return result
     })()
 
@@ -212,7 +221,8 @@ const MultipePlatformBlogData = (() => {
     /**
      * @typedef {{
      *   rootElem: Elem,
-     *   title: 
+     *   articleId: string,
+     *   title: string,
      * }} Doc
      */
 
@@ -226,6 +236,8 @@ const MultipePlatformBlogData = (() => {
          * 
          * @param {(
          *   doc: {
+         *    title: (title: string) => void,
+         *    articleId: (id: string) => void,
          *    body: ((...values: any) => void)
          *    tex: TexFunc,
          *    attr: (key: string, value: string) => Style,
@@ -239,8 +251,9 @@ const MultipePlatformBlogData = (() => {
              */
             const doc = {}
             callback({
-                title: (title) => doc.title = title,
-                body: (...values) => {
+                articleId(id) { doc.articleId = id },
+                title(title) { doc.title = title },
+                body(...values) {
                     if (doc.rootElem != null) {
                         throw new Error("can only be called once")
                     }
