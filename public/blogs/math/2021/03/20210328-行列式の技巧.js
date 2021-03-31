@@ -1,6 +1,6 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, attr } = doc
-    const { A, I, M, Ｎ, E, φ } = tex.canonicalSymbols
+    const { A, I, i, M, Ｎ, E, φ } = tex.canonicalSymbols
     const { a, p, table, tr, td, br, h4 } = doc.el
 
     doc(
@@ -18,6 +18,11 @@ MultipePlatformBlogData.register(doc => {
         p(M, "が有限生成", A, "加群で、", tex("φ(M)⊂IM"), "ならば、ある ", tex("a_i∈I^i　(1≦i<n),　a_n∈A"), "が存在して、",
             E, "の元として"),
         p(attr("style", "text-align: center;"), tex("φ^n + a_1φ^{n-1} + … + a_n = 0")),
-        p("が成り立つ。")
+        p("が成り立つ。"),
+        h4("証明"),
+        p(M, "が", A, "上有限生成だから、その生成元を", tex("m_1,…,m_n"), "とすると、各", tex("i = 1,…,n"), "に対して",
+            tex.d("φ(m_i) = Σ_{j=1}^n a_{ij}m_j", "を満たす", tex("a_{ij}∈I"), "が存在する。")
+        ),
+        p(tex("\\left( \\begin{array}{c} a & b & c &d \\\\ d & e & f \\\\ g & h & i \\\\ g & h & i \\end{array} \\right) "))
     )
 })

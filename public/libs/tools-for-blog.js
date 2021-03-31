@@ -113,11 +113,16 @@ const MultipePlatformBlogData = (() => {
 
 
     /**
-     * @typedef {((...values: any) => Tex) & {
-     *  canonicalSymbols: {
-     *   a: Tex, z: Tex, A: Tex, Z: Tex
-     *   Ｎ: Tex, Ｑ: Tex, Ｒ: Tex, Ｚ: tex,
-     * }} TexFunc
+     * @typedef {((...values: any) => Tex) & 
+     * {
+     *   canonicalSymbols: {
+     *      a: Tex, z: Tex, A: Tex, Z: Tex
+     *      Ｎ: Tex, Ｑ: Tex, Ｒ: Tex, Ｚ: tex,
+     *   },
+     *   d: (...values: string) => Tex,
+     *   matrix: (row: number, col: number, ...values: string) => Tex
+     * }
+     * } TexFunc
      */
 
     /**
@@ -133,30 +138,37 @@ const MultipePlatformBlogData = (() => {
         "∋": " \\ni ",
         "⊂": "\\subset ",
         "⊃": "\\supset ",
-        "φ": "\\varphi ",
         "≡": "\\equiv ",
         "<": "\\lt ",
         ">": "\\gt ",
-        "…": "\\cdots",
+        "…": "\\cdots ",
+        "Σ": "\\sum",
         "　": "\\,",
         "Ｎ": "\\mathbb{N}",
         "Ｑ": "\\mathbb{Q}",
         "Ｒ": "\\mathbb{R}",
         "Ｚ": "\\mathbb{Z}",
+        "φ": "\\varphi ",
+        "α": "\\alpha",
     }
 
     /**
      * @type {TexFunc}
      */
     const texFunc = (() => {
+        /** @type {TexFunc} */
         const tex = (...values) => new Tex(values)
+        // \displaystyle を手軽に使えるように
+        tex.d = (...values) => new Tex(["\\displaystyle "].concat(values))
+        // 行列操作
+        tex.matrix = (row, col, ...values) => Tex("\\left( \\begin{array}{c}")
+        // 標準シンボル（a, b,c, ..., A, B, C, ...）
         const symbols = tex.canonicalSymbols = {}
         "abcdefghijklmnopqrstuvwxyz".split("").forEach(c => {
             symbols[c] = tex(c)
             symbols[c.toUpperCase()] = tex(c.toUpperCase())
         })
         Object.keys(texReplaceMap).forEach(k => symbols[k] = tex(texReplaceMap[k]))
-        console.log(tex.canonicalSymbols)
         return tex
     })()
 
