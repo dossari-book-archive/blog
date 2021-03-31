@@ -1,8 +1,20 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, attr } = doc
-    const { A, I, i, M, Ｎ, E, φ } = tex.canonicalSymbols
+    const { d, A, I, i, M, Ｎ, E, φ } = tex.canonicalSymbols
     const { a, p, table, tr, td, br, h4 } = doc.el
+    const det = v => tex(`{\\rm det}(${v})`)
+    const textCenter = attr("style", "text-align: center;")
 
+    const importantPoint = p(textCenter, tex(
+        tex.matrix([
+            ["φ - a_{11}", "a_{12}    ", "… ", "a_{1n}   "],
+            ["a_{21}    ", "φ - a_{22}", "… ", "a_{2n}   "],
+            ["：        ", "：        ", "：…", "：       "],
+            ["a_{n1}    ", "a_{n2}    ", "… ", "φ - a_{nn}"],
+        ]),
+        tex.vvector(["m_1", "m_2", "：", "m_n"]),
+        "= O",
+    ))
     doc(
         h4("記号の定義"),
         table(
@@ -14,15 +26,44 @@ MultipePlatformBlogData.register(doc => {
                 br(), "（", a("こちら"), "の記事参照）"
             )),
         ),
+        h4("証明の雰囲気"),
+        importantPoint,
         h4("定理"),
         p(M, "が有限生成", A, "加群で、", tex("φ(M)⊂IM"), "ならば、ある ", tex("a_i∈I^i　(1≦i<n),　a_n∈A"), "が存在して、",
             E, "の元として"),
-        p(attr("style", "text-align: center;"), tex("φ^n + a_1φ^{n-1} + … + a_n = 0")),
+        p(textCenter, tex("φ^n + a_1φ^{n-1} + … + a_n = 0")),
         p("が成り立つ。"),
         h4("証明"),
         p(M, "が", A, "上有限生成だから、その生成元を", tex("m_1,…,m_n"), "とすると、各", tex("i = 1,…,n"), "に対して",
-            tex.d("φ(m_i) = Σ_{j=1}^n a_{ij}m_j", "を満たす", tex("a_{ij}∈I"), "が存在する。")
+            p(textCenter,
+                tex.d("φ(m_i) = Σ_{j=1}^n a_{ij}m_j")
+            ),
+            "を満たす", tex("a_{ij}∈I"), "が存在する。", br(), "これを行列で表現すると"
         ),
-        p(tex("\\left( \\begin{array}{c} a & b & c &d \\\\ d & e & f \\\\ g & h & i \\\\ g & h & i \\end{array} \\right) "))
+        p(textCenter, tex(
+            tex.matrix([
+                ["φ ", "0 ", "… ", "0 "],
+                ["0 ", "φ ", "… ", "0 "],
+                ["：", "：", "：…", "："],
+                ["0 ", "0", "…  ", "φ"],
+            ]),
+            tex.vvector(["m_1", "m_2", "：", "m_n"]),
+            "=",
+            tex.matrix([
+                ["a_{11}", "a_{12}", "… ", "a_{1n}"],
+                ["a_{21}", "a_{22}", "… ", "a_{2n}"],
+                ["：    ", "：    ", "：…", "：    "],
+                ["a_{n1}", "a_{n2}", "… ", "a_{nn}"],
+            ]),
+            tex.vvector(["m_1", "m_2", "：", "m_n"]),
+        )),
+        p("左辺 - 右辺 により"),
+        importantPoint,
+        p("左辺の行列の行列式を", d, "として、左辺に余因子行列を掛けると"),
+        p(textCenter, tex("d　m_i = 0　　(i = 1, …, n)")),
+        p(tex("m_1,…m_n"), "は", M, "の生成元だから、", d, "は", E, "の元として0であることがわかる。"),
+        p("行列式", d, "を展開すれば、"),
+        p(textCenter, tex("d = φ^n + a_1φ^{n-1} + … + a_n,　　　a_i∈I^i　(1≦i<n),　a_n∈A")),
+        p("であることがわかる（証明終）")
     )
 })

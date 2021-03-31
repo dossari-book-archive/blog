@@ -42,6 +42,11 @@ const MultipePlatformBlogData = (() => {
         if (options.formatter.tex.texEnd.indexOf("]") >= 0) {
             map["]"] = "\\]"
         }
+        // 複数文字置換
+        for (let key in multiWordReplaceMap) {
+            txt = txt.replace(new RegExp(key, "g"), multiWordReplaceMap[key]) // TODO 見直し
+        }
+        // 単一文字置換
         for (let i = 0; i < txt.length; i++) {
             let replaced = map[txt[i]];
             result.push(replaced == null ? txt[i] : replaced)
@@ -111,16 +116,23 @@ const MultipePlatformBlogData = (() => {
         return result
     })()
 
+    /**
+     * @typedef {{
+     *   alignment: string
+     * }} MatrixOptions
+     */
 
     /**
-     * @typedef {((...values: any) => Tex) & 
+     * @typedef {((...values: (string|Tex)) => Tex) & 
      * {
      *   canonicalSymbols: {
      *      a: Tex, z: Tex, A: Tex, Z: Tex
      *      Ｎ: Tex, Ｑ: Tex, Ｒ: Tex, Ｚ: tex,
      *   },
      *   d: (...values: string) => Tex,
-     *   matrix: (row: number, col: number, ...values: string) => Tex
+     *   matrix: (matrix: ((string|Tex)[][]), options: MatrixOptions) => Tex,
+     *   hvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,
+     *   vvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,
      * }
      * } TexFunc
      */
@@ -128,6 +140,12 @@ const MultipePlatformBlogData = (() => {
     /**
      * @typedef {(...values: any) => Elem} ElemFunc
      */
+
+    const multiWordReplaceMap = {
+        "：…": "\\ddots ",
+        "<=": "\\le ",
+        ">=": "\\ge ",
+    }
 
     const texReplaceMap = {
         "≦": "\\le ",
@@ -142,6 +160,7 @@ const MultipePlatformBlogData = (() => {
         "<": "\\lt ",
         ">": "\\gt ",
         "…": "\\cdots ",
+        "：": "\\vdots",
         "Σ": "\\sum",
         "　": "\\,",
         "Ｎ": "\\mathbb{N}",
@@ -161,13 +180,31 @@ const MultipePlatformBlogData = (() => {
         // \displaystyle を手軽に使えるように
         tex.d = (...values) => new Tex(["\\displaystyle "].concat(values))
         // 行列操作
-        tex.matrix = (row, col, ...values) => Tex("\\left( \\begin{array}{c}")
+        tex.matrix = (matrix, options = {}) => {
+            // TeX形式への行列変換例
+            // [["a", "b", "c"], ["d", "e", "f"], ["h", "i", "j"]] 
+            //   ↓　↓　↓
+            // \( \left( \begin{array}{ccc} a & b & c \\ d & e & f \\ g & h & i \end{array} \right) \)
+            const alignment = options.alignment || "c".repeat(matrix[0].length)
+            const matrixStr = matrix.map(row => row.join(" & ")).join(" \\\\ ")
+            return tex(`\\left( \\begin{array}{${alignment}} ${matrixStr} \\end{array} \\right)`)
+        }
+        // vvector
+        tex.hvector = (vector, options = {}) => {
+            return tex.matrix([vector], options)
+        }
+        // hvector
+        tex.vvector = (vector, options = {}) => {
+            return tex.matrix(vector.map(v => [v], options))
+        }
+
         // 標準シンボル（a, b,c, ..., A, B, C, ...）
         const symbols = tex.canonicalSymbols = {}
         "abcdefghijklmnopqrstuvwxyz".split("").forEach(c => {
             symbols[c] = tex(c)
             symbols[c.toUpperCase()] = tex(c.toUpperCase())
         })
+
         Object.keys(texReplaceMap).forEach(k => symbols[k] = tex(texReplaceMap[k]))
         return tex
     })()
