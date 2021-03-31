@@ -1,7 +1,7 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, attr } = doc
-    const { d, A, I, M, E, φ } = tex.canonicalSymbols
-    const { a, p, div, table, tr, td, br, h4 } = doc.el
+    const { d, A, B, b, I, M, E, φ } = tex.canonicalSymbols
+    const { a, p, div, table, tr, td, br, h4, h5 } = doc.el
     const textCenter = attr("style", "text-align: center;")
     const justifyCenter = attr("style", "display:flex; justify-content: center;")
 
@@ -31,12 +31,14 @@ MultipePlatformBlogData.register(doc => {
         ),
         h4("雰囲気"),
         importantPoint,
+        //////////////////// 定理 ////////////////////
         h4("定理"),
         p(M, "が有限生成", A, "加群で、", tex("φ(M)⊂IM"), "ならば、ある ", tex("a_i∈I^i　(1≦i<n),　a_n∈A"), "が存在して、",
             E, "の元として"),
         p(textCenter, tex("φ^n + a_1φ^{n-1} + … + a_n = 0")),
         p("が成り立つ。"),
-        h4("証明"),
+        //////////////////// 証明 ////////////////////
+        h5("証明"),
         p(M, "が", A, "上有限生成だから、その生成元を", tex("m_1,…,m_n"), "とすると、各", tex("i = 1,…,n"), "に対して",
             p(textCenter,
                 tex.d("φ(m_i) = Σ_{j=1}^n a_{ij}m_j")
@@ -67,7 +69,22 @@ MultipePlatformBlogData.register(doc => {
         p(tex("m_1,…m_n"), "は", M, "の生成元だから、", d, "は", E, "の元として0であることがわかる。"),
         p("行列式", d, "を展開すれば、"),
         p(textCenter, tex("d = φ^n + a_1φ^{n-1} + … + a_n,　　　a_i∈I^i　(1≦i<n),　a_n∈A")),
-        p("であることがわかる（証明終）"),
+        p("であることがわかる。"),
+        p("（証明終）"),
+        //////////////////// 系 ////////////////////
+        h4("系"),
+        p("可換環", B, "を", A, "の拡大で、", A, "加群として有限生成とすると、", B, "の任意の元は", A, "上整である"),
+        //////////////////// 証明 ////////////////////
+        h5("証明"),
+        p(tex("b∈B"), "とする。"),
+        p("定理において、", tex("M = E = B,　I = A,　φ=b"),
+            "（ここで, ", B, "を", B, "の自己準同型写像と同一視できる点に注意しておく）",
+            "とすれば、"
+        ),
+        p(textCenter, tex("b^n + a_1b^{n-1} + … + a_n = 0")),
+        p("を満たす", tex("a_1,…a_n"), "が存在することがわかり、", b, "は", A, "上整である。"),
+        p("（証明終）"),
+        //////////////////// 参考 ////////////////////
         h4("参考"),
         p("松村英之. 復刊 可換環論: 共立出版 p9 定理2.1")
     )
