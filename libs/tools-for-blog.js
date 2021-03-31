@@ -10,7 +10,8 @@
 /**
  * @typedef {{
  *  formatter: Tools4BlogFormatter
- * }} OutputOptions
+ *  id2Url: (id: string) => string
+ * }} OutputProps
  */
 
 const MultipePlatformBlogData = (() => {
@@ -33,13 +34,13 @@ const MultipePlatformBlogData = (() => {
     }
     /**
      * @param {string} txt 
-     * @param {OutputOptions} options
+     * @param {OutputProps} outputProps
      * @returns {string}
      */
-    const replaceTexTxt = (txt, options) => {
+    const replaceTexTxt = (txt, outputProps) => {
         const result = []
         const map = { ...texReplaceMap }
-        if (options.formatter.tex.texEnd.indexOf("]") >= 0) {
+        if (outputProps.formatter.tex.texEnd.indexOf("]") >= 0) {
             map["]"] = "\\]"
         }
         // 複数文字置換
@@ -54,7 +55,13 @@ const MultipePlatformBlogData = (() => {
         return result.join("")
     }
 
-    const buildHTML = (/** @type {Elem} */elem, /**  @type {OutputOptions} */ options) => {
+    /**
+     * 
+     * @param {Elem} elem 
+     * @param {OutputProps} outputProps 
+     * @returns 
+     */
+    const buildHTML = (elem, outputProps) => {
         const data = elem[dataKey]
         const htmlElem = document.createElement(data.tagName)
         data.children.forEach(child => {
@@ -62,15 +69,24 @@ const MultipePlatformBlogData = (() => {
                 htmlElem.append(document.createTextNode(child))
             } else if (child instanceof Tex) {
                 htmlElem.append(document.createTextNode(
-                    options.formatter.tex.texStart
-                    + replaceTexTxt(child[dataKey], options)
-                    + options.formatter.tex.texEnd
+                    outputProps.formatter.tex.texStart
+                    + replaceTexTxt(child[dataKey], outputProps)
+                    + outputProps.formatter.tex.texEnd
                 ))
             } else if (child instanceof Elem) {
-                htmlElem.append(buildHTML(child, options))
+                htmlElem.append(buildHTML(child, outputProps))
             } else if (child instanceof Attr) {
                 const data = child[dataKey]
-                htmlElem.setAttribute(data.key, data.value)
+                if (data.value instanceof Link) {
+                    const link = outputProps.id2Url(data.value[dataKey])
+                    if (link) {
+                        htmlElem.setAttribute(data.key, link)
+                    } else {
+                        console.warn(`cannot link to article '${data.value[dataKey]}'`)
+                    }
+                } else {
+                    htmlElem.setAttribute(data.key, data.value)
+                }
             }
         })
         return htmlElem
@@ -94,6 +110,15 @@ const MultipePlatformBlogData = (() => {
     class Attr {
         constructor(key, value) {
             this[dataKey] = { key, value }
+        }
+    }
+
+    class Link {
+        /**
+         * @param {string} id 
+         */
+        constructor(id) {
+            this[dataKey] = id
         }
     }
 
@@ -242,6 +267,7 @@ const MultipePlatformBlogData = (() => {
          *    tex: TexFunc,
          *    attr: (key: string, value: string) => Style,
          *    el: {table: ElemFunc, tr: ElemFunc, p: ElemFunc},
+         *    articleLink: (id: string) => Link
          *   }
          * ) => void} callback 
          */
@@ -262,11 +288,12 @@ const MultipePlatformBlogData = (() => {
                 tex: texFunc,
                 el: Elems,
                 attr: (key, value = "") => new Attr(key, value),
+                articleLink: id => new Link(id)
             })
             latestDoc = doc
         },
         /**
-         * @param {OutputOptions} options 
+         * @param {OutputProps} options 
          */
         build(options) {
             return {

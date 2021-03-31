@@ -3,21 +3,16 @@ window.addEventListener("DOMContentLoaded", () => {
     const articleBody = document.getElementById("articleBody")
     const articleTitle = document.getElementById("articleTitle")
     const loadingMessage = document.getElementById("loadingMessage")
+    const mathJaxUrl = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"
 
     const params = new URLSearchParams(document.location.search.substring(1));
-    const kind = params.get("kind");
-    const articleName = params.get("article");
-    if (kind != "math" || articleName == null) {
+    const targetScriptUrl = getTargetScriptUrl(params.get("article"))
+    if (!targetScriptUrl) {
         return notFound()
     }
-    const match = articleName.match(/^([0-9]{8})-([0-9]{2})/)
-    if (!match) {
-        return notFound()
-    }
-    const year = match[1].substring(0, 4)
-    const month = match[1].substring(4, 6)
     const script = document.createElement("script")
-    script.src = `${kind}/${year}/${month}/${articleName}.js`
+
+    script.src = targetScriptUrl
     script.onerror = () => {
         notFound()
     }
@@ -29,6 +24,12 @@ window.addEventListener("DOMContentLoaded", () => {
                     texStart: " \\( ",
                     texEnd: "\\) "
                 }
+            },
+            id2Url: id => {
+                if (!getTargetScriptUrl(id)) {
+                    return false
+                }
+                return "article.html?article=" + id
             }
         })
         document.title = doc.title
@@ -39,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 skipStartupTypeset: true
             }
             const script = document.createElement("script")
-            script.src = `https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js`
+            script.src = mathJaxUrl
             script.onload = () => {
                 loadingMessage.style.display = "none"
                 MathJax.typesetPromise([articleBody])
@@ -54,6 +55,20 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
     document.head.append(script)
+
+    function getTargetScriptUrl(articleId) {
+        if (!articleId) {
+            return false
+        }
+        const match = articleId.match(/^(math)-([0-9]{8})-([0-9]{2})$/)
+        if (!match) {
+            return false
+        }
+        const kind = match[1]
+        const year = match[2].substring(0, 4)
+        const month = match[2].substring(4, 6)
+        return `${kind}/${year}/${month}/${articleId}.js`
+    }
 
     function notFound() {
         document.getElementById("loadingMessage").style.display = "none"
