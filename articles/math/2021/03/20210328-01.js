@@ -1,9 +1,10 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, attr } = doc
     const { d, A, I, i, M, Ｎ, E, φ } = tex.canonicalSymbols
-    const { a, p, table, tr, td, br, h4 } = doc.el
+    const { a, p, div, table, tr, td, br, h4 } = doc.el
     const det = v => tex(`{\\rm det}(${v})`)
     const textCenter = attr("style", "text-align: center;")
+    const justifyCenter = attr("style", "display:flex; justify-content: center;")
 
     const importantPoint = p(textCenter, tex(
         tex.matrix([
@@ -13,18 +14,20 @@ MultipePlatformBlogData.register(doc => {
             ["a_{n1}    ", "a_{n2}    ", "… ", "φ - a_{nn}"],
         ]),
         tex.vvector(["m_1", "m_2", "：", "m_n"]),
-        "= O",
+        "= 0",
     ))
     doc(
         h4("記号の定義"),
-        table(
-            tr(td(A), td("可換環")),
-            tr(td(I), td(A, "のイデアル")),
-            tr(td(φ), td(M, "の自己準同型")),
-            tr(td(E), td(
-                φ, "で生成される", M, "の自己準同型の部分環", tex(`A[φ]=｛aφ^n|a∈A,n∈Ｎ｝`),
-                br(), "（", a("こちら"), "の記事参照）"
-            )),
+        div(justifyCenter,
+            table(
+                tr(td(A), td("可換環")),
+                tr(td(I), td(A, "のイデアル")),
+                tr(td(φ), td(M, "の自己準同型")),
+                tr(td(E), td(
+                    φ, "で生成される", M, "の自己準同型の部分環", tex(`A[φ]=｛aφ^n|a∈A,n∈Ｎ｝`),
+                    br(), "（", a("こちら"), "の記事参照）"
+                )),
+            ),
         ),
         h4("証明の雰囲気"),
         importantPoint,

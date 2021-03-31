@@ -1,0 +1,117 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    max-height: 100%;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #ccc;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+h3 {
+    font-size: 1.7em;
+    border-bottom: solid 2px #ccc;
+}
+
+h4 {
+    font-size: 1.5em;
+    border-bottom: solid 1px #ccc;
+}
+
+h5 {
+    font-size: 1.3em;
+    border-bottom: solid 0.5px #ccc;
+}
+
+.fade-in-hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.fade-in-show {
+    visibility: visible;
+    opacity: 1;
+    transition: .5s;
+}
+
+#loadingMessage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text-center {
+    text-align: center;
+}
+
+.full {
+    width: 100%;
+    height: 100%;
+}
+
+.dot-flashing {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: dot-flashing 1s infinite linear alternate;
+    animation-delay: .5s;
+}
+
+.dot-flashing::before, .dot-flashing::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+}
+
+.dot-flashing::before {
+    left: -15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 0s;
+}
+
+.dot-flashing::after {
+    left: 15px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #9880ff;
+    color: #9880ff;
+    animation: dot-flashing 1s infinite alternate;
+    animation-delay: 1s;
+}
+
+@keyframes dot-flashing {
+    0% {
+        background-color: #9880ff;
+    }
+    50%, 100% {
+        background-color: #ebe6ff;
+    }
+}
