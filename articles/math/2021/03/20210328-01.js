@@ -1,8 +1,7 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, attr } = doc
-    const { d, A, I, i, M, Ｎ, E, φ } = tex.canonicalSymbols
+    const { d, A, I, M, E, φ } = tex.canonicalSymbols
     const { a, p, div, table, tr, td, br, h4 } = doc.el
-    const det = v => tex(`{\\rm det}(${v})`)
     const textCenter = attr("style", "text-align: center;")
     const justifyCenter = attr("style", "display:flex; justify-content: center;")
 
@@ -16,7 +15,8 @@ MultipePlatformBlogData.register(doc => {
         tex.vvector(["m_1", "m_2", "：", "m_n"]),
         "= 0",
     ))
-    doc(
+    doc.title("行列式の技巧")
+    doc.body(
         h4("記号の定義"),
         div(justifyCenter,
             table(
@@ -29,7 +29,7 @@ MultipePlatformBlogData.register(doc => {
                 )),
             ),
         ),
-        h4("証明の雰囲気"),
+        h4("雰囲気"),
         importantPoint,
         h4("定理"),
         p(M, "が有限生成", A, "加群で、", tex("φ(M)⊂IM"), "ならば、ある ", tex("a_i∈I^i　(1≦i<n),　a_n∈A"), "が存在して、",
@@ -67,6 +67,8 @@ MultipePlatformBlogData.register(doc => {
         p(tex("m_1,…m_n"), "は", M, "の生成元だから、", d, "は", E, "の元として0であることがわかる。"),
         p("行列式", d, "を展開すれば、"),
         p(textCenter, tex("d = φ^n + a_1φ^{n-1} + … + a_n,　　　a_i∈I^i　(1≦i<n),　a_n∈A")),
-        p("であることがわかる（証明終）")
+        p("であることがわかる（証明終）"),
+        h4("参考"),
+        p("松村英之. 復刊 可換環論: 共立出版 p16 定理2.2（NAK）")
     )
 })

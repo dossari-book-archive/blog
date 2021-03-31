@@ -210,15 +210,23 @@ const MultipePlatformBlogData = (() => {
     })()
 
     /**
-     * @type {Elem}
+     * @typedef {{
+     *   rootElem: Elem,
+     *   title: 
+     * }} Doc
      */
-    let latestRootElem
+
+    /**
+     * @type {Doc}
+     */
+    let latestDoc
 
     return {
         /**
          * 
          * @param {(
-         *   doc: ((...values: any) => void) & {
+         *   doc: {
+         *    body: ((...values: any) => void)
          *    tex: TexFunc,
          *    attr: (key: string, value: string) => Style,
          *    el: {table: ElemFunc, tr: ElemFunc, p: ElemFunc},
@@ -226,24 +234,32 @@ const MultipePlatformBlogData = (() => {
          * ) => void} callback 
          */
         register(callback) {
-            let rootElem;
-            const doc = (...values) => {
-                if (rootElem != null) {
-                    throw new Error("can only be called once")
-                }
-                rootElem = new Elem("div", values)
-            }
-            doc.tex = texFunc
-            doc.el = Elems
-            doc.attr = (key, value = "") => new Attr(key, value)
-            callback(doc)
-            latestRootElem = rootElem
+            /**
+             * @type {Doc}
+             */
+            const doc = {}
+            callback({
+                title: (title) => doc.title = title,
+                body: (...values) => {
+                    if (doc.rootElem != null) {
+                        throw new Error("can only be called once")
+                    }
+                    doc.rootElem = new Elem("div", values)
+                },
+                tex: texFunc,
+                el: Elems,
+                attr: (key, value = "") => new Attr(key, value),
+            })
+            latestDoc = doc
         },
         /**
          * @param {OutputOptions} options 
          */
         build(options) {
-            return buildHTML(latestRootElem, options)
+            return {
+                title: latestDoc.title,
+                body: buildHTML(latestDoc.rootElem, options),
+            }
         }
     }
 })()

@@ -1,6 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
 
-    const article = document.getElementById("article")
+    const articleBody = document.getElementById("articleBody")
+    const articleTitle = document.getElementById("articleTitle")
     const loadingMessage = document.getElementById("loadingMessage")
 
     const params = new URLSearchParams(document.location.search.substring(1));
@@ -15,7 +16,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     const year = match[1].substring(0, 4)
     const month = match[1].substring(4, 6)
-    const num = match[2]
     const script = document.createElement("script")
     script.src = `${kind}/${year}/${month}/${articleName}.js`
     script.onerror = () => {
@@ -23,14 +23,17 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     script.onload = () => {
         // 成功したのでmathjax呼び出し
-        article.append(MultipePlatformBlogData.build({
+        const doc = MultipePlatformBlogData.build({
             formatter: {
                 tex: {
                     texStart: " \\( ",
                     texEnd: "\\) "
                 }
             }
-        }))
+        })
+        document.title = doc.title
+        articleTitle.textContent = doc.title
+        articleBody.append(doc.body)
         if (!window.MathJax) {
             window.MathJax = {
                 skipStartupTypeset: true
@@ -39,10 +42,12 @@ window.addEventListener("DOMContentLoaded", () => {
             script.src = `https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js`
             script.onload = () => {
                 loadingMessage.style.display = "none"
-                MathJax.typesetPromise([article])
+                MathJax.typesetPromise([articleBody])
                     .then(() => {
-                        article.classList.remove("fade-in-hidden")
-                        article.classList.add("fade-in-show")
+                        document.querySelectorAll(".fade-in-hidden").forEach(elem => {
+                            elem.classList.remove("fade-in-hidden")
+                            elem.classList.add("fade-in-show")
+                        })
                     })
             }
             document.head.append(script)
