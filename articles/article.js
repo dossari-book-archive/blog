@@ -37,11 +37,17 @@ window.addEventListener("DOMContentLoaded", () => {
         articleBody.append(doc.body)
         if (!window.MathJax) {
             window.MathJax = {
-                skipStartupTypeset: true
+                skipStartupTypeset: true,
+                loader: { load: ['[tex]/color'] },
+                tex: { packages: { '[+]': ['color'] } }
             }
             const script = document.createElement("script")
             script.src = mathJaxUrl
-            script.onload = () => {
+            document.head.append(script)
+            // パッケージを入れると、onloadeでもtypesetPromiseが使えない？
+            let iid = setInterval(() => {
+                if (!MathJax.typesetPromise) { return }
+                clearInterval(iid)
                 loadingMessage.style.display = "none"
                 MathJax.typesetPromise([articleBody])
                     .then(() => {
@@ -50,8 +56,9 @@ window.addEventListener("DOMContentLoaded", () => {
                             elem.classList.add("fade-in-show")
                         })
                     })
-            }
-            document.head.append(script)
+            })
+            // script.onload = () => {
+            // }
         }
     }
     document.head.append(script)

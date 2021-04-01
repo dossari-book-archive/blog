@@ -14,7 +14,7 @@ MultipePlatformBlogData.register(doc => {
         h4("記号の定義"),
         div(justifyCenter,
             table(
-                [A, "可換環の拡大"],
+                [A, "可換環"],
                 [B, [A, "を含む可換環"]],
                 [b1_b2, [B, "の元"]],
                 [A_alg, [b1_b2, "で生成される", B, "の部分環"]],

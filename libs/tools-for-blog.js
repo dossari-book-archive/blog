@@ -87,18 +87,31 @@ const MultipePlatformBlogData = (() => {
                 } else {
                     htmlElem.setAttribute(data.key, data.value)
                 }
+            } else if (child instanceof Style) {
+                const data = child[dataKey]
+                for (let key in data) {
+                    htmlElem.style[toCamel(key)] = data[key]
+                }
             }
         })
         return htmlElem
     }
 
+    const toCamel = p =>
+        //_+小文字を大文字にする(例:_a を A)
+        p.replace(/-./g, s => s.charAt(1).toUpperCase())
+
     class Tex {
         constructor(values) {
             this[dataKey] = values.map(value => {
-                if (value instanceof Tex) {
+                if (value == null) {
+                    return ""
+                } else if (value instanceof Tex) {
                     return value[dataKey]
                 } else if (typeof value == "string") {
                     return value
+                } else {
+                    return "" + value
                 }
             }).join("")
         }
@@ -110,6 +123,17 @@ const MultipePlatformBlogData = (() => {
     class Attr {
         constructor(key, value) {
             this[dataKey] = { key, value }
+        }
+    }
+
+    class Style {
+        constructor(key, value) {
+            if (key instanceof Object) {
+                this[dataKey] = key
+            } else if (typeof key == "string") {
+                this[dataKey] = {}
+                this[dataKey][key] = value
+            }
         }
     }
 
@@ -153,6 +177,7 @@ const MultipePlatformBlogData = (() => {
     /**
      * @typedef {{
      *   alignment: string
+     *   parenthesis: "[]"|"||"|"()"
      * }} MatrixOptions
      */
 
@@ -177,6 +202,7 @@ const MultipePlatformBlogData = (() => {
 
     const multiWordReplaceMap = {
         "：…": "\\ddots ",
+        "…：": "\\ddots ",
         "<=": "\\le ",
         ">=": "\\ge ",
     }
@@ -184,18 +210,22 @@ const MultipePlatformBlogData = (() => {
     const texReplaceMap = {
         "≦": "\\le ",
         "≧": "\\ge ",
-        "｛": "\\{",
-        "｝": "\\}",
+        "｛": "\\left{ ",
+        "｝": "\\right} ",
+        "（": "\\left( ",
+        "）": "\\right) ",
         "∈": " \\in ",
         "∋": " \\ni ",
         "⊂": "\\subset ",
         "⊃": "\\supset ",
+        "×": "\\times ",
         "≡": "\\equiv ",
         "<": "\\lt ",
         ">": "\\gt ",
         "…": "\\cdots ",
         "：": "\\vdots",
         "Σ": "\\sum",
+        "Π": "\\prod",
         "　": "\\,",
         "Ｎ": "\\mathbb{N}",
         "Ｑ": "\\mathbb{Q}",
@@ -214,22 +244,30 @@ const MultipePlatformBlogData = (() => {
         // \displaystyle を手軽に使えるように
         tex.d = (...values) => new Tex(["\\displaystyle "].concat(values))
         // 行列操作
-        tex.matrix = (matrix, options = {}) => {
+        tex.matrix = (matrix, options) => {
+            options = { parenthesis: "()", ...options }
             // TeX形式への行列変換例
             // [["a", "b", "c"], ["d", "e", "f"], ["h", "i", "j"]] 
+            // または
+            // ["a  b  c", "d  e  f", "h  i  j"] （空白スペース2以上）
+            //   ↓　↓　↓
+            // \( \left( \begin{array}{ccc} a & b & c \\ d & e & f \\ g & h & i \end{array} \right) \)
             //   ↓　↓　↓
             // \( \left( \begin{array}{ccc} a & b & c \\ d & e & f \\ g & h & i \end{array} \right) \)
             const alignment = options.alignment || "c".repeat(matrix[0].length)
-            const matrixStr = matrix.map(row => row.join(" & ")).join(" \\\\ ")
-            return tex(`\\left( \\begin{array}{${alignment}} ${matrixStr} \\end{array} \\right)`)
+            const matrixStr = matrix.map(row =>
+                typeof row == "string" ? row.trim().replace(/ {2,}/g, " & ")
+                    : row.join(" & ")
+            ).join(" \\\\ ")
+            return tex(`\\left${options.parenthesis[0]} \\begin{array}{${alignment}} ${matrixStr} \\end{array} \\right${options.parenthesis[1]}`)
         }
         // vvector
-        tex.hvector = (vector, options = {}) => {
-            return tex.matrix([vector], options)
+        tex.hvector = (values, options = {}) => {
+            return tex.matrix([values], options)
         }
         // hvector
-        tex.vvector = (vector, options = {}) => {
-            return tex.matrix(vector.map(v => [v], options))
+        tex.vvector = (values, options = {}) => {
+            return tex.matrix(values.map(v => [v], options))
         }
 
         // 標準シンボル（a, b,c, ..., A, B, C, ...）
@@ -265,7 +303,8 @@ const MultipePlatformBlogData = (() => {
          *    articleId: (id: string) => void,
          *    body: ((...values: any) => void)
          *    tex: TexFunc,
-         *    attr: (key: string, value: string) => Style,
+         *    attr: (key: string, value: string) => Attr,
+         *    style: (key: string, value: string) => Style
          *    el: {table: ElemFunc, tr: ElemFunc, p: ElemFunc},
          *    articleLink: (id: string) => Link
          *   }
@@ -288,6 +327,7 @@ const MultipePlatformBlogData = (() => {
                 tex: texFunc,
                 el: Elems,
                 attr: (key, value = "") => new Attr(key, value),
+                style: (key, value) => new Style(key, value),
                 articleLink: id => new Link(id)
             })
             latestDoc = doc
