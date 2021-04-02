@@ -210,8 +210,8 @@ const MultipePlatformBlogData = (() => {
     const texReplaceMap = {
         "≦": "\\le ",
         "≧": "\\ge ",
-        "｛": "\\left{ ",
-        "｝": "\\right} ",
+        "｛": "\\left\\{ ",
+        "｝": "\\right\\} ",
         "（": "\\left( ",
         "）": "\\right) ",
         "∈": " \\in ",
