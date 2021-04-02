@@ -6,6 +6,11 @@ html, body {
     max-height: 100%;
 }
 
+body {
+    width: max-content;
+    margin: auto;
+}
+
 table {
     border-collapse: collapse;
 }
@@ -42,6 +47,19 @@ h5 {
     transition: .5s;
 }
 
+#articleBody h4 {
+    margin: 20px 10px 10px 10px;
+}
+
+#articleBody h5 {
+    margin: 10px 10px 5px 10px;
+}
+
+#articleBody p {
+    line-height: 2;
+    margin: 0 10px;
+}
+
 #loadingMessage {
     position: absolute;
     top: 0;
@@ -58,6 +76,7 @@ h5 {
     justify-content: center;
     align-items: center;
 }
+
 .text-center {
     text-align: center;
 }
