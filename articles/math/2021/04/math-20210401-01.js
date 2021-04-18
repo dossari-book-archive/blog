@@ -8,10 +8,14 @@ MultipePlatformBlogData.register(doc => {
     const contentCenter = style({ display: "flex", "justify-content": "center" })
     const red = v => `\\color{red}{${v}}`
     const textWeak = style("color", "#999")
-    const note = (...values) => p(textWeak, style({ margin: "0 1.2em", padding: "10px", "background-color": "#fcfcfc" }), ...values)
+    const note = (...values) => p(
+        textWeak,
+        style({ margin: "0 1.2em", padding: "10px", "background-color": "#fcfcfc" }),
+        ...values
+    )
 
     doc.articleId("math-20210401-01")
-    doc.title("特殊な列の行列式")
+    doc.title("特殊な形の行列式")
     doc.body(
         style("width", "720px"),
         h4("記号の定義"),
@@ -113,16 +117,29 @@ MultipePlatformBlogData.register(doc => {
 
             )
         ),
+        h4("系"),
+        p(tex("(c_{i,j})"), "を以下のように定める。"),
+        div(contentCenter,
+            ul(
+                li(tex("c_{i, i+1} = 1　　(i = 1, … n-1)")),
+                li(tex("c_{n, i} = -b_i　　(i = 1, … n)")),
+                li("上記以外は", tex("0")),
+            )
+        ),
+        p("つまり次のような行列になる："),
+        p(textCenter, tex.matrix([
+            "0      1    0   …   0           0",
+            "0      0    1   …   0           0",
+            "：     ：   …：  …   ：         ：",
+            "0      0    …   …   1          0",
+            "0      0    …   …   0           1",
+            "-b_1  -b_2  …   …  -b_{n-1}    -b_n",
+        ])),
+        p("この行列の固有多項式は次のようになる。"),
+        p(textCenter, tex.d(
+            " Σ_{i=i}^n t^{i-1}b_i",
+            " + t^n")
+        ),
         h4("関連"),
-
-
-        // p(tex("b_1, b_2∈B"), "が", A, "上整であれば、", tex("b_1 + b_2, 　b_1b_2"), "も", A, "上整である"),
-        // h4("証明"),
-        // p(b1_b2, "が", A, "$A$上整だから、", A_alg, "は", A, "加群として有限生成であり、",
-        //     tex("b_1+b_2, b_1b_2∈", A_alg), "だから、",
-        //     doc.el.a(href(doc.articleLink("math-20210328-01")), "こちら"), "の系から",
-        //     tex("b_1+b_2, b_1b_2"), "も", A, "上整であることがわかる。"
-        // ),
-        // p("（証明終）")
     )
 })
