@@ -35,39 +35,45 @@ window.addEventListener("DOMContentLoaded", () => {
         document.title = doc.title
         articleTitle.textContent = doc.title
         articleBody.append(doc.body)
-        if (!window.MathJax) {
-            window.MathJax = {
-                skipStartupTypeset: true,
-                loader: { load: ['[tex]/color'] },
-                tex: { packages: { '[+]': ['color'] } }
-            }
-            const script = document.createElement("script")
-            script.src = mathJaxUrl
-            document.head.append(script)
-            // パッケージを入れると、onloadeでもtypesetPromiseが使えない？
-            let iid = setInterval(() => {
-                if (!MathJax.typesetPromise) { return }
-                clearInterval(iid)
+        const showContent = () => {
+            document.querySelectorAll(".fade-in-hidden").forEach(elem => {
                 loadingMessage.style.display = "none"
-                MathJax.typesetPromise([articleBody])
-                    .then(() => {
-                        document.querySelectorAll(".fade-in-hidden").forEach(elem => {
-                            elem.classList.remove("fade-in-hidden")
-                            elem.classList.add("fade-in-show")
-                        })
-                    })
+                elem.classList.remove("fade-in-hidden")
+                elem.classList.add("fade-in-show")
             })
-            // script.onload = () => {
-            // }
+        }
+        if (doc.existsTex) {
+            if (!window.MathJax) {
+                window.MathJax = {
+                    skipStartupTypeset: true,
+                    loader: { load: ['[tex]/color'] },
+                    tex: { packages: { '[+]': ['color'] } }
+                }
+                const script = document.createElement("script")
+                script.src = mathJaxUrl
+                document.head.append(script)
+                // パッケージを入れると、onloadeでもtypesetPromiseが使えない？
+                let iid = setInterval(() => {
+                    if (!MathJax.typesetPromise) { return }
+                    clearInterval(iid)
+                    MathJax.typesetPromise([articleBody])
+                        .then(showContent)
+                })
+                // script.onload = () => {
+                // }
+            }
+        } else {
+            setTimeout(() => showContent())
         }
     }
+
     document.head.append(script)
 
     function getTargetScriptUrl(articleId) {
         if (!articleId) {
             return false
         }
-        const match = articleId.match(/^(math)-([0-9]{8})-([0-9]{2})$/)
+        const match = articleId.match(/^(math|it|misc|mylife)-([0-9]{8})-([0-9]{2})$/)
         if (!match) {
             return false
         }
