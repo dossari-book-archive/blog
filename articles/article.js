@@ -7,6 +7,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const params = new URLSearchParams(document.location.search.substring(1));
     const targetScriptUrl = getTargetScriptUrl(params.get("article"))
+    let prevHTML
     if (!targetScriptUrl) {
         return notFound()
     }
@@ -47,6 +48,10 @@ window.addEventListener("DOMContentLoaded", () => {
             })
             document.title = doc.title
             articleTitle.textContent = doc.title
+            if (prevHTML == doc.body.outerHTML) {
+                return
+            }
+            prevHTML = doc.body.outerHTML
             articleBody.innerHTML = ""
             articleBody.append(doc.body)
             const showContent = () => {
