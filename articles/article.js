@@ -10,64 +10,81 @@ window.addEventListener("DOMContentLoaded", () => {
     if (!targetScriptUrl) {
         return notFound()
     }
-    const script = document.createElement("script")
-
-    script.src = targetScriptUrl
-    script.onerror = () => {
-        notFound()
+    exec()
+    const keyEvent4StartLivePreview = (/** @type {KeyboardEvent}*/ e) => {
+        if (e.key == "F12" && e.ctrlKey && e.shiftKey) {
+            console.log("start live preview!!")
+            document.removeEventListener("keydown", keyEvent4StartLivePreview)
+            setInterval(exec, 1000)
+        }
     }
-    script.onload = () => {
-        // 成功したのでmathjax呼び出し
-        const doc = MultipePlatformBlogData.build({
-            formatter: {
-                tex: {
-                    texStart: " \\( ",
-                    texEnd: "\\) "
+    document.addEventListener("keydown", keyEvent4StartLivePreview)
+
+    /////////////////////////////////////////////////////////////
+    function exec() {
+
+        const script = document.createElement("script")
+
+        script.src = targetScriptUrl
+        script.onerror = () => {
+            notFound()
+        }
+        script.onload = () => {
+            // 成功したのでmathjax呼び出し
+            const doc = MultipePlatformBlogData.build({
+                formatter: {
+                    tex: {
+                        texStart: " \\( ",
+                        texEnd: "\\) "
+                    }
+                },
+                id2Url: id => {
+                    if (!getTargetScriptUrl(id)) {
+                        return false
+                    }
+                    return "article.html?article=" + id
                 }
-            },
-            id2Url: id => {
-                if (!getTargetScriptUrl(id)) {
-                    return false
-                }
-                return "article.html?article=" + id
-            }
-        })
-        document.title = doc.title
-        articleTitle.textContent = doc.title
-        articleBody.append(doc.body)
-        const showContent = () => {
-            document.querySelectorAll(".fade-in-hidden").forEach(elem => {
-                loadingMessage.style.display = "none"
-                elem.classList.remove("fade-in-hidden")
-                elem.classList.add("fade-in-show")
             })
-        }
-        if (doc.existsTex) {
-            if (!window.MathJax) {
-                window.MathJax = {
-                    skipStartupTypeset: true,
-                    loader: { load: ['[tex]/color'] },
-                    tex: { packages: { '[+]': ['color'] } }
-                }
-                const script = document.createElement("script")
-                script.src = mathJaxUrl
-                document.head.append(script)
-                // パッケージを入れると、onloadeでもtypesetPromiseが使えない？
-                let iid = setInterval(() => {
-                    if (!MathJax.typesetPromise) { return }
-                    clearInterval(iid)
-                    MathJax.typesetPromise([articleBody])
-                        .then(showContent)
+            document.title = doc.title
+            articleTitle.textContent = doc.title
+            articleBody.innerHTML = ""
+            articleBody.append(doc.body)
+            const showContent = () => {
+                document.querySelectorAll(".fade-in-hidden").forEach(elem => {
+                    loadingMessage.style.display = "none"
+                    elem.classList.remove("fade-in-hidden")
+                    elem.classList.add("fade-in-show")
                 })
-                // script.onload = () => {
-                // }
             }
-        } else {
-            setTimeout(() => showContent())
-        }
-    }
+            if (doc.existsTex) {
+                if (!window.MathJax) {
+                    window.MathJax = {
+                        skipStartupTypeset: true,
+                        loader: { load: ['[tex]/color'] },
+                        tex: { packages: { '[+]': ['color'] } }
+                    }
+                    const script = document.createElement("script")
+                    script.src = mathJaxUrl
+                    document.head.append(script)
 
-    document.head.append(script)
+                    // パッケージを入れると、onloadeでもtypesetPromiseが使えない？
+                    let iid = setInterval(() => {
+                        if (!MathJax.typesetPromise) { return }
+                        clearInterval(iid)
+                        MathJax.typesetPromise([articleBody])
+                            .then(showContent)
+                    })
+                    // script.onload = () => {
+                    // }
+                } else if (MathJax.typesetPromise) {
+                    MathJax.typesetPromise([articleBody]).then(showContent)
+                }
+            } else {
+                setTimeout(() => showContent())
+            }
+        }
+        document.head.append(script)
+    }
 
     function getTargetScriptUrl(articleId) {
         if (!articleId) {
