@@ -1,8 +1,9 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
-        , { K, n, Ω, φ, ψ } = tex.canonicalSymbols
+        , { a, K, L, n, Ω, φ, ψ } = tex.canonicalSymbols
         , { p, div, table, br, h4, ul, li } = doc.el
         , textRight = style("text-align", "right")
+        , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
         , prod = tex.d("Π_{i=1}^n r_i")
 
@@ -15,11 +16,17 @@ MultipePlatformBlogData.register(doc => {
             table(
                 [[tex("L/K"), textRight], "可換体の代数拡大"]
                 , [[tex("a_1, …, a_n"), textRight], [n, "個の元", tex("∈L")]]
-                , [[tex("K_i"), textRight], [tex("= K(a_1, …, a_i)")]]
-                , [[Ω, textRight], [tex("a_1, …, a_n"), "の共役をすべて含む体"]]
+                , [[tex("K_i"), textRight], [
+                    tex("=", tex.cases(
+                        "K & (i = 0) "
+                        , "K(a_1, …, a_i) & (i = 1,…,n)"
+                    ))
+                ]]
+                , [[Ω, textRight], [K, "を含み、任意の", L, "の元", a, "に対して"
+                    , tex("a"), "の", K, "上共役な元をすべて含む体"]]
                 , [[tex("r_i"), textRight], [
-                    tex("a_{i+1}"), "の", tex("K_i"), "上の最小多項式における異なる根の個数"
-                    , br(), tex("(i = 1, …, n - 1)")
+                    tex("a_i"), "の", tex("K_{i-1}"), "上の最小多項式における異なる根の個数"
+                    , br(), tex("(i = 1, …, n)")
                 ]]
             ),
         )
@@ -28,6 +35,7 @@ MultipePlatformBlogData.register(doc => {
             tex("K_n"), "から", Ω, "への",
             K, "上の埋め込みは丁度", prod, "個存在する。"
         )
+        , p("（したがって、埋め込みの個数", tex("<= [L : K]"), "）")
         , h4("証明")
         , p("埋め込みが", prod, "個以上存在すること：")
         , ul(
@@ -66,5 +74,30 @@ MultipePlatformBlogData.register(doc => {
             )
         )
         , p("（証明終）")
+        , h4("系1")
+        , p(tex("L/K"), "を有限次拡大とすると")
+        , p(
+            tex("L/K"), "が分離拡大"
+            , tex("⇔ L"), "の", Ω, "への埋め込みの個数", tex(" = [L : K]")
+        )
+        , h4("証明")
+        , p(tex("L = K(a_1, …, a_n)"), "とする。")
+        , p(tex("⇒)"), tex("a_i"), "が", tex("K_{i-1}"), "上分離的な元だから、")
+        , p(textCenter, tex("r_i = [K_i : K_{i-1}]"))
+        , p("よって")
+        , p(textCenter, "埋め込みの総数", tex(`= ${prod} = Π_{i=1}^n [K_i : K_{i - 1}] = [L : K]`))
+        , br()
+        , p(tex("⇐) L"), "が非分離的な元", tex("b∈L"), "を含むとする。このとき")
+        , p(textCenter, "埋め込み", tex("K(b) ↪ Ω"), "の個数", tex("< [K(b) : K]"))
+        , p("よって本命題から")
+        , p(textCenter, "埋め込みの総数", tex(`< [K : K(b)][K(b) : L] = [L : K]`))
+        , p("（証明終）")
+        , h4("系2")
+        , p(tex("a_1,…,a_n"), "が分離的であれば、", tex("K(a_1,…,a_n)/K"), "は分離拡大となる。")
+        , p("（したがって", L, "の分離的な元全体の集合は", L, "の部分体を成す）")
+        , h4("リンク")
+        , ul(
+            li(doc.el.a(doc.attr("href", doc.articleLink("math-20210418-03")), "有限次分離拡大は単純拡大"))
+        )
     )
 })
