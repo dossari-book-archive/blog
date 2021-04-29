@@ -1,7 +1,7 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
-        , { a, c, r, n, K, L, } = tex.canonicalSymbols
-        , { p, div, table, br, h4 } = doc.el
+        , { a, r, n, K, L, } = tex.canonicalSymbols
+        , { p, div, table, h4 } = doc.el
         , textRight = style("text-align", "right")
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
@@ -23,7 +23,6 @@ MultipePlatformBlogData.register(doc => {
         , h4("命題")
         , p("ある", r, "に対して", tex("a^{p^r}∈K"), "なら、"
             , n, "は", tex("1"), "または", tex("p"), "冪（", tex("<= p^r"), "）。")
-        //, p(tex("a^p∈K"), "なら、", tex("n = 1"), "または", tex("p"), "。")
         , h4("証明")
         , p("体の列")
         , p(textCenter, tex("K ⊂ K(a^{p^{r-1}}) ⊂ K(a^{p^{r-2}}) ⊂ … ⊂ K(a)"))
