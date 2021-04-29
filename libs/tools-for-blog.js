@@ -66,7 +66,9 @@ const MultipePlatformBlogData = (() => {
         const htmlElem = document.createElement(data.tagName)
         data.children.forEach(child => {
             if (typeof child == "string") {
-                htmlElem.append(document.createTextNode(child))
+                htmlElem.append(document.createTextNode(
+                    child.replace("、", ", ").replace("。", ". ")) // TODO
+                )
             } else if (child instanceof Tex) {
                 htmlElem.append(document.createTextNode(
                     outputProps.formatter.tex.texStart
@@ -95,6 +97,26 @@ const MultipePlatformBlogData = (() => {
             }
         })
         return htmlElem
+    }
+
+    /**
+     * 
+     * @param {Elem} elem 
+     * @returns 
+     */
+    const existsTex = (elem) => {
+        const data = elem[dataKey]
+        for (let i = 0; i < data.children.length; i++) {
+            const child = data.children[i]
+            if (child instanceof Tex) {
+                return true;
+            } else if (child instanceof Elem) {
+                if (existsTex(child)) {
+                    return true;
+                }
+            }
+        }
+        return false
     }
 
     const toCamel = p =>
@@ -189,6 +211,8 @@ const MultipePlatformBlogData = (() => {
      *      Ｎ: Tex, Ｑ: Tex, Ｒ: Tex, Ｚ: tex,
      *   },
      *   d: (...values: string) => Tex,
+     *   align: (...values: string|Tex) => Tex,
+     *   cases: (...values: string|Tex) => Tex,
      *   matrix: (matrix: ((string|Tex)[][]), options: MatrixOptions) => Tex,
      *   hvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,
      *   vvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,
@@ -207,6 +231,16 @@ const MultipePlatformBlogData = (() => {
         ">=": "\\ge ",
     }
 
+    const greekLetters = {
+        "α": "\\alpha ",
+        "β": "\\beta ",
+        "γ": "\\gamma ",
+        "Ω": "\\Omega ",
+        "φ": "\\varphi ",
+        "Ψ": "\\psi ",
+        "ψ": "\\psi ",
+    }
+
     const texReplaceMap = {
         "≦": "\\le ",
         "≧": "\\ge ",
@@ -219,20 +253,25 @@ const MultipePlatformBlogData = (() => {
         "⊂": "\\subset ",
         "⊃": "\\supset ",
         "×": "\\times ",
+        "≠": "\\neq ",
         "≡": "\\equiv ",
+        "⇔": "\\Leftrightarrow ",
+        "⇒": "\\Rightarrow ",
+        "⇐": "\\Leftarrow ",
+        "↪": "\\hookrightarrow ",
         "<": "\\lt ",
         ">": "\\gt ",
         "…": "\\cdots ",
         "：": "\\vdots",
         "Σ": "\\sum",
         "Π": "\\prod",
+        "｜" : "\\mid ",
         "　": "\\,",
         "Ｎ": "\\mathbb{N}",
         "Ｑ": "\\mathbb{Q}",
         "Ｒ": "\\mathbb{R}",
         "Ｚ": "\\mathbb{Z}",
-        "φ": "\\varphi ",
-        "α": "\\alpha",
+        ...greekLetters
     }
 
     /**
@@ -261,6 +300,12 @@ const MultipePlatformBlogData = (() => {
             ).join(" \\\\ ")
             return tex(`\\left${options.parenthesis[0]} \\begin{array}{${alignment}} ${matrixStr} \\end{array} \\right${options.parenthesis[1]}`)
         }
+        tex.br = tex(" \\\\ ")
+        tex.align = (...values) => new Tex([
+            "\\begin{align}",
+            ...values,
+            "\\end{align}"
+        ])
         // vvector
         tex.hvector = (values, options = {}) => {
             return tex.matrix([values], options)
@@ -269,14 +314,20 @@ const MultipePlatformBlogData = (() => {
         tex.vvector = (values, options = {}) => {
             return tex.matrix(values.map(v => [v], options))
         }
-
+        tex.cases = (...values) => new Tex(
+            ["\\begin{cases}\n", values.join(" \\\\ "), "\\end{cases}"]
+            // K & (i = 0) \\\\
+            // K(a_1, …, a_i) & (i = 1,…,n)
+            // \\end{cases}
+        )
         // 標準シンボル（a, b,c, ..., A, B, C, ...）
-        const symbols = tex.canonicalSymbols = {}
+        const symbols = tex.canonicalSymbols = {
+            ...greekLetters
+        }
         "abcdefghijklmnopqrstuvwxyz".split("").forEach(c => {
             symbols[c] = tex(c)
             symbols[c.toUpperCase()] = tex(c.toUpperCase())
         })
-
         Object.keys(texReplaceMap).forEach(k => symbols[k] = tex(texReplaceMap[k]))
         return tex
     })()
@@ -338,6 +389,7 @@ const MultipePlatformBlogData = (() => {
         build(options) {
             return {
                 title: latestDoc.title,
+                existsTex: existsTex(latestDoc.rootElem),
                 body: buildHTML(latestDoc.rootElem, options),
             }
         }
