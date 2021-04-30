@@ -355,6 +355,7 @@ const MultipePlatformBlogData = (() => {
          *   doc: {
          *    title: (title: string) => void,
          *    articleId: (id: string) => void,
+         *    article: (id: string, ...values:any) => Elem
          *    body: ((...values: any) => void)
          *    tex: TexFunc,
          *    attr: (key: string, value: string) => Attr,
@@ -383,7 +384,12 @@ const MultipePlatformBlogData = (() => {
                     el: Elems,
                     attr: (key, value = "") => new Attr(key, value),
                     style: (key, value) => new Style(key, value),
-                    articleLink: id => new Link(id)
+                    articleLink: id => new Link(id),
+                    article: (id, ...values) =>
+                        new Elem("a", [
+                            new Attr("href", new Link(id)),
+                            ...values
+                        ])
                 })
                 latestDoc = doc
                 latestError = null
