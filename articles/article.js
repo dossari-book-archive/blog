@@ -21,6 +21,19 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     document.addEventListener("keydown", keyEvent4StartLivePreview)
 
+    const showContent = (() => {
+        let showed = false
+        return () => {
+            if (showed) return
+            showed = true
+            document.querySelectorAll(".fade-in-hidden").forEach(elem => {
+                loadingMessage.style.display = "none"
+                elem.classList.remove("fade-in-hidden")
+                elem.classList.add("fade-in-show")
+            })
+        }
+    })()
+
     /////////////////////////////////////////////////////////////
     function exec() {
 
@@ -31,42 +44,51 @@ window.addEventListener("DOMContentLoaded", () => {
             notFound()
         }
         script.onload = () => {
+            const errorInfo = document.getElementById("errorInfo")
             // 成功したのでmathjax呼び出し
-            const doc = MultipePlatformBlogData.build({
-                formatter: {
-                    tex: {
-                        texStart: " \\( ",
-                        texEnd: "\\) "
+            const onerror = e => {
+                errorInfo.innerText = e.stack || e.message
+                throw e
+            }
+            const e = MultipePlatformBlogData.latestError
+            if (e != null) {
+                return onerror(e)
+            }
+            let doc
+            try {
+                doc = MultipePlatformBlogData.build({
+                    formatter: {
+                        tex: {
+                            texStart: " \\( ",
+                            texEnd: "\\) "
+                        }
+                    },
+                    id2Url: id => {
+                        if (!getTargetScriptUrl(id)) {
+                            return false
+                        }
+                        return "article.html?article=" + id
                     }
-                },
-                id2Url: id => {
-                    if (!getTargetScriptUrl(id)) {
-                        return false
-                    }
-                    return "article.html?article=" + id
-                }
-            })
+                })
+            } catch (e) {
+                return onerror(e)
+            }
+            errorInfo.innerText = ""
             document.title = doc.title
             articleTitle.textContent = doc.title
             if (prevHTML == doc.body.outerHTML) {
+                showContent()
                 return
             }
             prevHTML = doc.body.outerHTML
             articleBody.innerHTML = ""
             articleBody.append(doc.body)
-            const showContent = () => {
-                document.querySelectorAll(".fade-in-hidden").forEach(elem => {
-                    loadingMessage.style.display = "none"
-                    elem.classList.remove("fade-in-hidden")
-                    elem.classList.add("fade-in-show")
-                })
-            }
             if (doc.existsTex) {
                 if (!window.MathJax) {
                     window.MathJax = {
                         skipStartupTypeset: true,
-                        loader: { load: ['[tex]/color'] },
-                        tex: { packages: { '[+]': ['color'] } }
+                        loader: { load: ['[tex]/color', '[tex]/amscd'] },
+                        tex: { packages: { '[+]': ['color', 'amscd'] } }
                     }
                     const script = document.createElement("script")
                     script.src = mathJaxUrl

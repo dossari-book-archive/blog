@@ -67,7 +67,7 @@ const MultipePlatformBlogData = (() => {
         data.children.forEach(child => {
             if (typeof child == "string") {
                 htmlElem.append(document.createTextNode(
-                    child.replace("、", ", ").replace("。", ". ")) // TODO
+                    child.replace(/、/g, ", ").replace(/。/g, ". ")) // TODO
                 )
             } else if (child instanceof Tex) {
                 htmlElem.append(document.createTextNode(
@@ -266,7 +266,7 @@ const MultipePlatformBlogData = (() => {
         "：": "\\vdots",
         "Σ": "\\sum",
         "Π": "\\prod",
-        "｜" : "\\mid ",
+        "｜": "\\mid ",
         "　": "\\,",
         "Ｎ": "\\mathbb{N}",
         "Ｑ": "\\mathbb{Q}",
@@ -345,6 +345,8 @@ const MultipePlatformBlogData = (() => {
      * @type {Doc}
      */
     let latestDoc
+    /** @type {Error} */
+    let latestError
 
     return {
         /**
@@ -367,22 +369,30 @@ const MultipePlatformBlogData = (() => {
              * @type {Doc}
              */
             const doc = {}
-            callback({
-                articleId(id) { doc.articleId = id },
-                title(title) { doc.title = title },
-                body(...values) {
-                    if (doc.rootElem != null) {
-                        throw new Error("can only be called once")
-                    }
-                    doc.rootElem = new Elem("div", values)
-                },
-                tex: texFunc,
-                el: Elems,
-                attr: (key, value = "") => new Attr(key, value),
-                style: (key, value) => new Style(key, value),
-                articleLink: id => new Link(id)
-            })
-            latestDoc = doc
+            try {
+                callback({
+                    articleId(id) { doc.articleId = id },
+                    title(title) { doc.title = title },
+                    body(...values) {
+                        if (doc.rootElem != null) {
+                            throw new Error("can only be called once")
+                        }
+                        doc.rootElem = new Elem("div", values)
+                    },
+                    tex: texFunc,
+                    el: Elems,
+                    attr: (key, value = "") => new Attr(key, value),
+                    style: (key, value) => new Style(key, value),
+                    articleLink: id => new Link(id)
+                })
+                latestDoc = doc
+                latestError = null
+            } catch (e) {
+                latestError = e
+            }
+        },
+        get latestError() {
+            return latestError
         },
         /**
          * @param {OutputProps} options 
