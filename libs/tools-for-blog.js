@@ -252,6 +252,7 @@ const MultipePlatformBlogData = (() => {
         "∋": " \\ni ",
         "⊂": "\\subset ",
         "⊃": "\\supset ",
+        "＼": "\\setminus ",
         "×": "\\times ",
         "≠": "\\neq ",
         "≡": "\\equiv ",
