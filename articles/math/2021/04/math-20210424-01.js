@@ -1,6 +1,6 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
-        , { a, K, L, n, Ω, φ, ψ } = tex.canonicalSymbols
+        , { a, K, L, M, n, Ω, φ, ψ } = tex.canonicalSymbols
         , { p, div, table, br, h4, ul, li } = doc.el
         , textRight = style("text-align", "right")
         , textCenter = style("text-align", "center")
@@ -95,6 +95,14 @@ MultipePlatformBlogData.register(doc => {
         , h4("系2")
         , p(tex("a_1,…,a_n"), "が分離的であれば、", tex("K(a_1,…,a_n)/K"), "は分離拡大となる。")
         , p("（したがって", L, "の分離的な元全体の集合は", L, "の部分体を成す）")
+        , h4("系3")
+        , p(tex("L/K"), "を分離拡大、"
+            , tex("M"), "を", tex("L/K"), "の中間体とすると、"
+            , "埋め込み", tex("σ,σ':L ↪ Ω"), "は", M, "への制限で"
+            , )
+        , p(textCenter, tex("σ～σ' ⇔ σ|_M = σ'|_M"))
+        , p("という同値関係によって", tex("[L:M]")
+            , "個の元を含む", tex("[M:K]"), "個の同値類に分けられる。")
         , h4("リンク")
         , ul(
             li(doc.el.a(doc.attr("href", doc.articleLink("math-20210418-03")), "有限次分離拡大は単純拡大"))

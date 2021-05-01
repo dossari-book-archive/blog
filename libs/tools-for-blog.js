@@ -235,10 +235,28 @@ const MultipePlatformBlogData = (() => {
         "α": "\\alpha ",
         "β": "\\beta ",
         "γ": "\\gamma ",
-        "Ω": "\\Omega ",
+        "δ": "\\delta ",
+        "ε": "\\epsilon ",
+        "ζ": "\\zeta ",
+        "η": "\\eta ",
+        "θ": "\\theta ",
+        "ι": "\\iota ",
+        "κ": "\\kappa ",
+        "λ": "\\lambda ",
+        "μ": "\\mu ",
+        "ν": "\\nu ",
+        "ξ": "\\xi ",
+        "π": "\\pi ",
+        "ρ": "\\rho ",
+        "σ": "\\sigma ",
+        "τ": "\\tau ",
+        "υ": "\\upsilon ",
+        "χ": "\\chi ",
+        "ω": "\\omega ",
         "φ": "\\varphi ",
         "Ψ": "\\psi ",
         "ψ": "\\psi ",
+        "Ω": "\\Omega ",
     }
 
     const texReplaceMap = {
@@ -255,6 +273,7 @@ const MultipePlatformBlogData = (() => {
         "＼": "\\setminus ",
         "×": "\\times ",
         "≠": "\\neq ",
+        "～" : "\\sim",
         "≡": "\\equiv ",
         "⇔": "\\Leftrightarrow ",
         "⇒": "\\Rightarrow ",
@@ -388,6 +407,7 @@ const MultipePlatformBlogData = (() => {
                     article: (id, ...values) =>
                         new Elem("a", [
                             new Attr("href", new Link(id)),
+                            new Attr("target", "_blank"),
                             ...values
                         ])
                 })
