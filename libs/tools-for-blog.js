@@ -204,6 +204,10 @@ const MultipePlatformBlogData = (() => {
      */
 
     /**
+     * @typedef {(...values: string|Tex) => Tex} GetTex
+     */
+
+    /**
      * @typedef {((...values: (string|Tex)) => Tex) & 
      * {
      *   canonicalSymbols: {
@@ -216,6 +220,10 @@ const MultipePlatformBlogData = (() => {
      *   matrix: (matrix: ((string|Tex)[][]), options: MatrixOptions) => Tex,
      *   hvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,
      *   vvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,
+     *   typeFaces: {
+     *     rm: GetTex, bf: GetTex, it: GetTex, sf: GetTex,
+     *     sl: GetTex, sc: GetTex, tt: GetTex, gt: GetTex, mc: GetTex,
+     *   }
      * }
      * } TexFunc
      */
@@ -273,7 +281,7 @@ const MultipePlatformBlogData = (() => {
         "＼": "\\setminus ",
         "×": "\\times ",
         "≠": "\\neq ",
-        "～" : "\\sim",
+        "～": "\\sim ",
         "≡": "\\equiv ",
         "⇔": "\\Leftrightarrow ",
         "⇒": "\\Rightarrow ",
@@ -347,6 +355,10 @@ const MultipePlatformBlogData = (() => {
         "abcdefghijklmnopqrstuvwxyz".split("").forEach(c => {
             symbols[c] = tex(c)
             symbols[c.toUpperCase()] = tex(c.toUpperCase())
+        })
+        tex.typeFaces = {}
+        "rm bf it sf sl sc tt gt mc".split(" ").forEach(name => {
+            tex.typeFaces[name] = (...values) => new Tex(["{\\", name, " ", ...values, "}"])
         })
         Object.keys(texReplaceMap).forEach(k => symbols[k] = tex(texReplaceMap[k]))
         return tex
