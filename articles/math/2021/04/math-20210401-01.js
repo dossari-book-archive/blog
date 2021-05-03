@@ -137,7 +137,7 @@ MultipePlatformBlogData.register(doc => {
         ])),
         p("この行列の固有多項式は次のようになる。"),
         p(textCenter, tex.d(
-            " Σ_{i=i}^n t^{i-1}b_i",
+            " Σ_{i=1}^n b_it^{i-1}",
             " + t^n")
         ),
         h4("関連"),

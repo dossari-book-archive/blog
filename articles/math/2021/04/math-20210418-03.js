@@ -33,7 +33,7 @@ MultipePlatformBlogData.register(doc => {
             "分離的な元の全体は体を成すから（"
             , doc.el.a(
                 attr("href", doc.articleLink("math-20210424-01"))
-                , "こちらの系2"
+                , "こちら"
             )
             , "を参照）、"
             , tex("L/K"), "の生成元の個数による帰納法で証明が完了する。"
