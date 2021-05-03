@@ -1,39 +1,41 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
-        , { a, K, L, M, n, Ω, φ, ψ } = tex.canonicalSymbols
+        , { a, K, L, M, n, Ω, φ, ψ, σ } = tex.canonicalSymbols
         , { p, div, table, br, h4, ul, li } = doc.el
         , textRight = style("text-align", "right")
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
         , prod = tex.d("Π_{i=1}^n r_i")
+        , Kσ = tex("K^σ")
 
     doc.articleId("math-20210424-01")
     doc.title("代数拡大における埋め込みの個数")
     doc.body(
         style("width", "720px")
-        , h4("記号の定義")
+        , h4("前提")
         , div(contentCenter,
             table(
-                [[tex("L/K"), textRight], "可換体の代数拡大"]
-                , [[tex("a_1, …, a_n"), textRight], [n, "個の元", tex("∈L")]]
+                [[tex("L/K"), textRight], "可換体の有限次代数拡大"]
+                , [[tex("a_1, …, a_n"), textRight], [L, "を生成する", n, "個の元:", tex("L = K(a_1,…,a_n)")]]
                 , [[tex("K_i"), textRight], [
                     tex("=", tex.cases(
                         "K & (i = 0) "
                         , "K(a_1, …, a_i) & (i = 1,…,n)"
                     ))
                 ]]
-                , [[Ω, textRight], [K, "を含み、任意の", L, "の元", a, "に対して"
-                    , tex("a"), "の", K, "上共役な元をすべて含む体"]]
                 , [[tex("r_i"), textRight], [
                     tex("a_i"), "の", tex("K_{i-1}"), "上の最小多項式における異なる根の個数"
                     , br(), tex("(i = 1, …, n)")
                 ]]
+                , [[Kσ, textRight], [K, "と同型な体。", σ, "は同型写像"]]
+                , [[Ω, textRight], [Kσ, "を含み、任意の", L, "の元", a, "に対して"
+                    , tex("a"), "の", K, "上共役な元をすべて含む体"]]
+                , [["埋め込み", tex("K_i ↪ Ω")], [σ, "を拡張した体の準同型（単射）"]]
             ),
         )
         , h4("命題")
         , p(
-            tex("K_n"), "から", Ω, "への",
-            K, "上の埋め込みは丁度", prod, "個存在する。"
+            "埋め込み", tex("L ↪ Ω"), "は丁度", prod, "個存在する。"
         )
         , p("（したがって、埋め込みの個数", tex("<= [L : K]"), "）")
         , h4("証明")
@@ -74,11 +76,10 @@ MultipePlatformBlogData.register(doc => {
             )
         )
         , p("（証明終）")
-        , h4("系1")
-        , p(tex("L/K"), "を有限次拡大とすると")
+        , h4("命題")
         , p(
             tex("L/K"), "が分離拡大"
-            , tex("⇔ L"), "の", Ω, "への埋め込みの個数", tex(" = [L : K]")
+            , tex("⇔"), "埋め込み", tex("L↪Ω"), "の個数", tex(" = [L : K]")
         )
         , h4("証明")
         , p(tex("L = K(a_1, …, a_n)"), "とする。")
@@ -92,15 +93,15 @@ MultipePlatformBlogData.register(doc => {
         , p("よって本命題から")
         , p(textCenter, "埋め込みの総数", tex(`< [K : K(b)][K(b) : L] = [L : K]`))
         , p("（証明終）")
-        , h4("系2")
+        , h4("命題")
         , p(tex("a_1,…,a_n"), "が分離的であれば、", tex("K(a_1,…,a_n)/K"), "は分離拡大となる。")
         , p("（したがって", L, "の分離的な元全体の集合は", L, "の部分体を成す）")
-        , h4("系3")
+        , h4("命題")
         , p(tex("L/K"), "を分離拡大、"
             , tex("M"), "を", tex("L/K"), "の中間体とすると、"
-            , "埋め込み", tex("σ,σ':L ↪ Ω"), "は", M, "への制限で"
+            , "埋め込み", tex("φ,φ':L ↪ Ω"), "は", M, "への制限で"
             , )
-        , p(textCenter, tex("σ～σ' ⇔ σ|_M = σ'|_M"))
+        , p(textCenter, tex("φ～φ' ⇔ φ|_M = φ'|_M"))
         , p("という同値関係によって", tex("[L:M]")
             , "個の元を含む", tex("[M:K]"), "個の同値類に分けられる。")
         , h4("リンク")
