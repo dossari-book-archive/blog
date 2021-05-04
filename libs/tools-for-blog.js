@@ -280,6 +280,8 @@ const MultipePlatformBlogData = (() => {
         "⊂": "\\subset ",
         "⊃": "\\supset ",
         "＼": "\\setminus ",
+        "∩": "\\cap ",
+        "∪": "\\cup ",
         "×": "\\times ",
         "≠": "\\neq ",
         "～": "\\sim ",
@@ -365,6 +367,39 @@ const MultipePlatformBlogData = (() => {
         return tex
     })()
 
+    const Drawing = {
+        /**
+         * @param {{
+         *   startX: number, startY: number, endX: number, endY: number
+         * }} pos 
+         */
+        line(pos, ...values) {
+            const length = Math.sqrt((pos.startX - pos.endX) ** 2 + (pos.startY - pos.endY) ** 2)
+            // const vx = (pos.endX - pos.startX)// / length
+            // const vy = (pos.endY - pos.startY)// / length
+            const angle = Math.atan2((pos.endY - pos.startY), (pos.endX - pos.startX))
+            const degrees = Math.floor(angle * 180 / Math.PI)
+            console.log(degrees)
+            return Elems.div(
+                new Style({
+                    position: "absolute",
+                    top: pos.startY + "px",
+                    left: pos.startX + "px",
+                    width: length + "px",
+                    transformOrigin: "top left",
+                    // transform: `rotate(${angle})`
+                    //transform: `rotate(${degrees}deg)`
+                    transform: `rotate(${degrees}deg)`
+                }),
+                ...values
+            )
+        }
+    }
+
+    /**
+     * @typedef {Drawing} DrawingT
+     */
+
     /**
      * @typedef {{
      *   rootElem: Elem,
@@ -393,6 +428,7 @@ const MultipePlatformBlogData = (() => {
          *    attr: (key: string, value: string) => Attr,
          *    style: (key: string, value: string) => Style
          *    el: {table: ElemFunc, tr: ElemFunc, p: ElemFunc},
+         *    drawing: DrawingT,
          *    articleLink: (id: string) => Link
          *   }
          * ) => void} callback 
@@ -414,6 +450,7 @@ const MultipePlatformBlogData = (() => {
                     },
                     tex: texFunc,
                     el: Elems,
+                    drawing: Drawing,
                     attr: (key, value = "") => new Attr(key, value),
                     style: (key, value) => new Style(key, value),
                     articleLink: id => new Link(id),
