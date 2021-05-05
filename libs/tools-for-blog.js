@@ -237,6 +237,7 @@ const MultipePlatformBlogData = (() => {
         "…：": "\\ddots ",
         "<=": "\\le ",
         ">=": "\\ge ",
+        "/｜": "\\nmid ",
     }
 
     const greekLetters = {
