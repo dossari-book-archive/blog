@@ -217,6 +217,7 @@ const MultipePlatformBlogData = (() => {
      *   d: (...values: string) => Tex,
      *   align: (...values: string|Tex) => Tex,
      *   cases: (...values: string|Tex) => Tex,
+     *   br: Tex
      *   matrix: (matrix: ((string|Tex)[][]), options: MatrixOptions) => Tex,
      *   hvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,
      *   vvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,

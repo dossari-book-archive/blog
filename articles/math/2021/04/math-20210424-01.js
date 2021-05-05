@@ -1,7 +1,7 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
         , { a, K, L, M, n, Ω, φ, ψ, σ } = tex.canonicalSymbols
-        , { p, div, table, br, h4, ul, li } = doc.el
+        , { p, div, table, br, h4, h5, ul, ol, li } = doc.el
         , textRight = style("text-align", "right")
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
@@ -34,11 +34,38 @@ MultipePlatformBlogData.register(doc => {
             ),
         )
         , h4("命題")
-        , p(
-            "埋め込み", tex("L ↪ Ω"), "は丁度", prod, "個存在する。"
+        , ol(
+            li(p(
+                "埋め込み", tex("L ↪ Ω"), "は丁度", prod, "個存在する。"
+                , "（したがって、埋め込みの個数", tex("<= [L : K]"), "）"
+            ))
+            , li(p(
+                tex("L/K"), "が分離拡大"
+                , tex("⇔"), "埋め込み", tex("L↪Ω"), "の個数", tex(" = [L : K]")
+            ))
+            , li(p(
+                tex("a_1,…,a_n"), "が分離的であれば、", tex("K(a_1,…,a_n)/K"), "は分離拡大となる。"
+                , br(), "（したがって", L, "の分離的な元全体の集合は", L, "の部分体を成す）"
+            ))
+            , li(p(
+                tex("M"), "を", tex("L/K"), "の中間体とすると、"
+                , "埋め込み", tex("L↪K"), "の個数は"
+                , p(textCenter
+                    , "（", M, "上の埋め込み", tex("L↪Ω"), "の個数）"
+                    , "×（", K, "上の埋め込み", tex("M↪Ω"), "の個数）"
+                )
+            ))
+            , li(p(
+                tex("L/K"), "を分離拡大、"
+                , tex("M"), "を", tex("L/K"), "の中間体とすると、"
+                , "埋め込み", tex("φ,φ':L ↪ Ω"), "は", M, "への制限で"
+                , p(textCenter, tex("φ～φ' ⇔ φ|_M = φ'|_M"))
+                , "という同値関係によって", tex("[L:M]")
+                , "個の元を含む", tex("[M:K]"), "個の同値類に分けられる。"
+            ))
         )
-        , p("（したがって、埋め込みの個数", tex("<= [L : K]"), "）")
         , h4("証明")
+        , h5("1.")
         , p("埋め込みが", prod, "個以上存在すること：")
         , ul(
             li(
@@ -75,13 +102,7 @@ MultipePlatformBlogData.register(doc => {
                 , ψ, "は上記", prod, "個の埋め込みのいずれかに一致することがわかる。"
             )
         )
-        , p("（証明終）")
-        , h4("命題")
-        , p(
-            tex("L/K"), "が分離拡大"
-            , tex("⇔"), "埋め込み", tex("L↪Ω"), "の個数", tex(" = [L : K]")
-        )
-        , h4("証明")
+        , h5("2.")
         , p(tex("L = K(a_1, …, a_n)"), "とする。")
         , p(tex("⇒)"), tex("a_i"), "が", tex("K_{i-1}"), "上分離的な元だから、")
         , p(textCenter, tex("r_i = [K_i : K_{i-1}]"))
@@ -92,21 +113,8 @@ MultipePlatformBlogData.register(doc => {
         , p(textCenter, "埋め込み", tex("K(b) ↪ Ω"), "の個数", tex("< [K(b) : K]"))
         , p("よって本命題から")
         , p(textCenter, "埋め込みの総数", tex(`< [K : K(b)][K(b) : L] = [L : K]`))
+        , h5("3.")
+        , p("1、2より明らか。")
         , p("（証明終）")
-        , h4("命題")
-        , p(tex("a_1,…,a_n"), "が分離的であれば、", tex("K(a_1,…,a_n)/K"), "は分離拡大となる。")
-        , p("（したがって", L, "の分離的な元全体の集合は", L, "の部分体を成す）")
-        , h4("命題")
-        , p(tex("L/K"), "を分離拡大、"
-            , tex("M"), "を", tex("L/K"), "の中間体とすると、"
-            , "埋め込み", tex("φ,φ':L ↪ Ω"), "は", M, "への制限で"
-            , )
-        , p(textCenter, tex("φ～φ' ⇔ φ|_M = φ'|_M"))
-        , p("という同値関係によって", tex("[L:M]")
-            , "個の元を含む", tex("[M:K]"), "個の同値類に分けられる。")
-        , h4("リンク")
-        , ul(
-            li(doc.el.a(doc.attr("href", doc.articleLink("math-20210418-03")), "有限次分離拡大は単純拡大"))
-        )
     )
 })
