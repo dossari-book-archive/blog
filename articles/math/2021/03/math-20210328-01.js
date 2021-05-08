@@ -15,7 +15,6 @@ MultipePlatformBlogData.register(doc => {
         tex.vvector(["m_1", "m_2", "：", "m_n"]),
         "= 0",
     ))
-    doc.articleId("math-20210328-01")
     doc.title("行列式の技巧")
     doc.body(
         h4("記号の定義"),

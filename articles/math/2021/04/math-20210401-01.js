@@ -14,7 +14,6 @@ MultipePlatformBlogData.register(doc => {
         ...values
     )
 
-    doc.articleId("math-20210401-01")
     doc.title("特殊な形の行列式")
     doc.body(
         style("width", "720px"),

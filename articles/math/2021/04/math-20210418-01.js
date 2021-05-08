@@ -10,7 +10,6 @@ MultipePlatformBlogData.register(doc => {
         , f1 = tex("f_1")
         , f2 = tex("f_2")
 
-    doc.articleId("math-20210418-01")
     doc.title("分離元と単純拡大")
     doc.body(
         h4("記号の定義")

@@ -6,7 +6,6 @@ MultipePlatformBlogData.register(doc => {
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
 
-    doc.articleId("math-20210429-01")
     doc.title("純非分離拡大")
     doc.body(
         style("width", "720px")

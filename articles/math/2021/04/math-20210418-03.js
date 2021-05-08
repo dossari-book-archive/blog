@@ -5,7 +5,6 @@ MultipePlatformBlogData.register(doc => {
     const textRight = style("text-align", "right")
     const contentCenter = style({ display: "flex", "justify-content": "center" })
 
-    doc.articleId("math-20210418-03")
     doc.title("有限次分離拡大は単純拡大")
     doc.body(
         style("width", "720px")

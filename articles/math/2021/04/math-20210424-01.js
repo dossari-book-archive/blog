@@ -8,7 +8,6 @@ MultipePlatformBlogData.register(doc => {
         , prod = tex.d("Π_{i=1}^n r_i")
         , Kσ = tex("K^σ")
 
-    doc.articleId("math-20210424-01")
     doc.title("代数拡大における埋め込みの個数")
     doc.body(
         style("width", "720px")

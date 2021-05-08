@@ -9,7 +9,6 @@ MultipePlatformBlogData.register(doc => {
         , Tr = tex.typeFaces.rm("Tr")
         , det = tex.typeFaces.rm("det")
 
-    doc.articleId("math-20210502-01")
     doc.title("代数拡大におけるトレース、ノルム")
     doc.body(
         style("width", "720px")

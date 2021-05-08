@@ -6,7 +6,6 @@ MultipePlatformBlogData.register(doc => {
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
 
-    doc.articleId("math-20210501-01")
     doc.title("非分離元のべき乗は分離元になる")
     doc.body(
         style("width", "720px")

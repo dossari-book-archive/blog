@@ -5,7 +5,6 @@ MultipePlatformBlogData.register(doc => {
         , textRight = style("text-align", "right")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
 
-    doc.articleId("math-20210430-02")
     doc.title("重根と形式的微分")
     doc.body(
         style("width", "720px")

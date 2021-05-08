@@ -8,7 +8,6 @@ MultipePlatformBlogData.register(doc => {
     const href = link => attr("href", link)
 
 
-    doc.articleId("math-20210331-01")
     doc.title("整な元は加法、乗法で閉じている")
     doc.body(
         h4("記号の定義"),
