@@ -14,6 +14,15 @@
  * }} OutputProps
  */
 
+/**
+ * @typedef {{
+ *   rootElem: Elem,
+ *   articleId: string,
+ *   title: string,
+ *   tags: string[],
+ * }} DocumentData
+ */
+
 const MultipePlatformBlogData = (() => {
 
     const dataKey = Symbol("data")
@@ -292,6 +301,7 @@ const MultipePlatformBlogData = (() => {
         "⇒": "\\Rightarrow ",
         "⇐": "\\Leftarrow ",
         "↪": "\\hookrightarrow ",
+        "◦": "\\circ ",
         "<": "\\lt ",
         ">": "\\gt ",
         "…": "\\cdots ",
@@ -300,6 +310,7 @@ const MultipePlatformBlogData = (() => {
         "Π": "\\prod",
         "｜": "\\mid ",
         "　": "\\,",
+        "√": "\\sqrt",
         "Ｎ": "\\mathbb{N}",
         "Ｑ": "\\mathbb{Q}",
         "Ｒ": "\\mathbb{R}",
@@ -354,8 +365,10 @@ const MultipePlatformBlogData = (() => {
             // \\end{cases}
         )
         // 標準シンボル（a, b,c, ..., A, B, C, ...）
-        const symbols = tex.canonicalSymbols = {
-            ...greekLetters
+        const symbols = tex.canonicalSymbols = {}
+        // 数値
+        for(let i = 0; i < 10; i++) {
+            symbols["_" + i] = tex(i)
         }
         "abcdefghijklmnopqrstuvwxyz".split("").forEach(c => {
             symbols[c] = tex(c)
@@ -381,7 +394,6 @@ const MultipePlatformBlogData = (() => {
             // const vy = (pos.endY - pos.startY)// / length
             const angle = Math.atan2((pos.endY - pos.startY), (pos.endX - pos.startX))
             const degrees = Math.floor(angle * 180 / Math.PI)
-            console.log(degrees)
             return Elems.div(
                 new Style({
                     position: "absolute",
@@ -403,15 +415,7 @@ const MultipePlatformBlogData = (() => {
      */
 
     /**
-     * @typedef {{
-     *   rootElem: Elem,
-     *   articleId: string,
-     *   title: string,
-     * }} Doc
-     */
-
-    /**
-     * @type {Doc}
+     * @type {DocumentData}
      */
     let latestDoc
     /** @type {Error} */
@@ -431,13 +435,14 @@ const MultipePlatformBlogData = (() => {
          *    style: (key: string, value: string) => Style
          *    el: {table: ElemFunc, tr: ElemFunc, p: ElemFunc},
          *    drawing: DrawingT,
+         *    tags: (...tags) => void,
          *    articleLink: (id: string) => Link
          *   }
          * ) => void} callback 
          */
         register(callback) {
             /**
-             * @type {Doc}
+             * @type {DocumentData}
              */
             const doc = {}
             try {
@@ -461,7 +466,10 @@ const MultipePlatformBlogData = (() => {
                             new Attr("href", new Link(id)),
                             new Attr("target", "_blank"),
                             ...values
-                        ])
+                        ]),
+                    tags(...tags){
+                        doc.tags = tags
+                    }
                 })
                 latestDoc = doc
                 latestError = null
@@ -481,6 +489,9 @@ const MultipePlatformBlogData = (() => {
                 existsTex: existsTex(latestDoc.rootElem),
                 body: buildHTML(latestDoc.rootElem, options),
             }
+        },
+        get() {
+            return latestDoc
         }
     }
 })()
