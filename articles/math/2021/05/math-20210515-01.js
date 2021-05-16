@@ -1,7 +1,7 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
         , { a, f, g, n, x, K, M, X, Y, Z } = tex.canonicalSymbols
-        , { p, div, ul, ol, li, table, br, h4 } = doc.el
+        , { p, div, ul, ol, li, table, br, h4, h5 } = doc.el
         , textRight = style("text-align", "right")
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
@@ -24,10 +24,12 @@ MultipePlatformBlogData.register(doc => {
                     li(tex("A =｛(X,Y,Z)｜0<X<Y<Z, X^2 + Y^2 = Z^2, XY/2 = n｝"))
                     , li(tex("B =｛x∈Q｜x+n, x-nが平方数｝"))
                 ))
-                //, li("合同数", n, "およびそれを成す直角三角形")
+                , li("与えられた", tex("n, Z"), "に対して、"
+                    , Z, "を斜辺とする面積", n, "の直角三角形は（", tex("X,Y"), "を入れ替えを除けば）高々1つしか存在しない")
             )
         )
         , h4("証明")
+        , h5("1.")
         , p(tex("f: A→B,　g:B→A"), "を以下のように定める。")
         , p(
             ul(
@@ -56,6 +58,14 @@ MultipePlatformBlogData.register(doc => {
             )
             , li(tex("f(g(x)) = f(2√{x}) = x"))
         ))
+        , br()
+        , h5("2.")
+        , p("1.により、", tex("n,Z"), "が与えられれば、", tex("X,Y"), "は次の値の組み合わせになる。")
+        , p(ul(
+            li(tex("√{(Z/2)^2 + n} - √{(Z/2)^2 - n}"))
+            , li(tex("√{(Z/2)^2 + n} + √{(Z/2)^2 - n}"))
+        ))
+        , p("よって、", tex("n,Z"), "によって", tex("X,Y"), "が決まる。")
         , p("（証明終）")
         , h4("参考")
         , p("楕円曲線と保型形式 N.コブリッツ (著) 上田 勝 (翻訳) p5 命題1.1")
