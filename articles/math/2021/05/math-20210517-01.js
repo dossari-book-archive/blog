@@ -1,5 +1,6 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
+        , { frac } = doc.tex
         , { n, m, y, z, Y, Z } = tex.canonicalSymbols
         , { p, ul, ol, li, br, h4, h5, strong } = doc.el
         , textCenter = style("text-align", "center")
@@ -52,10 +53,11 @@ MultipePlatformBlogData.register(doc => {
             , li(tex("p = 2"), "の場合、", n, "が平方因子を持たないので、①より", tex("4/｜x,y"), "である。"
                 , br(), "このとき"
                 , p(textCenter, tex.d(
-                    "Z^2 = X^2 + Y^2 = \\frac{(m_2^2x^2 + m_1^2y^2)}{m_1^2m_2^2}"
-                    , " = \\frac{4(m_2^2(x/2)^2 + m_1^2(y/2)^2)}{m_1^2m_2^2}"))
+                    "Z^2 = X^2 + Y^2 = ", frac("m_2^2x^2 + m_1^2y^2", "m_1^2m_2^2")
+                    , " = ", frac("4(m_2^2(x/2)^2 + m_1^2(y/2)^2)", "m_1^2m_2^2"))
+                )
                 , p(textCenter, tex.d(
-                    "（\\frac{Zm_1m_2}{2}）^2 = m_2^2(x/2)^2 + m_1^2(y/2)^2"), "…②")
+                    `（${frac("Zm_1m_2", "2")}）^2 = m_2^2（${frac("x", "2")}）^2 + m_1^2（${frac("y", "2")}）^2`), "…②")
                 , "となるが、②の右辺の各項は奇数であるため、", tex(tex.typeFaces.rm("mod"), "　4")
                 , "で考えるとあり得ないことがわかる。"
             )
@@ -64,7 +66,7 @@ MultipePlatformBlogData.register(doc => {
         , p("次に、", tex("x, z"), "が互いに素であることを示す。（", tex("y,z"), "の場合も同様）")
         , p(tex("x,z"), "が素数", _p, "を共通因子にを持つと仮定すると、")
         , p(ul(
-            li(tex("Y^2 = Z^2 - X^2 = ((m^2_1z^2 - m^2_3x^2)/m^2_1m^2_3)"), "…③")
+            li(tex.d(`Y^2 = Z^2 - X^2 = ${frac("m^2_1z^2 - m^2_3x^2", "m^2_1m^2_3")}`), "…③")
             , li("③の分母は", _p, "を約数に持たない")
             , li("③の分子は", _p, "を約数に持つ")
             , li("よって", Y, "の分子", y, "も", _p, "を約数に持つ")
