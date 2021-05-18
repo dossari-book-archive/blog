@@ -10,6 +10,7 @@ MultipePlatformBlogData.register(doc => {
         , det = tex.typeFaces.rm("det")
 
     doc.title("代数拡大におけるトレース、ノルム")
+    doc.tags("ノイキルヒ")
     doc.body(
         style("width", "720px")
         , h4("前提")

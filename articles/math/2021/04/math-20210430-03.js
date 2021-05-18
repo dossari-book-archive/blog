@@ -6,6 +6,7 @@ MultipePlatformBlogData.register(doc => {
         , contentCenter = style({ display: "flex", "justify-content": "center" })
 
     doc.title("最小多項式と既約多項式")
+    doc.tags("可換体論")
     doc.body(
         style("width", "720px")
         , h4("記号の定義")

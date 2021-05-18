@@ -15,6 +15,7 @@ MultipePlatformBlogData.register(doc => {
     )
 
     doc.title("特殊な形の行列式")
+    doc.tags("ノイキルヒ")
     doc.body(
         style("width", "720px"),
         h4("記号の定義"),

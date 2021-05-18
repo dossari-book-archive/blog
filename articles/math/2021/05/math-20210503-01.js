@@ -9,6 +9,7 @@ MultipePlatformBlogData.register(doc => {
         , LsLi = tex("L_sL_i")
 
     doc.title("分離閉包と純非分離閉包の合成")
+    doc.tags("可換体論")
     doc.body(
         style("width", "720px")
         , h4("前提")

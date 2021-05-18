@@ -6,6 +6,7 @@ MultipePlatformBlogData.register(doc => {
     const contentCenter = style({ display: "flex", "justify-content": "center" })
 
     doc.title("非分離拡大と単純拡大")
+    doc.tags("可換体論")
     doc.body(
         style("width", "720px")
         , h4("記号の定義")

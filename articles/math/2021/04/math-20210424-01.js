@@ -9,6 +9,7 @@ MultipePlatformBlogData.register(doc => {
         , Kσ = tex("K^σ")
 
     doc.title("代数拡大における埋め込みの個数")
+    doc.tags("可換体論")
     doc.body(
         style("width", "720px")
         , h4("前提")

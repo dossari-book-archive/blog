@@ -9,6 +9,7 @@ MultipePlatformBlogData.register(doc => {
 
 
     doc.title("整な元は加法、乗法で閉じている")
+    doc.tags("松村英之", "可換環論", "ノイキルヒ")
     doc.body(
         h4("記号の定義"),
         div(justifyCenter,

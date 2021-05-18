@@ -7,6 +7,7 @@ MultipePlatformBlogData.register(doc => {
         , contentCenter = style({ display: "flex", "justify-content": "center" })
 
     doc.title("非分離元のべき乗は分離元になる")
+    doc.tags("可換体論")
     doc.body(
         style("width", "720px")
         , h4("前提")
