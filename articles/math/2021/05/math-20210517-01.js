@@ -1,8 +1,7 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
-        , { a, f, g, n, m, u, x, y, z, K, M, X, Y, Z } = tex.canonicalSymbols
-        , { p, div, ul, ol, li, table, br, h4, h5, strong } = doc.el
-        , textRight = style("text-align", "right")
+        , { n, m, y, z, Y, Z } = tex.canonicalSymbols
+        , { p, ul, ol, li, br, h4, h5, strong } = doc.el
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
         , _p = tex("p")
@@ -45,7 +44,7 @@ MultipePlatformBlogData.register(doc => {
         , p("まず", tex("x, y"), "が互いに素であることを示す。"
             , br(), tex("x,y"), "が素数", _p, "を共通因子にを持つと仮定すると、")
         , p(textCenter, tex("n = XY/2 = xy/2m_1m_2"), "…①")
-        , p("で、", tex("m_1m_2"), "は分子と互いに素なので、")
+        , p("で、", tex("m_1m_2"), "は", _p, "と互いに素なので、")
         , p(ul(
             li(tex("p ≠ 2"), "の場合①の分子は、", tex("p^2"), "を約数に持ち、"
                 , n, "が平方因子を持たないことに矛盾")
