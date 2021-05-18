@@ -227,6 +227,7 @@ const MultipePlatformBlogData = (() => {
      *   align: (...values: string|Tex) => Tex,
      *   cases: (...values: string|Tex) => Tex,
      *   br: Tex
+     *   frac: (numer: string|Tex, denom: string|Tex) => Tex
      *   matrix: (matrix: ((string|Tex)[][]), options: MatrixOptions) => Tex,
      *   hvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,
      *   vvector: (vector: ((string|Tex)[]), options: MatrixOptions) => Tex,
@@ -345,6 +346,7 @@ const MultipePlatformBlogData = (() => {
             return tex(`\\left${options.parenthesis[0]} \\begin{array}{${alignment}} ${matrixStr} \\end{array} \\right${options.parenthesis[1]}`)
         }
         tex.br = tex(" \\\\ ")
+        tex.frac = (numer, denom) => tex("\\frac{", numer, "}{", denom, "}")
         tex.align = (...values) => new Tex([
             "\\begin{align}",
             ...values,
