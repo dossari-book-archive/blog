@@ -20,6 +20,7 @@
  *   articleId: string,
  *   title: string,
  *   tags: string[],
+ *   links: string[],
  * }} DocumentData
  */
 
@@ -106,6 +107,27 @@ const MultipePlatformBlogData = (() => {
             }
         })
         return htmlElem
+    }
+
+    /**
+     * 
+     * @param {Elem} elem 
+     * @returns 
+     */
+    const findLinks = (elem) => {
+        const links = []
+        elem[dataKey].children.forEach(child => {
+            if (child instanceof Elem) {
+                links.push(...findLinks(child))
+            } else if (child instanceof Attr) {
+                const data = child[dataKey]
+                if (data.value instanceof Link) {
+                    links.push(data.value[dataKey])
+                }
+            }
+        })
+        // 重複を除外
+        return [...new Set(links)]
     }
 
     /**
@@ -369,7 +391,7 @@ const MultipePlatformBlogData = (() => {
         // 標準シンボル（a, b,c, ..., A, B, C, ...）
         const symbols = tex.canonicalSymbols = {}
         // 数値
-        for(let i = 0; i < 10; i++) {
+        for (let i = 0; i < 10; i++) {
             symbols["_" + i] = tex(i)
         }
         "abcdefghijklmnopqrstuvwxyz".split("").forEach(c => {
@@ -446,7 +468,9 @@ const MultipePlatformBlogData = (() => {
             /**
              * @type {DocumentData}
              */
-            const doc = {}
+            const doc = {
+                tags: []
+            }
             try {
                 callback({
                     articleId(id) { doc.articleId = id },
@@ -469,10 +493,9 @@ const MultipePlatformBlogData = (() => {
                             new Attr("target", "_blank"),
                             ...values
                         ]),
-                    tags(...tags){
-                        doc.tags = tags
-                    }
+                    tags(...tags) { doc.tags.push(...tags) }
                 })
+                doc.links = findLinks(doc.rootElem)
                 latestDoc = doc
                 latestError = null
             } catch (e) {
