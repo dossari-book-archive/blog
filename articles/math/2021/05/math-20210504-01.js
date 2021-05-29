@@ -73,7 +73,7 @@ MultipePlatformBlogData.register(doc => {
         , p("を満たすものが存在する。（", doc.article("math-20210429-01", "こちら"), "を参照）")
         , br()
         , p("また、", tex("K_2/K"), "は単純拡大なので、", tex("K_2 = K(α)"), "と置くと（"
-            , doc.article("math-20210418-03", "こちら"), "を参照）")
+            , doc.article("math-20210418-01", "こちら"), "を参照）")
         , p(textCenter, tex("K_2 = K(α) = M_0(α) ⊂ M_1(α)⊂M_2(α)⊂…⊂M_n(α) = K_1K_2"))
         , p("という", tex("K_1K_2/K_2"), "の部分体の列ができる。")
         , br()
