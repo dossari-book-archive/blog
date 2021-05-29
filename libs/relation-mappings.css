@@ -1,0 +1,66 @@
+html,
+body {
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif;
+}
+
+.bezier-2d-polyline {
+    fill: none;
+    stroke: #aaa;
+    stroke-width: 3;
+    stroke-dasharray: 3, 5;
+}
+
+.bezier-2d-curve:hover,
+.bezier-2d-curve-support:hover+.bezier-2d-curve,
+.bezier-2d-polyline:hover,
+.bezier-2d-polyline-support:hover+.bezier-2d-polyline {
+    stroke: #4e7fff;
+}
+
+.bezier-2d-polyline:hover {
+    stroke: #4e7fff;
+}
+
+.bezier-2d-curve {
+    fill: none;
+    stroke: #aaa;
+    stroke-width: 1;
+    transition: stroke .5s;
+}
+
+.bezier-2d-point {
+    fill: #aaa;
+    transition: fill .5s;
+}
+
+.assoc-chart-curve-endpoint {
+    fill: #aaa;
+}
+
+.bezier-2d-point:hover,
+.bezier-2d-point-active {
+    fill: #4e7fff;
+}
+
+.assoc-chart-editing,
+.assoc-chart-curve-endpoint {
+	z-index: 1;
+}
+
+a .article-drawing {
+    color: black;
+}
+
+a .article-drawing * {
+    cursor: pointer;
+}
+
+.article-drawing {
+    width: max-content;
+    border: 1px solid #999;
+    position: absolute;
+    padding: 5px;
+    cursor: default;
+    background-color: white;
+}

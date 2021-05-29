@@ -9,6 +9,12 @@ html, body {
 body {
     width: max-content;
     margin: auto;
+    font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: darkblue;
 }
 
 table {
