@@ -1,7 +1,7 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
         , { a, K, M } = tex.canonicalSymbols
-        , { p, div, table, br, h4 } = doc.el
+        , { p, div, table, br, h4, h5, ol, ul, li, strong } = doc.el
         , textRight = style("text-align", "right")
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })

@@ -28,8 +28,16 @@
     </table>
   </div>
   <h4>定理</h4>
-  <p> \( K\) 上非分離的な元は, 適当な \( p\) べき乗により分離的な元となる. </p>
+  <p>
+  <ol>
+    <li> \( K\) 上非分離的な元は, 適当な \( p\) べき乗により分離的な元となる. </li>
+    <li> \( a\in L\) の共役は, 重根の数がすべて等しく \( 1\) または \( p\) べきとなる. <br>つまり, 分解体の上で<p style="text-align: center;"> \( a\) の \( K\) 上の最小多項式 \( = \prod(x-a_i)^{p^r}\) </p>
+      <p style="text-align: center;">ただし \( i\neq j \Rightarrow a_i\neq a_j\) </p>の形で表せる.
+    </li>
+  </ol>
+  </p>
   <h4>証明</h4>
+  <h5>1.</h5>
   <p>非分離的な元 \( a\) の最小多項式を \( f = f(x) = \sum_{i} c_ix^i, c_i \neq 0, p\mid i\) とする. <br>（このような形で書ける理由は<a data-article-id="math-20210430-02" href="../../../../../out/articles/math/2021/04/math-20210430-02.html" target="_blank">こちら</a>を参照）</p>
   <p>全ての \( i\) を割り切る最小の \( p\) べき指数 \( \ge 1\) を \( r\) として, \( g = g(x) = \sum_i c_ix^{i/p^r}\) と置くと</p>
   <ul>
@@ -39,13 +47,7 @@
     <li> \( g(a^{p^r}) = 0\) </li>
   </ul>
   <p>よって \( a^{p^r}\) は分離的な元となる. </p>
-  <p>（証明終）</p>
-  <h4>系</h4>
-  <p> \( a\in L\) の共役は, \( a\) 重根の数はすべて等しく, \( 1\) または \( p\) べきとなる. つまり, 分解体の上で</p>
-  <p style="text-align: center;"> \( a\) の \( K\) 上の最小多項式 \( = \prod(x-a_i)^{p^r}\) </p>
-  <p style="text-align: center;">ただし \( i\neq j \Rightarrow a_i\neq a_j\) </p>
-  <p>の形で表せる. </p>
-  <h4>証明</h4>
+  <h5>2.</h5>
   <p>上の証明で, \( c_i\) の \( p^r\) べき乗根を含む体で考えると, </p>
   <p> \( f = \left( \sum c_i^{1/p^r} x^{i/p^r}\right) ^{p^r}\) で, カッコ内 \( \sum c_i^{1/p^r} x^{i/p^r}\) は重根を持たないので, 上のような形で表せる. </p>
   <p>（証明終）</p>
