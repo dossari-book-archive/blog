@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", () => {
         if (e.ctrlKey) { return } // 別タブで開かせる
         if (!e.target.getAttribute("data-article-id")) { return }
         e.preventDefault()
-        Dialogs.showDialog(e.target.getAttribute("href"))
+        Dialogs.showDialog(e.target.href)
     })
 
     /////////////////////////////////////////////////////////////
