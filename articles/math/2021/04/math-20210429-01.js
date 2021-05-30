@@ -7,7 +7,7 @@ MultipePlatformBlogData.register(doc => {
         , contentCenter = style({ display: "flex", "justify-content": "center" })
 
     doc.title("純非分離拡大")
-    doc.tags("可換体論")
+    doc.tags("可換体論", "ガロア理論")
     doc.body(
         style("width", "720px")
         , h4("前提")

@@ -7,7 +7,7 @@ MultipePlatformBlogData.register(doc => {
         , contentCenter = style({ display: "flex", "justify-content": "center" })
 
     doc.title("非分離正規拡大は純非分離的な元を含む")
-    doc.tags("可換体論")
+    doc.tags("可換体論", "ガロア理論")
     doc.body(
         style("width", "720px")
         , h4("前提")

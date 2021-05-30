@@ -11,7 +11,7 @@ MultipePlatformBlogData.register(doc => {
         , f2 = tex("f_2")
 
     doc.title("分離拡大と単純拡大")
-    doc.tags("可換体論")
+    doc.tags("可換体論", "ガロア理論")
     doc.body(
         style("width", "720px"),
         h4("前提")

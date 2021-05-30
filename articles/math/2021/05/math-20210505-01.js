@@ -9,7 +9,7 @@ MultipePlatformBlogData.register(doc => {
         , Li = tex("L_i")
 
     doc.title("分離閉包、純非分離閉包と分離次数、非分離次数")
-    doc.tags("可換体論")
+    doc.tags("可換体論", "ガロア理論")
     doc.body(
         style("width", "720px")
         , h4("前提")

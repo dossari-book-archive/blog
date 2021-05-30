@@ -22,7 +22,7 @@ MultipePlatformBlogData.register(doc => {
         , smallFont = style("font-size", ".5em")
 
     doc.title("分離拡大と純非分離拡大の合成")
-    doc.tags("可換体論")
+    doc.tags("可換体論", "ガロア理論")
     doc.body(
         style("width", "720px")
         , h4("前提")
