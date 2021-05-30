@@ -1,6 +1,8 @@
 html,
 body {
     height: 100%;
+    min-width: max-content;
+    overflow-y: auto;
     font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif;
 }
 
