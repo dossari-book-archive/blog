@@ -19,12 +19,5 @@ window.MathJax = {
 setTimeout(() => MathJax.typesetPromise([]), 1000)
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll("[data-article-id]").forEach(articleElem => {
-        articleElem.addEventListener("click", (e) => {
-            // ctrlキー押下時は別タブで開かせる。ctrlキー押下でない場合はダイアログで開く
-            if (e.ctrlKey) { return } // 別タブで開かせる
-            e.preventDefault()
-            Dialogs.showDialog(articleElem.href)
-        })
-    })
+    Dialogs.addEventListenerOnArticleLinkClick()
 })

@@ -50,12 +50,9 @@ body {
 	z-index: 1;
 }
 
-a .article-drawing {
+.article-drawing {
     color: black;
-}
-
-a .article-drawing * {
-    cursor: pointer;
+    cursor: default;
 }
 
 .article-drawing {
@@ -67,3 +64,9 @@ a .article-drawing * {
     background-color: white;
     border-radius: 5px;
 }
+
+a, a:visited {
+    text-decoration: none;
+    color: cornflowerblue;
+}
+

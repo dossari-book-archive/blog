@@ -517,6 +517,9 @@ const MultipePlatformBlogData = (() => {
         },
         get() {
             return latestDoc
+        },
+        clear() {
+            latestDoc = null
         }
     }
 })()

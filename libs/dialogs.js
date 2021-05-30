@@ -87,8 +87,18 @@ var Dialogs = (() => {
         }
     })
 
+    function addEventListenerOnArticleLinkClick() {
+        document.querySelectorAll("[data-article-id]").forEach(articleElem => {
+            articleElem.addEventListener("click", (e) => {
+                // ctrlキー押下時は別タブで開かせる。ctrlキー押下でない場合はダイアログで開く
+                if (e.ctrlKey) { return } // 別タブで開かせる
+                e.preventDefault()
+                Dialogs.showDialog(articleElem.href)
+            })
+        })
+    }
+
     return {
-        showDialog,
-        popDialog
+        showDialog, popDialog, addEventListenerOnArticleLinkClick
     }
 })()

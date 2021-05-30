@@ -12,14 +12,12 @@ window.addEventListener("DOMContentLoaded", () => {
         return notFound()
     }
     exec()
-    const keyEvent4StartLivePreview = (/** @type {KeyboardEvent}*/ e) => {
-        if (e.key == "F12" && e.ctrlKey && e.shiftKey) {
+    {
+        if (location.protocol == "file:" || location.hostname == "localhost") {
             console.log("start live preview!!")
-            document.removeEventListener("keydown", keyEvent4StartLivePreview)
             setInterval(exec, 1000)
         }
     }
-    document.addEventListener("keydown", keyEvent4StartLivePreview)
 
     const showContent = (() => {
         let showed = false
