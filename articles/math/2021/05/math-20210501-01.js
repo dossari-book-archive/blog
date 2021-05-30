@@ -1,7 +1,8 @@
 MultipePlatformBlogData.register(doc => {
     const { tex, style } = doc
         , { a, f, g, r, K, } = tex.canonicalSymbols
-        , { p, div, table, br, h4, ul, li } = doc.el
+        , { p, div, table, br, h4, h5, ol, ul, li } = doc.el
+        , { frac } = tex
         , textRight = style("text-align", "right")
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
@@ -18,8 +19,20 @@ MultipePlatformBlogData.register(doc => {
             ),
         )
         , h4("定理")
-        , p(K, "上非分離的な元は、適当な", tex("p"), "べき乗により分離的な元となる。")
+        , p(ol(
+            li(K, "上非分離的な元は、適当な", tex("p"), "べき乗により分離的な元となる。")
+            , li(tex("a∈L"), "の共役は、重根の数がすべて等しく"
+                , tex("1"), "または", tex("p"), "べきとなる。"
+                , br(), "つまり、分解体の上で"
+                , p(textCenter, a, "の", K, "上の最小多項式"
+                    , tex("= Π(x-a_i)^{p^r}")
+                )
+                , p(textCenter, "ただし", tex("i≠j ⇒ a_i≠a_j"))
+                , "の形で表せる。"
+            )
+        ))
         , h4("証明")
+        , h5("1.")
         , p(
             "非分離的な元", a, "の最小多項式を"
             , tex("f = f(x) = Σ_{i} c_ix^i, c_i ≠ 0, p｜i"), "とする。"
@@ -37,16 +50,7 @@ MultipePlatformBlogData.register(doc => {
             , li(tex("g(a^{p^r}) = 0"))
         )
         , p("よって", tex("a^{p^r}"), "は分離的な元となる。")
-        , p("（証明終）")
-        , h4("系")
-        , p(tex("a∈L"), "の共役は、", a, "重根の数はすべて等しく、"
-            , tex("1"), "または", tex("p"), "べきとなる。つまり、分解体の上で")
-        , p(textCenter, a, "の", K, "上の最小多項式"
-            , tex("= Π(x-a_i)^{p^r}")
-        )
-        , p(textCenter, "ただし", tex("i≠j ⇒ a_i≠a_j"))
-        , p("の形で表せる。")
-        , h4("証明")
+        , h5("2.")
         , p("上の証明で、", tex("c_i"), "の", tex("p^r"), "べき乗根を含む体で考えると、")
         , p(tex("f = （Σ c_i^{1/p^r} x^{i/p^r}）^{p^r}")
             , "で、カッコ内"
