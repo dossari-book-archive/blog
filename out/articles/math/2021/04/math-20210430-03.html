@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>最小多項式と既約多項式</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">最小多項式と既約多項式</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>記号の定義</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( L/K\) </td>
+        <td>可換体の代数拡大</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( a\) </td>
+        <td> \( L\) の元</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( f, g\) </td>
+        <td> \( K\) 上の多項式（次数 \( \ge 1\) ）</td>
+      </tr>
+    </table>
+  </div>
+  <h4>命題</h4>
+  <p>「 \( f\) が \( a\) の \( K\) 上最小多項式」 \( \Leftrightarrow \) 「 \( f(a) = 0\) かつ \( f\) が \( K\) 上既約」</p>
+  <h4>証明</h4>
+  <p> \( \Rightarrow )\) \( f = f_1f_2\) と分解すると, \( f_1(a) = 0\) または \( f_2(a) = 0\) . </p>
+  <p> \( f\) の最小性から \( f_1, f_2\) のいずれかは次数が \( f\) と一致する. </p><br>
+  <p> \( \Leftarrow )\) \( g(a) = 0\) とすると, \( f\) と \( g\) は互いに素でないから共通の約元を持つが, \( f\) が既約であることから \( f\) の次数 \( \le \) \( g\) の次数. </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210430-01.html" data-article-id="math-20210430-01">完全体</a></li>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210430-02.html" data-article-id="math-20210430-02">重根と形式的微分</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

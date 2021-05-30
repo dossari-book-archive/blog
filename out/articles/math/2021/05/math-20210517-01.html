@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>合同数</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">合同数</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>定義</h4>
+  <p>正整数 \( n\) が<strong>合同数</strong>であるとは, \( n\) を面積とする直角三角形で, 3辺が有理数であるものが存在する. </p>
+  <p>つまり, 以下の \( X,Y,Z\) に関する方程式が有理数解を持つことである. </p>
+  <p>
+  <ul>
+    <li> \( X^2 + Y^2 = Z^2\) </li>
+    <li> \( XY/2 = n\) </li>
+  </ul>
+  </p>
+  <h4>命題</h4>
+  <p>
+  <ol>
+    <li> \( n\) が合同数 \( \Leftrightarrow \) 任意の正整数 \( m\) に対して \( m^2n\) が合同数. <p style="border: 1px solid rgb(204, 204, 204); display: flex; justify-content: center;">
+      <p>以下, \( n\) を平方因子を持たない合同数として, 三辺を \( X,Y,Z\) （ \( Z\) が斜辺）とする. <br>また, \( X=x/m_1,Y=y/m_2,Z=z/m_3\) と既約分数表示する</p>
+      </p>
+    </li>
+    <li> \( x,y,z\) は互いに素</li>
+    <li> \( z\) は奇数で, \( x, y\) の偶奇は異なる</li>
+    <li> \( m_1\mid y, m_2\mid x\) （したがって \( m_1, m_2\) は互いに素）</li>
+    <li> \( m_3 = m_1m_2\) </li>
+    <li> \( m_3X, m_3Y, m_3Z\) が原始的なピタゴラス数となる. <br>（原始的なピタゴラス数に関しては<a data-article-id="math-20210510-01" href="../../../../../out/articles/math/2021/05/math-20210510-01.html" target="_blank">こちら</a>を参照）</li>
+    <li> \( z\) と \( n\) は互いに素</li>
+  </ol>
+  </p>
+  <h4>証明</h4>
+  <h5>1.</h5>
+  <p>三角形の辺を \( m\) 倍, \( 1/m\) 倍することで面積 \( m^2\) 倍, \( 1/m^2\) 倍の直角三角形が得られることから明らか. </p><br>
+  <h5>2.</h5>
+  <p></p>
+  <p>まず \( x, y\) が互いに素であることを示す. <br> \( x,y\) が素数 \( p\) を共通因子にを持つと仮定すると, </p>
+  <p style="text-align: center;"> \( n = XY/2 = xy/2m_1m_2\) …①</p>
+  <p>で, \( m_1m_2\) は \( p\) と互いに素なので, </p>
+  <p>
+  <ul>
+    <li> \( p \neq 2\) の場合①の分子は, \( p^2\) を約数に持ち, \( n\) が平方因子を持たないことに矛盾</li>
+    <li> \( p = 2\) の場合, \( n\) が平方因子を持たないので, ①より \( 4\nmid x,y\) である. <br>このとき<p style="text-align: center;"> \( \displaystyle Z^2 = X^2 + Y^2 = \frac{m_2^2x^2 + m_1^2y^2}{m_1^2m_2^2} = \frac{4(m_2^2(x/2)^2 + m_1^2(y/2)^2)}{m_1^2m_2^2}\) </p>
+      <p style="text-align: center;"> \( \displaystyle \left( \frac{Zm_1m_2}{2}\right) ^2 = m_2^2\left( \frac{x}{2}\right) ^2 + m_1^2\left( \frac{y}{2}\right) ^2\) …②</p>となるが, ②の右辺の各項は奇数であるため, \( {\rm mod}\,4\) で考えるとあり得ないことがわかる.
+    </li>
+  </ul>
+  </p>
+  <p>よって, \( x,y\) は互いに素である. </p>
+  <p>次に, \( x, z\) が互いに素であることを示す. （ \( y,z\) の場合も同様）</p>
+  <p> \( x,z\) が素数 \( p\) を共通因子にを持つと仮定すると, </p>
+  <p>
+  <ul>
+    <li> \( \displaystyle Y^2 = Z^2 - X^2 = \frac{m^2_1z^2 - m^2_3x^2}{m^2_1m^2_3}\) …③</li>
+    <li>③の分母は \( p\) を約数に持たない</li>
+    <li>③の分子は \( p\) を約数に持つ</li>
+    <li>よって \( Y\) の分子 \( y\) も \( p\) を約数に持つ</li>
+  </ul>
+  </p>
+  <p>これは \( x,y\) が互いに素であることに矛盾する. よって \( x,z\) は互いに素である. </p><br>
+  <h5>3.</h5>
+  <p>①より \( 2\mid xy\) だから, \( xy\) の偶奇は異なる. よって2.より \( z\) は奇数. </p><br>
+  <h5>4.</h5>
+  <p> \( n = xy/2m_1m_2\) で, \( x/m_1, y/m_2\) が既約分数であることからわかる. </p><br>
+  <h5>5, 6.</h5>
+  <p> \( X^2 + Y^2 = Z^2\) の両辺に \( m_1^2m_2^2\) を掛けると, </p>
+  <p style="text-align: center;"> \( \displaystyle m_2^2x^2 + m_1^2y^2 = \left( \frac{m_1m_2z}{m_3}\right) ^2\) 　…④</p>
+  <p>よって \( m_1m_2z/m_3\) も整数で, \( m_3\mid m_1m_2\) . </p>
+  <p>4.より \( m_2x, m_1y\) は互いに素であるから, \( (m_2x, m_1y, m_1m_2z/m_3)\) は原始的なピタゴラス数である. （<a data-article-id="math-20210510-01" href="../../../../../out/articles/math/2021/05/math-20210510-01.html" target="_blank">こちら</a>を参照）</p>
+  <p> \( m_3\neq m_1m_2\) とすると, この原始性に矛盾してしまうため, \( m_3 = m_1m_2\) である. </p><br>
+  <h5>7.</h5>
+  <p>5,6 の証明, ④より</p>
+  <p style="text-align: center;"> \( m_2^2x^2+m_1^2y^2 = z^2\) </p>
+  <p style="text-align: center;"> \( (m_2x±m_1y)^2 = z^2 ± 2m_1m_2xy = z^2 ± 4m_3^2n\) </p>
+  <p>ここで, もし \( z, n\) が奇素数 \( p\) を共通の約数に持つとすると, 上の式から \( m_2x±m_1y\) も \( p\) を共通の約数に持つが, \( m_2x±m_1y\) は互いに素なので（<a data-article-id="math-20210510-01" href="../../../../../out/articles/math/2021/05/math-20210510-01.html" target="_blank">こちら</a>を参照）, 矛盾が生じる. </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210510-01.html" data-article-id="math-20210510-01">原始的なピタゴラス数</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210515-01.html" data-article-id="math-20210515-01">合同数と楕円曲線</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

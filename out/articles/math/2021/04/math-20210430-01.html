@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>完全体</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">完全体</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>記号の定義</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( K\) </td>
+        <td>可換体</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( p\) </td>
+        <td> \( K\) の標数（ \( 0\) または素数）</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( K[x]\) </td>
+        <td> \( K\) 上の多項式環</td>
+      </tr>
+    </table>
+  </div>
+  <h4>定義</h4>
+  <p> \( K\) の任意の代数拡大体が \( K\) 上分離的であるとき, \( K\) を<strong>完全体</strong>と言う. </p>
+  <h4>定理</h4>
+  <p> \( K\) が完全体<br> \( \Leftrightarrow \) \( K\) 上の任意の既約多項式が重根を持たない<br> \( \Leftrightarrow \) \( p = 0\) , または \( p \gt 0\) で \( K^p = K\) （ \( K\) が任意の元の \( p\) 乗根を含む）</p>
+  <p>よって, 標数0の体, 有限体は完全体である. </p>
+  <h4>証明</h4>
+  <p>最初の同値性は, <a data-article-id="math-20210430-03" href="../../../../../out/articles/math/2021/04/math-20210430-03.html" target="_blank">こちらの命題</a>から明らか. </p>
+  <p> \( \Rightarrow )\) \( p \gt 0\) かつ \( K^p \neq K\) とすると, ある \( a\in K\) に対して \( a\) の \( p\) 乗根が \( K\) に存在しない. </p>
+  <p> \( a\) の \( p\) 乗根を含む拡大体で考えると, \( x^p - a\) は重根を持つため, 分離的な拡大体でない. </p>
+  <p>よって \( K\) は完全体でない. </p><br>
+  <p> \( \Leftarrow )\) \( p=0\) の場合, <a data-article-id="math-20210430-02" href="../../../../../out/articles/math/2021/04/math-20210430-02.html" target="_blank">こちらの定理</a>より, \( K\) 上の任意の既約多項式は重根を持たない. </p>
+  <p> \( p \gt 0\) で \( K^p = K\) の場合, 重根を持つ既約多項式は<a data-article-id="math-20210430-02" href="../../../../../out/articles/math/2021/04/math-20210430-02.html" target="_blank">同定理</a>より \( K[x^p]\) の元だが, </p>
+  <p style="text-align: center;"> \( K[x^p] = K^p[x^p] = (K[x])^p\) </p>
+  <p>よって, 重根を持つ既約多項式は存在しない. </p><br>
+  <p> \( K\) が有限体なら, \( K^p = K\) が成り立つので \( K\) は完全体. </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210430-03.html" data-article-id="math-20210430-03">最小多項式と既約多項式</a></li>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210430-02.html" data-article-id="math-20210430-02">重根と形式的微分</a></li>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210418-01.html" data-article-id="math-20210418-01">分離拡大と単純拡大</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210505-01.html" data-article-id="math-20210505-01">分離閉包、純非分離閉包と分離次数、非分離次数</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

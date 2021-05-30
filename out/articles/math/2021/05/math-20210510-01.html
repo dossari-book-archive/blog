@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>原始的なピタゴラス数</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">原始的なピタゴラス数</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>定義</h4>
+  <p><strong>ピタゴラス数</strong>は, \( X^2 + Y^2 = Z^2\) を満たす正整数の組 \( (X,Y,Z)\) を指す. </p>
+  <p>ピタゴラス数が<strong>原始的</strong>であるとは, 上記 \( X,Y,Z\) が互いに素である場合を指す. </p>
+  <h4>補題</h4>
+  <p>正整数 \( r,s\) が互いに素であるとする. </p>
+  <ul>
+    <li> \( r,s\) が同時に奇数にならないなら \( r+s, r-s\) は互いに素となる. </li>
+    <li> \( r,s\) が同時に奇数になるなら \( (r+s)/2, (r-s)/2\) は互いに素となる. </li>
+  </ul>
+  <h4>証明</h4>
+  <p>イデアルが \( (r+s)\mathbb{Z} + (r-s)\mathbb{Z}\supset 2(r,s)\mathbb{Z}=2\mathbb{Z}\) なので, 公約数の候補は「 \( 2\) 」しかないが, </p>
+  <ul>
+    <li> \( r,s\) が同時に奇数にならないなら \( r±s\) は奇数なので「 \( 2\) 」は公約数ではない. </li>
+    <li> \( r,s\) が同時に奇数になるなら \( 2\) は最大公約数で, \( (r+s)/2, (r-s)/2\) は互いに素となる. </li>
+  </ul>
+  <p>（証明終）</p>
+  <h4>定理</h4>
+  <p>
+  <ol>
+    <li>原始的なピタゴラス数 \( (X,Y,Z)\) の偶奇は, \( Z\) が常に奇数で \( X,Y\) の片方のみ奇数である. </li>
+    <li>ピタゴラス数 \( (X,Y,Z)\) に対して<br> \( (X,Y,Z)\) が原始的 \( \Leftrightarrow (X,Y), (Y, Z), (Z,X)\) のいずれか1組が互いに素</li>
+    <li> \( Y,Z\) を奇数とする任意の原始的なピタゴラス数に対して, 以下を満たす正整数 \( a,b\) が存在する. <ul>
+        <li> \( a \gt b \gt 0\) </li>
+        <li> \( a, b\) は互いに素</li>
+        <li> \( a, b\) は同時に奇数にならない（ \( a^2 ± b^2\) は奇数）</li>
+        <li> \( (X, Y, Z) = (a^2 - b^2, 2ab, a^2 + b^2)\) </li>
+      </ul>
+    </li>
+    <li>
+      <p>3.の逆で, \( a,b\) を上記のように与えれば, 原始的なピタゴラス数が得られる. </p>
+    </li>
+  </ol>
+  </p>
+  <h4>証明</h4>
+  <h5>1.</h5>
+  <p> \( X,Y\) が両方とも偶数だと, \( Z\) も偶数となり矛盾する. よって, \( X,Y\) のどちらか一方は奇数で, この場合 \( Z\) も奇数. </p><br>
+  <h5>2.</h5>
+  <p> \( \Rightarrow \) は明らか. \( \Leftarrow \) について, いずれか1組が共通因子を持てば, 他の組も共通因子を持つため, いずれか1組が互いに素なら, \( (X,Y,Z)\) は原始的. </p>
+  <h5>3.</h5>
+  <p>仮定より
+  <ul>
+    <li> \( (Y/2)^2 = ((Z+X)/2)((Z-X)/2)\) </li>
+    <li>上記補題により \( (Z+X)/2, (Z-X)/2\) は互いに素</li>
+  </ul>
+  </p>
+  <p>よって \( (Z±X)/2\) は平方数となる. </p>
+  <p> \( a^2=(Z+X)/2, b^2=(Z-X)/2\) と置けば, 明らかに
+  <ul>
+    <li> \( a \gt b \gt 0\) </li>
+    <li> \( a, b\) は互いに素</li>
+    <li> \( (X, Y, Z) = (a^2 - b^2, 2ab, a^2 + b^2)\) </li>
+    <li> \( Z\) が奇数なので, \( a,b\) は同時に奇数にならない</li>
+  </ul>
+  </p><br>
+  <h5>4.</h5>
+  <p>この場合, \( (a^2 - b^2, 2ab, a^2 + b^2)\) がピタゴラス数になることは明らかなので, 互いに素であることを示せば良い. </p>
+  <p> \( a^2, b^2\) は互いに素で同時に奇数とならないため, 補題より \( a^2+b^2, a^2-b^2\) は互いに素. </p>
+  <p>よって, 2.より \( (a^2 - b^2, 2ab, a^2 + b^2)\) の原始性がわかる. </p><br>
+  <p>ちなみに, 他の組も直接証明しようとすると次のようになる：</p>
+  <p>
+  <ul>
+    <li> \( a^2-b^2, 2ab\) は互いに素：<ul>
+        <li> \( a,b\) が互いに素なので \( a^2-b^2, a, b\) は互いに素. よって \( a^2-b^2, ab\) も互いに素. </li>
+        <li> \( a^2-b^2\) は奇数なので, \( a^2-b^2, 2ab\) も互いに素</li>
+      </ul>
+    </li>
+    <li> \( a^2+b^2, 2ab\) は互いに素であることの証明も上と同様. </li>
+  </ul>
+  </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210515-01.html" data-article-id="math-20210515-01">合同数と楕円曲線</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210516-01.html" data-article-id="math-20210516-01">1は合同数でない</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210517-01.html" data-article-id="math-20210517-01">合同数</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

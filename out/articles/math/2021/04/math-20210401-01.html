@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>特殊な形の行列式</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">特殊な形の行列式</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>記号の定義</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( A\) </td>
+        <td>可換環</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( n\) </td>
+        <td>自然数 \( \ge 2\) </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( a_i\) </td>
+        <td> \( A\) の元 \( (i = 1,\cdots ,n)\) </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( b_i\) </td>
+        <td> \( A\) の元 \( (i = 1,\cdots ,n)\) </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( (c_{i,j})\) </td>
+        <td> \( (i,j)\) 成分を \( c_{i,j}\) とする \( A\) 上の \( n\times n\) 行列</td>
+      </tr>
+    </table>
+  </div>
+  <h4>命題</h4>
+  <p> \( (c_{i,j})\) を以下のように定める. </p>
+  <div style="display: flex; justify-content: center;">
+    <ul>
+      <li> \( c_{i, i+1} = -1\,\,(i = 1, \cdots n-1)\) </li>
+      <li> \( c_{i, i} = a_i\,\,(i = 1, \cdots n-1)\) </li>
+      <li> \( c_{n, i} = b_i\,\,(i = 1, \cdots n-1)\) </li>
+      <li> \( c_{n, n} = a_n + b_n\) </li>
+      <li>上記以外は \( 0\) </li>
+    </ul>
+  </div>
+  <p>つまり次のような行列になる：</p>
+  <p style="text-align: center;"> \( \left( \begin{array}{ccccccccccccccccccccccccccccccc} a_1 &amp; -1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\ 0 &amp; a2 &amp; -1 &amp; \cdots &amp; 0 &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \cdots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; -1 &amp; 0 \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; a_{n-1} &amp; -1 \\ b_1 &amp; b_2 &amp; \cdots &amp; \cdots &amp; b_{n-1} &amp; a_n + b_n \end{array} \right)\) </p>
+  <p>この行列の行列式は次のようになる. </p>
+  <div style="display: flex; justify-content: center;">
+    <div>
+      <p> \( \displaystyle b_1 + b_2a_1 + b_3a_1a_2 + \cdots + b_na_1\cdots a_{n-1} + a_1a_2\cdots a_n\) </p>
+      <p> \( \displaystyle = b_1 + \sum_{j=2}^{n} \left( \prod_{i=1}^{j-1}a_i\right) b_j + \prod_{i=1}^n a_i\) </p>
+    </div>
+  </div>
+  <h4>証明</h4>
+  <p>帰納法により証明する. \( n=2\) の場合, 計算により直ちにわかる. </p>
+  <p> \( n \ge 3\) のとき, 求める行列式</p>
+  <div style="display: flex; justify-content: center;">
+    <div>
+      <p> \( = -\left| \begin{array}{cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc} a_1 &amp; -1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\ 0 &amp; a2 &amp; -1 &amp; \cdots &amp; 0 &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \cdots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; -1 &amp; 0 \\ \color{red}{b_1} &amp; \color{red}{b_2} &amp; \cdots &amp; \cdots &amp; \color{red}{b_{n-1}} &amp; \color{red}{b_n + a_n} \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; a_{n-1} &amp; -1 \end{array} \right|\) </p>
+      <p style="color: rgb(153, 153, 153); margin: 0px 1.2em; padding: 10px; background-color: rgb(252, 252, 252);">↑ \( n-1\) 行目と \( n\) 行目を入れ替え</p>
+      <p> \( = -\left| \begin{array}{ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc} a_1 &amp; -1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\ 0 &amp; a2 &amp; -1 &amp; \cdots &amp; 0 &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \cdots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; -1 &amp; 0 \\ b_1 &amp; b_2 &amp; \cdots &amp; \cdots &amp; \color{red}{a_{n- 1}(a_n + b_n) + b_{n-1}} &amp; b_n + a_n \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; \color{red}{0} &amp; -1 \end{array} \right|\) </p>
+      <p style="color: rgb(153, 153, 153); margin: 0px 1.2em; padding: 10px; background-color: rgb(252, 252, 252);">↑ \( n\) 列目 \( \times a_{n-1}\) を \( n-1\) 列目に足し合わせる</p>
+      <p> \( = \left| \begin{array}{ccccccccccccccccccccc} a_1 &amp; -1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; a2 &amp; -1 &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \cdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; -1 \\ b_1 &amp; b_2 &amp; \cdots &amp; \cdots &amp; a_{n-1}(a_n + b_n) + b_{n-1} \end{array} \right|\) 　</p>
+      <p style="color: rgb(153, 153, 153); margin: 0px 1.2em; padding: 10px; background-color: rgb(252, 252, 252);">↑ \( (n, 1), \cdots (n, n-1)\) 成分が0で, \( (n,n)\) 成分が \( -1\) なので, <br>↑のような \( n-1\times n-1\) 行列の行列式に変換できる</p>
+    </div>
+  </div>
+  <p>帰納法の仮定において, \( a_{n-1}\) を \( a_{n-1}(a_n + b_n)\) に置き換えることが可能で</p>
+  <div style="display: flex; justify-content: center;">
+    <div>
+      <p>求める行列式</p>
+      <p> \( \displaystyle = b_1 + \sum_{j=2}^{n-1} \left( \prod_{i=1}^{j-1}a_i\right) b_j + (a_n + b_n)\prod_{i=1}^{n-1} a_i\) </p>
+      <p> \( \displaystyle = b_1 + \sum_{j=2}^{n} \left( \prod_{i=1}^{j-1}a_i\right) b_j + \prod_{i=1}^n a_i\) </p>
+    </div>
+  </div>
+  <h4>系</h4>
+  <p> \( (c_{i,j})\) を以下のように定める. </p>
+  <div style="display: flex; justify-content: center;">
+    <ul>
+      <li> \( c_{i, i+1} = 1\,\,(i = 1, \cdots n-1)\) </li>
+      <li> \( c_{n, i} = -b_i\,\,(i = 1, \cdots n)\) </li>
+      <li>上記以外は \( 0\) </li>
+    </ul>
+  </div>
+  <p>つまり次のような行列になる：</p>
+  <p style="text-align: center;"> \( \left( \begin{array}{ccccccccccccccccccccccccccccccccc} 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0 &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \cdots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; 0 &amp; 1 \\ -b_1 &amp; -b_2 &amp; \cdots &amp; \cdots &amp; -b_{n-1} &amp; -b_n \end{array} \right)\) </p>
+  <p>この行列の固有多項式は次のようになる. </p>
+  <p style="text-align: center;"> \( \displaystyle \sum_{i=1}^n b_it^{i-1} + t^n\) </p>
+  <h4>関連</h4>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210502-02.html" data-article-id="math-20210502-02">拡大体におけるトレース、ノルム</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

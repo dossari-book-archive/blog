@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>拡大体におけるトレース、ノルム</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">拡大体におけるトレース、ノルム</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>前提, 記号の定義</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( L/K\) </td>
+        <td>可換体の有限次代数拡大</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( n\) </td>
+        <td> \( =[L:K]\) </td>
+      </tr>
+      <tr>
+        <td> \( {\rm Tr}_{L/K}\) </td>
+        <td>トレース写像. <a data-article-id="math-20210502-01" href="../../../../../out/articles/math/2021/05/math-20210502-01.html" target="_blank">こちら</a>を参照</td>
+      </tr>
+      <tr>
+        <td> \( N_{L/K}\) </td>
+        <td>ノルム写像. <a data-article-id="math-20210502-01" href="../../../../../out/articles/math/2021/05/math-20210502-01.html" target="_blank">こちら</a>を参照</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( x\) </td>
+        <td> \( L\) の元</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( d\) </td>
+        <td> \( =[L:K(x)]\) </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( T_x\) </td>
+        <td> \( K\) 上ベクトル空間の変換 \( L→L: \alpha ↦x\alpha \) <br>（<a data-article-id="math-20210502-01" href="../../../../../out/articles/math/2021/05/math-20210502-01.html" target="_blank">こちら</a>を参照）</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( p(t)\) </td>
+        <td> \( x\) の \( K\) 上の最小多項式<br> \( = t^m + c_1t^{m-1} + \cdots + c_m\) と置く</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( f(t)\) </td>
+        <td> \( T_x\) の特性多項式</td>
+      </tr>
+    </table>
+  </div>
+  <h4>命題</h4>
+  <p> \( p(t), f(t)\) に関して</p>
+  <p style="text-align: center;"> \( f(t) = p(t)^d\) </p>
+  <p>が成り立つ. よって</p>
+  <p style="text-align: center;"> \( {\rm Tr}_{L/K}(x) = dc_1\) </p>
+  <p style="text-align: center;"> \( N_{L/K}(x) = c_m^{d}\) </p>
+  <p>ちなみに, \( x\in K\) なら, \( x = c_1 = c_m\) </p>
+  <h4>証明</h4>
+  <p> \( x\in K\) なら, \( T_x\) は単位行列のスカラー \( x\) 倍と対応するから, 上の関係式は明らか. </p>
+  <p> \( x \notin K\) とする. </p>
+  <p> \( \left\{ \alpha _j\right\} _{1\le j\le d}\) を \( L/K(x)\) の基底とすると, \( \left\{ x^i\alpha _j\right\} _{0\le i\le m-1,1\le j\le d}\) は \( L/K\) の基底となる. </p>
+  <p>この基底に対応する \( T_x\) の行列は, </p>
+  <p style="text-align: center;"> \( \left( \begin{array}{cccccccccccccccccccccccccccccccc} 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0 &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \cdots &amp; \vdots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; \cdots &amp; \cdots &amp; 0 &amp; 1 \\ -c_m &amp; -c_{m-1} &amp; \cdots &amp; \cdots &amp; -c_2 &amp; -c_1 \end{array} \right)\) </p>
+  <p>というブロックが斜めに \( d\) 個並んだ（それ以外は \( 0\) の）行列で, \( f(t)\) は<a data-article-id="math-20210401-01" href="../../../../../out/articles/math/2021/04/math-20210401-01.html" target="_blank">こちら</a>の計算により</p>
+  <p style="text-align: center;"> \( f(t) = p(t)^d\) </p>
+  <p>が得られる. </p>
+  <p>（証明終）</p>
+  <h4>系</h4>
+  <p> \( L/K\) が非分離拡大なら</p>
+  <p style="text-align: center;"> \( {\rm Tr}_{L/K} = 0\) </p>
+  <h4>証明</h4>
+  <p> \( x\) が非分離的な場合, \( p(t)\in K[t^p]\) だから（<a data-article-id="math-20210430-02" href="../../../../../out/articles/math/2021/04/math-20210430-02.html" target="_blank">こちら</a>を参照） \( c_1 = 0\) となる. </p>
+  <p> \( x\) が分離的な場合, \( L/K(x)\) は非分離的であり（TODO 証明記事）, \( p\mid [L:K(x)]\) だから（TODO 証明記事）, 本命題より \( {\rm Tr}_{L/K}(x) = [L:K(x)]c_1 = 0\) となる. </p>
+  <p>（証明終）</p>
+  <h4>参考</h4>
+  <p><a href="https://ja.wikipedia.org/wiki/トレース_(体論)" target="_blank">wikipedia:トレース_(体論)</a></p>
+  <p>代数的整数論　著者 Ｊ．ノイキルヒ （著）,足立 恒雄 （監修）,梅垣 敦紀 （訳） p8 定義(2.5)</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210502-01.html" data-article-id="math-20210502-01">代数拡大におけるトレース、ノルム</a></li>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210401-01.html" data-article-id="math-20210401-01">特殊な形の行列式</a></li>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210430-02.html" data-article-id="math-20210430-02">重根と形式的微分</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

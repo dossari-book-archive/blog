@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>合同数と楕円曲線</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">合同数と楕円曲線</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>前提</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( n\) </td>
+        <td>平方因子を持たない正整数</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( X,Y,Z,x\) </td>
+        <td>正の有理数</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( \mathbb{Q}^+\) </td>
+        <td>正の有理数の集合</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( (\mathbb{Q}^+)^2\) </td>
+        <td>有理数で平方数の集合</td>
+      </tr>
+    </table>
+  </div>
+  <h4>命題</h4>
+  <p>次の集合の間に1対1対応が存在する：
+  <ul>
+    <li> \( A =\left\{ (X,Y,Z)\mid 0\lt X\lt Y\lt Z, X^2 + Y^2 = Z^2, XY/2 = n\right\} \) </li>
+    <li> \( B =\left\{ x\in (\mathbb{Q}^+)^2\mid x±n\in (\mathbb{Q}^+)^2\right\} \) </li>
+    <li> \( C =\left\{ x\in (\mathbb{Q}^+)^2\mid x^2 - n^2\in (\mathbb{Q}^+)^2で、xの分子が奇数、分母が偶数\right\} \) </li>
+    <li> \( D =\left\{ (x,y)\in (\mathbb{Q}^+)^2\times \mathbb{Q}^+\mid y^2 = x^3 - n^2x、xの分子が奇数、分母が偶数\right\} \) </li>
+  </ul>
+  </p>
+  <p>なお, これにより与えられた \( n, Z\) に対して, \( Z\) を斜辺とする面積 \( n\) の直角三角形は（ \( X,Y\) を入れ替えを除けば）高々1つしか存在しないことがわかる. </p>
+  <h4>証明</h4>
+  <h5> \( A\) と \( B\) の対応：</h5>
+  <p> \( f: A→B,\,g:B→A\) を以下のように定める. </p>
+  <p>
+  <ul>
+    <li> \( f(X,Y,Z) = x = (Z/2)^2\) <ul>
+        <li> \( x\) は平方数</li>
+        <li> \( x + n = ((X+Y)/2)^2\) も平方数…①</li>
+        <li> \( x - n = ((X-Y)/2)^2\) も平方数…②</li>
+      </ul>
+    </li>
+    <li> \( g(x) = (X, Y, Z)\) <br> \( X = \sqrt{x + n} - \sqrt{x - n}\) …③<br> \( Y = \sqrt{x + n} + \sqrt{x - n}\) …④<br> \( Z = 2\sqrt{x}\) <ul>
+        <li> \( X^2 + Y^2 = 4x = Z^2\) </li>
+        <li> \( XY = 2n\) </li>
+        <li> \( X\lt Y\) </li>
+      </ul>
+    </li>
+  </ul>
+  </p>
+  <p>あとは \( f,g\) が互いに逆写像になることを示せば良い. </p>
+  <p>
+  <ul>
+    <li> \( g(f(X,Y,Z)) = (X,Y,Z)\) の証明：<br> \( f(X,Y,Z) = x\) とすると, ①②③④より<ul>
+        <li> \( \sqrt{x + n} - \sqrt{x - n} = (X+Y)/2 - (Y-X)/2 = X\) </li>
+        <li> \( \sqrt{x + n} + \sqrt{x - n} = (X+Y)/2 + (Y-X)/2 = Y\) </li>
+        <li> \( 2\sqrt{x} = Z\) </li>
+      </ul>
+    </li>
+    <li> \( f(g(x)) = f(2\sqrt{x}) = x\) </li>
+  </ul>
+  </p><br>
+  <h5> \( B\) と \( C\) の対応：</h5>
+  <p>集合として \( B = C\) であることを示せば良い. </p>
+  <p> \( A\) と \( B\) の対応により, \( B\) に含まれる \( x\) は平方数で, 分子が奇数, 分母が偶数であることがわかる（<a data-article-id="math-20210517-01" href="../../../../../out/articles/math/2021/05/math-20210517-01.html" target="_blank">こちら</a>を参照）. </p>
+  <p>よって, \( B \subset C\) である. </p>
+  <p>逆に, \( C\) の元 \( x\) に対して, \( x = x'/m\) と既約分数表示すると</p>
+  <p style="text-align: center;"> \( \displaystyle x^2 - n^2 = (x+n)(x-n) = \frac{(x'+mn)(x'-mn)}{m^2}\) …⑤</p>
+  <p>右辺は既約分数であり, さらに
+  <ul>
+    <li> \( x'\) と \( n\) が互いに素なので, \( x',mn\) は互いに素</li>
+    <li> \( x'\) が奇数, \( m\) が偶数なので, \( x',mn\) の偶奇は異なる</li>
+  </ul>
+  </p>
+  <p>よって, \( x'±mn\) は互いに素（<a data-article-id="math-20210510-01" href="../../../../../out/articles/math/2021/05/math-20210510-01.html" target="_blank">こちら</a>を参照）になるので, ⑤式より \( x'±mn\) は平方数となる. </p>
+  <p> \( m\) も平方数なので, \( m\) で割った数 \( x'/m±n = x±n\) も平方数となる. </p>
+  <p>したがって \( x\in B\) となり, \( B = C\) が示せた. </p><br>
+  <h5> \( C\) と \( D\) の対応：</h5>
+  <p> \( C\) の元 \( x\) に対して, 平方数 \( u^2 = x^2 - n^2\) と置き, 両辺を \( x\) 倍して \( y = u\sqrt{x} \gt 0\) と置けば \( y^2 = x^3 - n^2x\) の式が得られ, \( (x,y)\in D\) となる. </p>
+  <p>逆に, \( (x,y)\in D\) が与えられたとき, 上記の式変形を逆に辿ることで \( x\in C\) であることがわかる. </p>
+  <p>これにより, \( C\) と \( D\) が一対一対応することは明らか. </p><br>
+  <h5>最後の部分</h5>
+  <p>1.により, \( n,Z\) が与えられれば, \( X,Y\) は次の値の組み合わせになる. </p>
+  <p>
+  <ul>
+    <li> \( \sqrt{(Z/2)^2 + n} - \sqrt{(Z/2)^2 - n}\) </li>
+    <li> \( \sqrt{(Z/2)^2 + n} + \sqrt{(Z/2)^2 - n}\) </li>
+  </ul>
+  </p>
+  <p>よって, \( n,Z\) によって \( X,Y\) が決まる. </p>
+  <p>（証明終）</p>
+  <h4>参考</h4>
+  <p>楕円曲線と保型形式 N.コブリッツ (著) 上田 勝 (翻訳) p5 命題1.1, p9 命題1.2</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210517-01.html" data-article-id="math-20210517-01">合同数</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210510-01.html" data-article-id="math-20210510-01">原始的なピタゴラス数</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

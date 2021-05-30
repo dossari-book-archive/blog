@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>1は合同数でない</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">1は合同数でない</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>定理</h4>
+  <p> \( 1\) は合同数でない. </p>
+  <h4>証明</h4>
+  <p> \( 1\) を合同数とすると, 原始的なピタゴラス数 \( (X,Y,Z)\) および正整数 \( m\) が存在してが成り立つ. （こちらを参照 TODO）</p>
+  <p>
+  <ul>
+    <li> \( X^2 + Y^2 = Z^2\) </li>
+    <li> \( XY/2 = m^2\) </li>
+  </ul>
+  </p>
+  <p> \( Y\) を偶数とすると, 以下を満たす正整数 \( a,b\) が存在する（<a data-article-id="math-20210510-01" href="../../../../../out/articles/math/2021/05/math-20210510-01.html" target="_blank">こちら</a>を参照）</p>
+  <p>
+  <ul>
+    <li> \( a \gt b \gt 0\) </li>
+    <li> \( a, b\) は互いに素</li>
+    <li> \( a, b\) は同時に奇数にならない</li>
+    <li> \( (X, Y, Z) = (a^2 - b^2, 2ab, a^2 + b^2)\) </li>
+  </ul>
+  </p>
+  <p>この場合, </p>
+  <p style="text-align: center;"> \( m^2 = XY/2 = (a^2 - b^2)ab\) </p>
+  <p>で, \( a, b, a^2 - b^2\) は互いに素だから全て平方数となる. </p>
+  <p> \( a = x^2, b = y^2, a^2 - b^2 = u^2\) と置けば, \( x^4 - y^4 = u^2\) となる. </p>
+  <p>これは, \( x^4 - y^4 = u^2\) は可解でない（TODO）ことに矛盾する. </p>
+  <p>（証明終）</p>
+  <h4>参考</h4>
+  <p>楕円曲線と保型形式 N.コブリッツ (著) 上田 勝 (翻訳) p6 演習問題3</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210510-01.html" data-article-id="math-20210510-01">原始的なピタゴラス数</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

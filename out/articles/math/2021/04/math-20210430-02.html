@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>重根と形式的微分</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">重根と形式的微分</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>記号の定義</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( K\) </td>
+        <td>可換体</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( f\) </td>
+        <td> \( K\) 上の多項式（次数 \( \ge 1\) ）</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( f'\) </td>
+        <td> \( K\) 上の形式的な微分</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( p\) </td>
+        <td> \( K\) の標数（0または素数）</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( L\) </td>
+        <td> \( K\) を含む \( f\) の分解体</td>
+      </tr>
+    </table>
+  </div>
+  <h4>定理</h4>
+  <p> \( 1)\) \( f\) が重根を持つ \( \Leftrightarrow \) \( f,f'\) が共通根を持つ</p>
+  <p> \( 2)\) \( p \gt 0,f' = 0\) （つまり \( f\in K[x^p]\) ） \( \Rightarrow \) \( f\) が重根を持つ　</p>
+  <p> \( 3)\) \( f\) を既約多項式とすると, \( 2)\) の逆も成り立つ</p>
+  <h4>証明</h4>
+  <p> \( 1)\) \( L\) において \( f = \prod(x - a_i)^{r_i}\) と分解したと仮定する. </p>
+  <ul>
+    <li> \( f\) が重根を持てば, ある \( i\) に対して \( r_i \ge 2\) となり, \( f,f'\) が共通根 \( a_i\) を持つことがわかる. </li>
+    <li> \( f\) が重根を持たなければ, すべての \( i\) で \( r_i = 1\) となり, \( f'(a_i) \neq 0\) . よって共通根を持たない. </li>
+  </ul>
+  <p> \( 2)\) \( f\) の係数の \( p\) 乗根を全て含む拡大体で考えれば, \( f\) はその体において \( p\) べき乗に分解されるため, 重根を持つ. </p>
+  <p> \( 3)\) \( a\in L\) を \( f\) の任意の根とすると, <a data-article-id="math-20210430-03" href="../../../../../out/articles/math/2021/04/math-20210430-03.html" target="_blank"> \( f\) が最小多項式となる</a>. 重根を持てば, \( 1)\) より \( f' = 0\) でなくてはならない. \( p = 0\) だと \( f'\neq 0\) なので \( p \gt 0\) . </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210430-03.html" data-article-id="math-20210430-03">最小多項式と既約多項式</a></li>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210430-01.html" data-article-id="math-20210430-01">完全体</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210501-01.html" data-article-id="math-20210501-01">非分離元のべき乗は分離元になる</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210502-02.html" data-article-id="math-20210502-02">拡大体におけるトレース、ノルム</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

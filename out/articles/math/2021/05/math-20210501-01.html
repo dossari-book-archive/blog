@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>非分離元のべき乗は分離元になる</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">非分離元のべき乗は分離元になる</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>前提</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( L/K\) </td>
+        <td>可換体の代数拡大</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( p\) </td>
+        <td> \( K\) の標数 &gt; 0</td>
+      </tr>
+    </table>
+  </div>
+  <h4>定理</h4>
+  <p> \( K\) 上非分離的な元は, 適当な \( p\) べき乗により分離的な元となる. </p>
+  <h4>証明</h4>
+  <p>非分離的な元 \( a\) の最小多項式を \( f = f(x) = \sum_{i} c_ix^i, c_i \neq 0, p\mid i\) とする. <br>（このような形で書ける理由は<a data-article-id="math-20210430-02" href="../../../../../out/articles/math/2021/04/math-20210430-02.html" target="_blank">こちら</a>を参照）</p>
+  <p>全ての \( i\) を割り切る最小の \( p\) べき指数 \( \ge 1\) を \( r\) として, \( g = g(x) = \sum_i c_ix^{i/p^r}\) と置くと</p>
+  <ul>
+    <li> \( f(x) = g(x^{p^r})\) </li>
+    <li> \( f\) が既約なので \( g\) も既約</li>
+    <li> \( g' \neq 0\) なので \( g\) は重根を持たない（<a data-article-id="math-20210430-02" href="../../../../../out/articles/math/2021/04/math-20210430-02.html" target="_blank">こちら</a>を参照）</li>
+    <li> \( g(a^{p^r}) = 0\) </li>
+  </ul>
+  <p>よって \( a^{p^r}\) は分離的な元となる. </p>
+  <p>（証明終）</p>
+  <h4>系</h4>
+  <p> \( a\in L\) の共役は, \( a\) 重根の数はすべて等しく, \( 1\) または \( p\) べきとなる. つまり, 分解体の上で</p>
+  <p style="text-align: center;"> \( a\) の \( K\) 上の最小多項式 \( = \prod(x-a_i)^{p^r}\) </p>
+  <p style="text-align: center;">ただし \( i\neq j \Rightarrow a_i\neq a_j\) </p>
+  <p>の形で表せる. </p>
+  <h4>証明</h4>
+  <p>上の証明で, \( c_i\) の \( p^r\) べき乗根を含む体で考えると, </p>
+  <p> \( f = \left( \sum c_i^{1/p^r} x^{i/p^r}\right) ^{p^r}\) で, カッコ内 \( \sum c_i^{1/p^r} x^{i/p^r}\) は重根を持たないので, 上のような形で表せる. </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210430-02.html" data-article-id="math-20210430-02">重根と形式的微分</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210505-01.html" data-article-id="math-20210505-01">分離閉包、純非分離閉包と分離次数、非分離次数</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210505-02.html" data-article-id="math-20210505-02">非分離正規拡大は純非分離的な元を含む</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

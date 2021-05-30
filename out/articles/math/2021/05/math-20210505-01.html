@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>分離閉包、純非分離閉包と分離次数、非分離次数</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">分離閉包、純非分離閉包と分離次数、非分離次数</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>前提</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( M/L/K\) </td>
+        <td>可換体の有限次代数拡大</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( L_s\) </td>
+        <td> \( L/K\) の分離閉包</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( L_i\) </td>
+        <td> \( L/K\) の純非分離閉包</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( p\) </td>
+        <td> \( K\) の標数（0または素数）</td>
+      </tr>
+    </table>
+  </div>
+  <h4>定理</h4>
+  <ol>
+    <li>
+      <p> \( L/L_s\) は純非分離的</p>
+    </li>
+    <li>
+      <p> \( L/K\) の分離次数 \( =\) 異なる埋め込み \( L \hookrightarrow \Omega \) の個数</p>
+    </li>
+    <li>
+      <p> \( [M:K]_s = [M:L]_s[L:M]_s\) </p>
+    </li>
+    <li>
+      <p> \( [M:K]_i = [M:L]_i[L:M]_i\) </p>
+    </li>
+    <li>
+      <p> \( M/L, L/K\) がそれぞれ純非分離的 \( \Leftrightarrow M/K\) は純非分離的</p>
+    </li>
+    <li>
+      <p> \( M/L, L/K\) がそれぞれ分離的 \( \Leftrightarrow M/K\) が分離的</p>
+    </li>
+    <li>
+      <p> \( L/K\) が正規拡大なら \( L/L_i\) は分離的</p>
+    </li>
+  </ol>
+  <h4>証明</h4>
+  <h5>1.</h5>
+  <ul>
+    <li>
+      <p> \( p = 0\) なら, \( L_s = L\) なので良い. （<a data-article-id="math-20210430-01" href="../../../../../out/articles/math/2021/04/math-20210430-01.html" target="_blank">こちら</a>を参照）</p>
+    </li>
+    <li>
+      <p> \( p \gt 0\) なら, 任意の \( a\in L\) は, 適当な \( p\) べき乗すると分離的な元になる（<a data-article-id="math-20210501-01" href="../../../../../out/articles/math/2021/05/math-20210501-01.html" target="_blank">こちら</a>を参照）ので, \( L_s\) 上分純非分離的である（<a data-article-id="math-20210429-01" href="../../../../../out/articles/math/2021/04/math-20210429-01.html" target="_blank">こちら</a>を参照）. </p>
+    </li>
+  </ul>
+  <h5>2.</h5>
+  <p>異なる埋め込み \( L \hookrightarrow \Omega \) の個数は, 以下の積である. （<a data-article-id="math-20210424-01" href="../../../../../out/articles/math/2021/04/math-20210424-01.html" target="_blank">こちら</a>を参照）</p>
+  <ul>
+    <li> \( L/Ls\) の異なる埋め込み \( L \hookrightarrow \Omega \) の個数</li>
+    <li> \( Ls/K\) の異なる埋め込み \( L_s \hookrightarrow \Omega \) の個数</li>
+  </ul>
+  <p>1.より, 1つめの値は \( =1\) になる. </p>
+  <p>また, 2つ目の値は分離次数 \( [L_s:K]\) に等しい. （<a data-article-id="math-20210424-01" href="../../../../../out/articles/math/2021/04/math-20210424-01.html" target="_blank">こちら</a>を参照）</p>
+  <p>よって</p>
+  <p style="text-align: center;"> \( L/K\) の分離次数 \( =\) 異なる埋め込み \( L \hookrightarrow \Omega \) の個数</p>
+  <p>が成り立つ. </p>
+  <h5>3.</h5>
+  <p>2.および<a data-article-id="math-20210424-01" href="../../../../../out/articles/math/2021/04/math-20210424-01.html" target="_blank">こちら</a>より明らか. </p>
+  <h5>4.</h5>
+  <p>3.を用いれば</p>
+  <p style="text-align: center;"> \( \begin{align}[M:K]_i &amp;= [M:K]\,/\,[M:K]_s \\ &amp;= [M:L][L:K]\,/\,[M:K]_s \\ &amp;= [M:L]_i[M:L]_s[L:K]_i[L:K]_s\,/\,[M:K]_s \\ &amp;= [M:L]_i[L:K]_i\end{align}\) </p>
+  <h5>5. 6.</h5>
+  <p>3, 4より明らか. </p>
+  <h5>7.</h5>
+  <p> \( L/L_i\) が非分離的だとすると, \( L_i\) 上純非分離的な \( L\) の元が存在する. </p>
+  <p>5.により, その元は \( K\) 上純非分離的となり, \( L_i\) が純非分離閉包であることに矛盾する. </p>
+  <p>よって \( L/L_i\) は分離的. </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210430-01.html" data-article-id="math-20210430-01">完全体</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210501-01.html" data-article-id="math-20210501-01">非分離元のべき乗は分離元になる</a></li>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210429-01.html" data-article-id="math-20210429-01">純非分離拡大</a></li>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210424-01.html" data-article-id="math-20210424-01">代数拡大における埋め込みの個数</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

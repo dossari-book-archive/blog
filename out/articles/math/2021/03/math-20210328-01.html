@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>行列式の技巧</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">行列式の技巧</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div>
+  <h4>記号の定義</h4>
+  <div style="display:flex; justify-content: center;">
+    <table>
+      <tr>
+        <td> \( A\) </td>
+        <td>可換環</td>
+      </tr>
+      <tr>
+        <td> \( I\) </td>
+        <td> \( A\) のイデアル</td>
+      </tr>
+      <tr>
+        <td> \( \varphi \) </td>
+        <td> \( M\) の自己準同型</td>
+      </tr>
+      <tr>
+        <td> \( E\) </td>
+        <td> \( \varphi \) で生成される \( M\) の自己準同型の部分環 \( A[\varphi ]=\left\{ a\varphi ^n|a\in A,n\in \mathbb{N}\right\} \) <br>（<a>こちら</a>の記事参照）</td>
+      </tr>
+    </table>
+  </div>
+  <h4>雰囲気</h4>
+  <p style="text-align: center;"> \( \left( \begin{array}{cccc} \varphi - a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; \varphi - a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; \varphi - a_{nn} \end{array} \right)\left( \begin{array}{c} m_1 \\ m_2 \\ \vdots \\ m_n \end{array} \right)= 0\) </p>
+  <h4>定理</h4>
+  <p> \( M\) が有限生成 \( A\) 加群で, \( \varphi (M)\subset IM\) ならば, ある \( a_i\in I^i\,(1\le i\lt n),\,a_n\in A\) が存在して, \( E\) の元として</p>
+  <p style="text-align: center;"> \( \varphi ^n + a_1\varphi ^{n-1} + \cdots + a_n = 0\) </p>
+  <p>が成り立つ. </p>
+  <h5>証明</h5>
+  <p> \( M\) が \( A\) 上有限生成だから, その生成元を \( m_1,\cdots ,m_n\) とすると, 各 \( i = 1,\cdots ,n\) に対して
+  <p style="text-align: center;"> \( \displaystyle \varphi (m_i) = \sum_{j=1}^n a_{ij}m_j\) </p>を満たす \( a_{ij}\in I\) が存在する. <br>これを行列で表現すると</p>
+  <p style="text-align: center;"> \( \left( \begin{array}{cccc} \varphi &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; \varphi &amp; \cdots &amp; 0 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 0 &amp; 0 &amp; \cdots &amp; \varphi \end{array} \right)\left( \begin{array}{c} m_1 \\ m_2 \\ \vdots \\ m_n \end{array} \right)=\left( \begin{array}{cccc} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} \end{array} \right)\left( \begin{array}{c} m_1 \\ m_2 \\ \vdots \\ m_n \end{array} \right)\) </p>
+  <p>左辺 - 右辺 により</p>
+  <p style="text-align: center;"> \( \left( \begin{array}{cccc} \varphi - a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; \varphi - a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; \varphi - a_{nn} \end{array} \right)\left( \begin{array}{c} m_1 \\ m_2 \\ \vdots \\ m_n \end{array} \right)= 0\) </p>
+  <p>左辺の行列の行列式を \( d\) として, 左辺に余因子行列を掛けると</p>
+  <p style="text-align: center;"> \( d\,m_i = 0\,\,(i = 1, \cdots , n)\) </p>
+  <p> \( m_1,\cdots m_n\) は \( M\) の生成元だから, \( d\) は \( E\) の元として0であることがわかる. </p>
+  <p>行列式 \( d\) を展開すれば, </p>
+  <p style="text-align: center;"> \( d = \varphi ^n + a_1\varphi ^{n-1} + \cdots + a_n,\,\,\,a_i\in I^i\,(1\le i\lt n),\,a_n\in A\) </p>
+  <p>であることがわかる. </p>
+  <p>（証明終）</p>
+  <h4>系</h4>
+  <p>可換環 \( B\) を \( A\) の拡大で, \( A\) 加群として有限生成とすると, \( B\) の任意の元は \( A\) 上整である</p>
+  <h5>証明</h5>
+  <p> \( b\in B\) とする. </p>
+  <p>定理において, \( M = E = B,\,I = A,\,\varphi =b\) （ここで, \( B\) を \( B\) の自己準同型写像と同一視できる点に注意しておく）とすれば, </p>
+  <p style="text-align: center;"> \( b^n + a_1b^{n-1} + \cdots + a_n = 0\) </p>
+  <p>を満たす \( a_1,\cdots a_n\) が存在することがわかり, \( b\) は \( A\) 上整である. </p>
+  <p>（証明終）</p>
+  <h4>参考</h4>
+  <p>松村英之. 復刊 可換環論: 共立出版 p9 定理2.1</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/03/math-20210331-01.html" data-article-id="math-20210331-01">整な元は加法、乗法で閉じている</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

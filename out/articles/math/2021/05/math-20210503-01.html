@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>分離閉包と純非分離閉包の合成</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">分離閉包と純非分離閉包の合成</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>前提</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( L/K\) </td>
+        <td>可換体の有限次代数拡大</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( L_s\) </td>
+        <td> \( L/K\) の分離閉包</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( L_i\) </td>
+        <td> \( L/K\) の純非分離閉包</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( L_sL_i\) </td>
+        <td> \( L_i, L_s\) を含む最小の部分体</td>
+      </tr>
+    </table>
+  </div>
+  <h4>定理</h4>
+  <p> \( [L_i:K] \) は \( [L:K]_i\) を割り切る. </p>
+  <p> \( L/K\) が正規拡大の場合, \( [L_i:K] = [L:K]_i\) が成り立つ. </p>
+  <p>図解すると, 一般の場合：</p>
+  <div style="display: flex; justify-content: center;">
+    <div style="position: relative; width: 300px; height: 200px;">
+      <div>
+        <div style="position: absolute; top: 100px; left: 0px;"> \( L_s\) </div>
+        <div style="position: absolute; top: 100px; left: 200px;"> \( L_i\) </div>
+        <div style="position: absolute; top: 150px; left: 100px;"> \( K\) </div>
+        <div style="position: absolute; top: 90px; left: 50px; font-size: 0.5em;"> \( [L_i:K]\) </div>
+        <div style="position: absolute; top: 105px; left: 25px; width: 71.5891px; transform-origin: left top; transform: rotate(-25deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 115px; left: 25px; width: 76.3217px; transform-origin: left top; transform: rotate(31deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 75px; left: 125px; width: 71.5891px; transform-origin: left top; transform: rotate(24deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 155px; left: 125px; width: 76.3217px; transform-origin: left top; transform: rotate(-32deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 0px; left: 100px;"> \( L\) </div>
+        <div style="position: absolute; top: 50px; left: 90px;"> \( L_sL_i\) </div>
+        <div style="position: absolute; top: 0px; left: 100px;"> \( L\) </div>
+        <div style="position: absolute; top: 30px; left: 30px; font-size: 0.5em;"> \( [L:K]_i\) </div>
+        <div style="position: absolute; top: 100px; left: 20px; width: 106.301px; transform-origin: left top; transform: rotate(-49deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 20px; left: 108px; width: 25px; transform-origin: left top; transform: rotate(90deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+      </div>
+    </div>
+  </div>
+  <p> \( L/K\) が正規拡大の場合：</p>
+  <div style="display: flex; justify-content: center;">
+    <div style="position: relative; width: 300px; height: 150px;">
+      <div>
+        <div style="position: absolute; top: 50px; left: 0px;"> \( L_s\) </div>
+        <div style="position: absolute; top: 50px; left: 200px;"> \( L_i\) </div>
+        <div style="position: absolute; top: 100px; left: 100px;"> \( K\) </div>
+        <div style="position: absolute; top: 40px; left: 50px; font-size: 0.5em;"> \( [L_i:K]\) </div>
+        <div style="position: absolute; top: 55px; left: 25px; width: 71.5891px; transform-origin: left top; transform: rotate(-25deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 65px; left: 25px; width: 76.3217px; transform-origin: left top; transform: rotate(31deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 25px; left: 125px; width: 71.5891px; transform-origin: left top; transform: rotate(24deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 105px; left: 125px; width: 76.3217px; transform-origin: left top; transform: rotate(-32deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 0px; left: 70px;"> \( L = L_sL_i\) </div>
+        <div style="position: absolute; top: 20px; left: 30px; font-size: 0.5em;"> \( [L:K]_i\) </div>
+      </div>
+    </div>
+  </div>
+  <h4>証明</h4>
+  <p>一般の場合は<a data-article-id="math-20210504-01" href="../../../../../out/articles/math/2021/05/math-20210504-01.html" target="_blank">こちら</a>から明らか. （ \( K = L_s \cap L_i\) ）</p>
+  <p> \( L/K\) が正規拡大の場合は, \( L = L_sL_i\) を示せば良い. </p>
+  <p>この場合, \( L/L_i\) が分離的なので（TODO 証明記事）, \( L/L_sL_i\) は分離的かつ純非分離的. </p>
+  <p>よって \( L = L_sL_i.\) </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210504-01.html" data-article-id="math-20210504-01">分離拡大と純非分離拡大の合成</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

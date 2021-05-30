@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>代数拡大における埋め込みの個数</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">代数拡大における埋め込みの個数</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>前提</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( L/K\) </td>
+        <td>可換体の有限次代数拡大</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( a_1, \cdots , a_n\) </td>
+        <td> \( L\) を生成する \( n\) 個の元: \( L = K(a_1,\cdots ,a_n)\) </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( K_i\) </td>
+        <td> \( =\begin{cases}
+          K &amp; (i = 0) \\ K(a_1, \cdots , a_i) &amp; (i = 1,\cdots ,n)\end{cases}\) </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( r_i\) </td>
+        <td> \( a_i\) の \( K_{i-1}\) 上の最小多項式における異なる根の個数<br> \( (i = 1, \cdots , n)\) </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( K^\sigma \) </td>
+        <td> \( K\) と同型な体. \( \sigma \) は同型写像</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( \Omega \) </td>
+        <td> \( K^\sigma \) を含み, 任意の \( L\) の元 \( a\) に対して \( a\) の \( K\) 上共役な元をすべて含む体</td>
+      </tr>
+      <tr>
+        <td>埋め込み \( K_i \hookrightarrow \Omega \) </td>
+        <td> \( \sigma \) を拡張した体の準同型（単射）</td>
+      </tr>
+    </table>
+  </div>
+  <h4>命題</h4>
+  <ol>
+    <li>
+      <p>埋め込み \( L \hookrightarrow \Omega \) は丁度 \( \displaystyle \prod_{i=1}^n r_i\) 個存在する. （したがって, 埋め込みの個数 \( \le [L : K]\) ）</p>
+    </li>
+    <li>
+      <p> \( L/K\) が分離拡大 \( \Leftrightarrow \) 埋め込み \( L\hookrightarrow \Omega \) の個数 \( = [L : K]\) </p>
+    </li>
+    <li>
+      <p> \( a_1,\cdots ,a_n\) が分離的であれば, \( K(a_1,\cdots ,a_n)/K\) は分離拡大となる. <br>（したがって \( L\) の分離的な元全体の集合は \( L\) の部分体を成す）</p>
+    </li>
+    <li>
+      <p> \( M\) を \( L/K\) の中間体とすると, 埋め込み \( L\hookrightarrow K\) の個数は
+      <p style="text-align: center;">（ \( M\) 上の埋め込み \( L\hookrightarrow \Omega \) の個数）×（ \( K\) 上の埋め込み \( M\hookrightarrow \Omega \) の個数）</p>
+      </p>
+    </li>
+    <li>
+      <p> \( L/K\) を分離拡大, \( M\) を \( L/K\) の中間体とすると, 埋め込み \( \varphi ,\varphi ':L \hookrightarrow \Omega \) は \( M\) への制限で
+      <p style="text-align: center;"> \( \varphi \sim \varphi ' \Leftrightarrow \varphi |_M = \varphi '|_M\) </p>という同値関係によって \( [L:M]\) 個の元を含む \( [M:K]\) 個の同値類に分けられる. </p>
+    </li>
+  </ol>
+  <h4>証明</h4>
+  <h5>1.</h5>
+  <p>埋め込みが \( \displaystyle \prod_{i=1}^n r_i\) 個以上存在すること：</p>
+  <ul>
+    <li> \( K_1\) から \( \Omega \) への \( K\) 上の埋め込みは \( r_1\) 個存在する. </li>
+    <li> \( \displaystyle r_1\) 個の各埋め込み \( \varphi : K_1 \hookrightarrow \Omega \) それぞれで, \( \varphi \) を拡張子した埋め込み \( K_2 \hookrightarrow \Omega \) が \( r_2\) 個存在して, 合計 \( r_1r_2\) 個存在する</li>
+    <li>同様に続けていけば, \( j \ge 1\) に対して, \( \displaystyle \prod_{i=1}^j r_i\) 個の各埋め込み \( \varphi : K_j \hookrightarrow \Omega \) それぞれで, \( \varphi \) を拡張子した埋め込み \( K_{j + 1} \hookrightarrow \Omega \) が \( r_{j+1}\) 個存在することがわかる. </li>
+  </ul><br>
+  <p>埋め込みが丁度 \( \displaystyle \prod_{i=1}^n r_i\) 個存在すること（任意の埋め込みが上記のいずれかに一致すること）：</p>
+  <ul>
+    <li>任意の埋め込み \( K_n \hookrightarrow \Omega \) に対して \( K_1\) への制限は上記 \( r_1\) 個の埋め込みのいずれかに一致する. </li>
+    <li>よって \( K_2\) への制限は上記 \( r_1r_2\) 個の埋め込みのいずれかに一致する. </li>
+    <li>同様に続けていけば \( \psi \) は上記 \( \displaystyle \prod_{i=1}^n r_i\) 個の埋め込みのいずれかに一致することがわかる. </li>
+  </ul>
+  <h5>2.</h5>
+  <p> \( L = K(a_1, \cdots , a_n)\) とする. </p>
+  <p> \( \Rightarrow )\) \( a_i\) が \( K_{i-1}\) 上分離的な元だから, </p>
+  <p style="text-align: center;"> \( r_i = [K_i : K_{i-1}]\) </p>
+  <p>よって</p>
+  <p style="text-align: center;">埋め込みの総数 \( = \displaystyle \prod_{i=1}^n r_i = \prod_{i=1}^n [K_i : K_{i - 1}] = [L : K]\) </p><br>
+  <p> \( \Leftarrow ) L\) が非分離的な元 \( b\in L\) を含むとする. このとき</p>
+  <p style="text-align: center;">埋め込み \( K(b) \hookrightarrow \Omega \) の個数 \( \lt [K(b) : K]\) </p>
+  <p>よって本命題から</p>
+  <p style="text-align: center;">埋め込みの総数 \( \lt [K : K(b)][K(b) : L] = [L : K]\) </p>
+  <h5>3.</h5>
+  <p>1, 2より明らか. </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/04/math-20210418-01.html" data-article-id="math-20210418-01">分離拡大と単純拡大</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210505-01.html" data-article-id="math-20210505-01">分離閉包、純非分離閉包と分離次数、非分離次数</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

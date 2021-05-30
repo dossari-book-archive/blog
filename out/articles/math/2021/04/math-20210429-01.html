@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>純非分離拡大</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">純非分離拡大</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>前提</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( L/K\) </td>
+        <td>可換体の代数拡大</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( p\) </td>
+        <td> \( K\) の標数 \( \gt 0\) </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( a\) </td>
+        <td> \( L\) の元</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( r\) </td>
+        <td>正の整数</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( n\) </td>
+        <td> \( = [K(a) : K]\) </td>
+      </tr>
+    </table>
+  </div>
+  <h4>定義</h4>
+  <p> \( a\) が自身以外に共役元を持たないとき, \( a\) は \( K\) 上純非分離的であるという. </p>
+  <p> \( L\) の任意の元が純非分離的であるとき \( L/K\) が純非分離的 or 純非分離拡大であるという</p>
+  <h4>命題</h4>
+  <ol>
+    <li>
+      <p>ある \( r\) に対して \( a^{p^r}\in K\) なら, \( n\) は \( 1\) または \( p\) 冪（ \( \le p^r\) ）. </p>
+    </li>
+    <li>
+      <p> \( a\) が \( K\) 上が純非分離的 \( \Leftrightarrow \) ある \( r\) に対して \( a^{p^r}\in K\) </p>
+    </li>
+    <li>
+      <p>純非分離的な元の集合は, \( L/K\) の中間体を成す. </p>
+    </li>
+    <li>
+      <p> \( L/K\) が有限次拡大であるとき<br> \( L/K\) が純非分離的 \( \Leftrightarrow \) \( L\) は \( K\) 上純非分離的な元で生成される. </p>
+    </li>
+    <li>
+      <p> \( L/K\) が有限次純非分離拡大ならば, 拡大体の列</p>
+      <p style="text-align: center;"> \( K = K_0 \subset K_1 \subset \cdots \subset K_i \subset \cdots \subset K_r = L\) </p>
+      <p style="text-align: center;"> \( [K_{i+1} : K_i] = p\) </p>
+      <p>が存在する. よって, 拡大次数 \( [L : K]\) は \( p\) 冪になる. </p>
+    </li>
+  </ol>
+  <h4>証明</h4>
+  <h5>1.</h5>
+  <p>体の列</p>
+  <p style="text-align: center;"> \( K \subset K(a^{p^{r-1}}) \subset K(a^{p^{r-2}}) \subset \cdots \subset K(a)\) </p>
+  <p>を考えれば, \( r = 1\) の場合に帰着する. </p>
+  <p> \( a\) の \( K\) 上の最小多項式は \( x^p - a^p = (x-p)^p\) の約元なので, \( (x-a)^n\) である. </p>
+  <p> \( n-1\) 次の項の係数が \( -na\in K\) なので, もし \( n \lt p\) なら, \( a\in K\) となり, \( n = 1\) となる</p><br>
+  <h5>2.</h5>
+  <p> \( \Leftarrow \) は明らかなので \( \Rightarrow \) を示す. </p>
+  <p> \( a\) が純非分離的な元であれば, 最小多項式は \( (x-a)^n\) になる. </p>
+  <p> \( n-1\) 次の項の係数が \( -na\in K\) なので</p>
+  <ul>
+    <li>
+      <p> \( p \nmid n\) なら, 1.の証明と同様にして \( a\in K\) </p>
+    </li>
+    <li>
+      <p> \( p\mid n\) なら, \( n = p^r s,\,p \nmid s\) と置く. <br> \( (x-a)^n = (x^{p^r} - a^{p^r})^s\) なので, 1.の証明と同様にして \( a^{p^r}\in K\) </p>
+    </li>
+  </ul>
+  <p></p><br>
+  <h5>3.</h5>
+  <p>2. より, 純非分離的な元は四則演算に関して閉じていることがわかる. </p>
+  <h5>4.</h5>
+  <p>3. より明らか. </p>
+  <h5>5.</h5>
+  <p> \( M\) を \( L/K\) の任意の中間体とすれば, \( L/M\) も純非分離的になるので, \( K\) に元を添加させて作った中間体の列を, 1.の証明にあるような体の列に細分化してやれば良い. </p>
+  <p>（証明終）</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210504-01.html" data-article-id="math-20210504-01">分離拡大と純非分離拡大の合成</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210505-01.html" data-article-id="math-20210505-01">分離閉包、純非分離閉包と分離次数、非分離次数</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210505-02.html" data-article-id="math-20210505-02">非分離正規拡大は純非分離的な元を含む</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>
