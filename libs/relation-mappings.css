@@ -63,4 +63,5 @@ a .article-drawing * {
     padding: 5px;
     cursor: default;
     background-color: white;
+    border-radius: 5px;
 }

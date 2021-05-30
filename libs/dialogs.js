@@ -1,29 +1,60 @@
 var Dialogs = (() => {
-    /** 
- * @type {{
+    /**
+     * @typedef {{
      *   src: string
      *   show: () => void
      *   hide: () => void
-     * }}
+     * }} Dialog
      */
-    let dialog
+    /** @type {Dialog[]} */
+    const dialogStack = []
+    /** @type {Dialog[]} */
+    const dialogPool = []
+
+    function hasParent() {
+        return location.protocol != "file:" && window.parent != window && window.parent.Dialogs
+    }
+
     function showDialog(src) {
-        if (!dialog) {
-            createDialog()
+        if (hasParent()) {
+            window.parent.Dialogs.showDialog(src)
+            return
+        }
+        /** @type {Dialog} */
+        let dialog
+        if (dialogPool.length == 0) {
+            dialog = createDialog()
+            dialogStack.push(dialog)
+        } else {
+            dialog = dialogPool.pop()
         }
         dialog.src = src
         dialog.show()
+        dialogStack.push(dialog)
+    }
+
+    function popDialog() {
+        if (hasParent()) {
+            window.parent.Dialogs.popDialog()
+            return
+        }
+        if (dialogStack.length == 0) {
+            return
+        }
+        const dialog = dialogStack.pop()
+        dialog.hide()
+        dialogPool.push(dialog)
     }
 
     function createDialog() {
         const dummy = document.createElement("div")
-        dummy.innerHTML = `<div style="width:100%; height:100%; background-color: rgba(0,0,0,0.5); display:flex; justify-content:center; align-items:center; position:absolute; top:0; left:0; visibility:hidden; opacity:0; transition: opacity .2s">
-                <iframe style="width: 90%; height: 90%; border: none; background-color: white;"></iframe>
+        dummy.innerHTML = `<div style="width:100%; height:100%; background-color: rgba(0,0,0,0.5); display:flex; justify-content:center; align-items:center; position:absolute; top:0; left:0; visibility:hidden; opacity:0; transition: opacity .2s; cursor:pointer;">
+                <iframe style="width: 90%; height: 90%; border: none; background-color: white; border-radius: 10px;"></iframe>
             </div>`
         const root = dummy.children[0]
         root.addEventListener("mousedown", (e) => {
             if (e.target == root) {
-                dialog.hide()
+                Dialogs.popDialog()
             }
         })
         const iframe = root.children[0]
@@ -31,7 +62,8 @@ var Dialogs = (() => {
             root.style.visibility = "hidden"
             root.removeEventListener("transitionend", hideDialogTransitionEndCallback)
         }
-        dialog = {
+        /** @type {Dialog} */
+        const dialog = {
             get src() { return iframe.getAttribute("src") },
             set src(value) { iframe.setAttribute("src", value) },
             show() {
@@ -46,12 +78,17 @@ var Dialogs = (() => {
             },
         }
         document.body.append(root)
-        document.addEventListener("keydown", (e) => {
-            if (e.key == "Escape") { dialog.hide() }
-        })
+        return dialog
     }
 
+    document.addEventListener("keydown", (e) => {
+        if (e.key == "Escape") {
+            Dialogs.popDialog()
+        }
+    })
+
     return {
-        showDialog
+        showDialog,
+        popDialog
     }
 })()

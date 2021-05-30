@@ -451,7 +451,6 @@ const MultipePlatformBlogData = (() => {
          * @param {(
          *   doc: {
          *    title: (title: string) => void,
-         *    articleId: (id: string) => void,
          *    article: (id: string, ...values:any) => Elem
          *    body: ((...values: any) => void)
          *    tex: TexFunc,
@@ -489,6 +488,7 @@ const MultipePlatformBlogData = (() => {
                     articleLink: id => new Link(id),
                     article: (id, ...values) =>
                         new Elem("a", [
+                            new Attr("data-article-id", id),
                             new Attr("href", new Link(id)),
                             new Attr("target", "_blank"),
                             ...values

@@ -34,6 +34,14 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     })()
 
+    document.addEventListener("click", (e) => {
+        // ctrlキー押下時は別タブで開かせる。ctrlキー押下でない場合はダイアログで開く
+        if (e.ctrlKey) { return } // 別タブで開かせる
+        if (!e.target.getAttribute("data-article-id")) { return }
+        e.preventDefault()
+        Dialogs.showDialog(e.target.getAttribute("href"))
+    })
+
     /////////////////////////////////////////////////////////////
     function exec() {
 
