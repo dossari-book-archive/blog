@@ -434,6 +434,12 @@ const MultipePlatformBlogData = (() => {
         }
     }
 
+    const Util = {
+        small(...values) {
+            return new Elem("span", [new Style("font-size", ".8em"), ...values])
+        }
+    }
+
     /**
      * @typedef {Drawing} DrawingT
      */
@@ -460,6 +466,7 @@ const MultipePlatformBlogData = (() => {
          *    drawing: DrawingT,
          *    tags: (...tags) => void,
          *    articleLink: (id: string) => Link
+         *    util: Util
          *   }
          * ) => void} callback 
          */
@@ -493,7 +500,8 @@ const MultipePlatformBlogData = (() => {
                             new Attr("target", "_blank"),
                             ...values
                         ]),
-                    tags(...tags) { doc.tags.push(...tags) }
+                    tags(...tags) { doc.tags.push(...tags) },
+                    util: Util
                 })
                 doc.links = findLinks(doc.rootElem)
                 latestDoc = doc

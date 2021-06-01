@@ -1,5 +1,5 @@
 MultipePlatformBlogData.register(doc => {
-    const { tex, style } = doc
+    const { tex, style, util, attr } = doc
         , { a, K, M } = tex.canonicalSymbols
         , { p, div, table, br, h4, h5, ol, ul, li, strong } = doc.el
         , textRight = style("text-align", "right")
