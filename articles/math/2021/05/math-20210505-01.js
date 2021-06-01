@@ -1,5 +1,5 @@
 MultipePlatformBlogData.register(doc => {
-    const { tex, style } = doc
+    const { tex, style, util } = doc
         , { K, L } = tex.canonicalSymbols
         , { p, div, table, ul, ol, li, h4, h5 } = doc.el
         , textRight = style("text-align", "right")
@@ -36,17 +36,17 @@ MultipePlatformBlogData.register(doc => {
         )
         , h4("証明")
         , h5("1.")
-        , ul(
-            li(p(tex("p = 0"), "なら、", tex("L_s = L"), "なので良い。（"
-                , doc.article("math-20210430-01", "こちら")
-                , "を参照）"))
-            , li(p(tex("p > 0"), "なら、", "任意の", tex("a∈L"), "は、適当な"
+        , p(ul(
+            li(tex("p = 0"), "なら、", tex("L_s = L"), "なので良い。"
+                , util.small("（標数0の体は完全体。", doc.article("math-20210430-01", "こちら"), "を参照）")
+            )
+            , li(tex("p > 0"), "なら、", "任意の", tex("a∈L"), "は、適当な"
                 , tex("p"), "べき乗すると分離的な元になる"
-                , "（", doc.article("math-20210501-01", "こちら"), "を参照）"
+                , util.small("（非分離元のべき乗は分離元になる。", doc.article("math-20210501-01", "こちら"), "を参照）")
                 , "ので、", Ls, "上分純非分離的である"
-                , "（", doc.article("math-20210429-01", "こちら"), "を参照）。"
-            ))
-        )
+                , util.small("（", doc.article("math-20210429-01", "こちら"), "を参照）。")
+            )
+        ))
         , h5("2.")
         , p("異なる埋め込み", tex("L ↪ Ω"), "の個数は、以下の積である。"
             , "（", doc.article("math-20210424-01", "こちら"), "を参照）")
