@@ -24,6 +24,10 @@
             stroke: #4e7fff;
         }
 
+        .bezier-2d-curve.bezier-2d-curve-selected {
+            stroke: red;
+        }
+
         .bezier-2d-curve {
             fill: none;
             stroke: #aaa;
@@ -65,7 +69,7 @@
 <body>
     <div id="drawingArea" style="position: relative; width: 720px; height: 700px; margin: 50px;">
         <svg id="drawings"
-            style="position:absolute; top: 0; left: 0; width: 100%; height: 100%; border: 1px solid #999; ">
+            style="position:absolute; top: 0; left: 0; width: 100%; height: 100%; border: 1px solid #999; overflow: visible;">
             <!-- <polyline points="10 80 32.5 10 95 80 120 100" class="bezier-2d-polyline"></polyline> -->
         </svg>
         <div id="textbox1"

@@ -3,6 +3,7 @@ var Drawings = (() => {
 
     const polylineClassName = "bezier-2d-polyline"
         , curveClassName = "bezier-2d-curve"
+        , curveSelectedClassName = "bezier-2d-curve-selected"
         , curveForEventClassName = "bezier-2d-curve-support"
         , polylineForEventClassName = "bezier-2d-polyline-support"
         , pointClassName = "bezier-2d-point"
@@ -129,6 +130,7 @@ var Drawings = (() => {
                  *   }
                  *   endPointFormType: "none"|"triangularArrow"
                  *   endPointTriangularSize: number
+                 *   isSelected: boolean
                  * }}
                  */
                 const d = {
@@ -146,6 +148,7 @@ var Drawings = (() => {
                     //get lastPoint() { return this.points[this.points.length - 1] },
                     endPointFormType: "none",
                     endPointTriangularSize: 10, // TODO
+                    isSelected: false,
                 }
                 d.editData.init()
                 this[privateData] = d
@@ -158,6 +161,18 @@ var Drawings = (() => {
                 const func = value ? show : hide
                 func(d.polyline, d.polylineForEvent)
                 d.points.forEach(p => func(p.elem))
+            }
+            get isSelected() { return this[privateData].isSelected }
+            set isSelected(isSelected) {
+                isSelected = !!isSelected
+                const d = this[privateData]
+                if (d.isSelected == isSelected) { return }
+                d.isSelected = isSelected
+                if (isSelected) {
+                    d.mainCurve.classList.add(curveSelectedClassName)
+                } else {
+                    d.mainCurve.classList.remove(curveSelectedClassName)
+                }
             }
             get pointsNum() { return this[privateData].points.length }
             /**
@@ -471,6 +486,31 @@ var Drawings = (() => {
                 d.points[d.points.length - 1].stickyTo = elem
                 updateStickyData(this.lastPoint, mode, percentile)
             }
+            move(x, y) {
+                this[privateData].points.forEach(p => {
+                    if (!p.stickyTo) {
+                        p.pos.x += x
+                        p.pos.y += y
+                    }
+                })
+                this.refresh()
+
+            }
+            moveUp() { this.moveCurve(0, -1) }
+            moveDown() { this.moveCurve(0, 1) }
+            moveLeft() { this.moveCurve(-1, 0) }
+            moveRight() { this.moveCurve(1, 0) }
+        }
+
+        /**
+         * @returns {HTMLElement[]} 
+         */
+        function getStickyElems(/** @type {Bezier2DCurve} */curve) {
+            const ps = curve[privateData].points
+            return [
+                ps[0].stickyTo,
+                ps[ps.length - 1].stickyTo
+            ].filter(e => e != null)
         }
 
         function getElemRect(elem, svg) {
@@ -584,6 +624,8 @@ var Drawings = (() => {
                  *   circleRadius: number
                  *   bezier2DCurves: Bezier2DCurve[]
                  *   pointer: SVGCircleElement
+                 *   isActive: boolean
+                 *   eventDetachersForInactivation: (() => {})[]
                  * }}
                  */
                 const data = {
@@ -598,14 +640,20 @@ var Drawings = (() => {
                         eventDetachers: [],
                     },
                     bezier2DCurves: [],
-                    circleRadius: 5 // TODO
+                    circleRadius: 5, // TODO
+                    isActive: false,
+                    eventDetachersForInactivation: [],
                 }
                 this[privateData] = data
                 const pointer = data.pointer = createSvgChild("circle", {
                     r: data.circleRadius,
                     "class": pointClassName, style: "display:none;"
                 })
-                param.svg.prepend(pointer)
+                data.svg.prepend(pointer)
+                // マウスダウンによるアクティブ化、非アクティブ化
+                data.svg.addEventListener("mousedown", () => {
+                    this.isActive = true
+                })
             }
             get svg() {
                 return this[privateData].svg
@@ -614,6 +662,110 @@ var Drawings = (() => {
                 return this[privateData].dragginArea
             }
             get circleRadius() { return this[privateData].circleRadius }
+            set isActive(isActive) {
+                isActive = !!isActive
+                const d = this[privateData]
+                    , detachers = d.eventDetachersForInactivation
+                if (d.isActive == isActive) { return }
+                d.isActive = isActive
+                const clear = () => {
+                    while (detachers > 0) {
+                        detachers.pop()()
+                    }
+                }
+                // 一旦イベント解除
+                clear()
+                // 活性化する場合はイベント登録
+                if (isActive) {
+                    detachers.push(
+                        // mousedown
+                        addEventListener(document, "mousedown", (e) => {
+                            if (e.button != 0) { return }
+                            /** @type {HTMLElement} */
+                            let elem = e.target
+                            while (elem) {
+                                if (elem == d.svg) { return }
+                                elem = elem.parentElement
+                            }
+                            // 描画領域外のmousedownによる非活性化
+                            this.isActive = false
+                        }),
+                    )
+                    // keydown
+                    const keydownCallback4SelectAll = (/** @type {KeyboardEvent} */e) => {
+                        // Ctrl + A で疑似的な全選択状態を作る
+                        if (e.key != "a" || !e.ctrlKey) { return }
+                        e.preventDefault()
+                        detacher()
+                        d.bezier2DCurves.forEach(curve => {
+                            curve.isSelected = true
+                        })
+                        // 上下キーでの移動イベントを登録
+                        const keyEventDetacher = addEventListener(document, "keydown", (/** @type {KeyboardEvent} */e) => {
+                            if (e.key == "ArrowUp") {
+                                e.preventDefault()
+                                this.moveSelectedItems(0, -1)
+                            } else if (e.key == "ArrowDown") {
+                                e.preventDefault()
+                                this.moveSelectedItems(0, 1)
+                            } else if (e.key == "ArrowLeft") {
+                                e.preventDefault()
+                                this.moveSelectedItems(-1, 0)
+                            } else if (e.key == "ArrowRight") {
+                                e.preventDefault()
+                                this.moveSelectedItems(1, 0)
+                            }
+                        })
+                        const unselect = () => {
+                            d.bezier2DCurves.forEach(curve => {
+                                curve.isSelected = false
+                            })
+                            keyEventDetacher()
+                            // 再登録
+                            detacher = addEventListener(document, "keydown", keydownCallback4SelectAll, detachers)
+                            detachers.push(detacher)
+                        }
+                        detachers.push(
+                            keyEventDetacher,
+                            // 領域mousedownで選択解除
+                            addOnceEventListener(d.svg, "mousedown", e => {
+                                if (e.button != 0) { return }
+                                unselect()
+                            }),
+                            // Escapeキーで選択解除
+                            addEventListener(document, "keydown", (e, detacher) => {
+                                if (e.key == "Escape") {
+                                    detacher()
+                                    unselect()
+                                }
+                            })
+                        )
+                    }
+                    let detacher = addEventListener(document, "keydown", keydownCallback4SelectAll, detachers)
+                    d.eventDetachersForInactivation.push(detacher)
+                } else {
+                    // 非活性化する場合はイベント解除
+                    clear()
+                    d.bezier2DCurves.forEach(curve => {
+                        curve.isSelected = false
+                    })
+                }
+            }
+            get isActive() { return this[privateData].isActive }
+            moveSelectedItems(x, y) {
+                const stickyElems = new Set()
+                this[privateData].bezier2DCurves.forEach(curve => {
+                    curve.move(x, y)
+                    getStickyElems(curve).forEach(elem => {
+                        if (elem[privateData] && elem[privateData].draggable && !stickyElems.has(elem)) {
+                            elem.style.left = (parseInt(elem.style.left) + x) + "px"
+                            elem.style.top = (parseInt(elem.style.top) + y) + "px"
+                            stickyElems.add(elem)
+                        }
+                    })
+                })
+                this[privateData].bezier2DCurves.forEach(curve => curve.refresh())
+            }
             showPointer(/** @type {XY} */point) {
                 const p = this[privateData].pointer
                 show(p)
@@ -731,6 +883,7 @@ var Drawings = (() => {
             }
             addDraggableElem(/** @type {HTMLElement} */elem) {
                 const d = this[privateData]
+                elem[privateData] = { draggable: true }
                 addEventListener(elem, "mousedown", (/** @type {MouseEvent} */e) => {
                     const mouseStart = getMousePos(d.dragginArea, e)
                         , elemStartPos = getElemRect(elem, d.dragginArea)
@@ -781,10 +934,42 @@ var Drawings = (() => {
         circle.setAttribute("cy", point.y)
     }
 
-    function addEventListener(/** @type {HTMLElement} */elem, eventName, callback) {
-        elem.addEventListener(eventName, callback)
+    function addEventListener(/** @type {HTMLElement} */elem, eventName, callback, list) {
+        const wrapped = (e) => {
+            callback(e, detacher)
+        }
+        elem.addEventListener(eventName, wrapped)
+        const detacher = () => {
+            elem.removeEventListener(eventName, wrapped)
+            list && removeFromList(list, detacher)
+        }
+        return detacher
+        // elem.addEventListener(eventName, callback)
+        // const detacher = () => {
+        //     elem.removeEventListener(eventName, callback)
+        // }
+        // return detacher
+    }
+
+    function removeFromList(list, target) {
+        let idx
+        while ((idx = list.indexOf(target)) >= 0) {
+            list.splice(idx, 1)
+        }
+    }
+
+    function addOnceEventListener(/** @type {HTMLElement} */elem, eventName, callback, list) {
+        const wrapped = (...args) => {
+            try {
+                callback(...args)
+            } finally {
+                elem.removeEventListener(eventName, wrapped)
+            }
+        }
+        elem.addEventListener(eventName, wrapped)
         return () => {
-            elem.removeEventListener(eventName, callback)
+            elem.removeEventListener(eventName, wrapped)
+            list && removeFromList(list, detacher)
         }
     }
 
