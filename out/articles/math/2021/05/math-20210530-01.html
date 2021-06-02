@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>正規拡大</title>
+    <link rel="stylesheet" href="../../../../../libs/reset.css" />
+    <link rel="stylesheet" href="../../../../../articles/article.css" />
+    <script src="../../../../../libs/dialogs.js"></script>
+    <script src="../../../../../libs/articles.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.1.2/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+<div class="fade-in-hidden article-main">
+  <h1 id="articleTitle" style="text-align: center;">正規拡大</h1>
+  <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
+  <h4>前提</h4>
+  <div style="display: flex; justify-content: center;">
+    <table>
+      <tr>
+        <td style="text-align: right;"> \( L/K\) </td>
+        <td>可換体の代数拡大</td>
+      </tr>
+    </table>
+  </div>
+  <h4>定義</h4>
+  <p>任意の元 \( a\in L\) に対して, \( a\) の \( K\) 上の最小多項式が \( L\) において分解するとき, \( L\) は \( K\) の<strong>正規拡大</strong>であるという. </p>
+  <p>言い換えれば, 任意の元 \( a\in L\) に対して, その共役がすべて \( L\) に含まれる場合に, \( L/K\) は正規拡大である. </p>
+  <h4>命題</h4>
+  <p> \( M\) を \( L/K\) の任意の中間体とするとき, \( L/M\) も正規拡大となる（証明は明らか）. </p>
+  <p> \( L/K\) を有限次拡大とする. 以下は同値</p>
+  <p>
+  <ol>
+    <li> \( L/K\) は正規拡大</li>
+    <li> \( L = K(a_1,\cdots ,a_n)\) で, 各 \( a_i\) の共役がすべて \( L\) に含まれるようなものが存在する. </li>
+    <li>任意の埋め込み \( \varphi :K \hookrightarrow \Omega \) に対して, \( \varphi \) を拡張した埋め込み \( L \hookrightarrow \Omega \) の像は一意的に定まる. </li>
+  </ol>
+  </p>
+  <h4>証明</h4>
+  <p> \( 1 \Rightarrow 2\) は明らか. </p>
+  <p> \( 2 \Rightarrow 3:\) </p>
+  <p>以下のように記号を定める. </p>
+  <p>
+  <ul>
+    <li> \( \varphi \) を拡張した2つの埋め込みを \( \psi _1, \psi _2: L \hookrightarrow \Omega \) とする. </li>
+    <li> \( a = a_1\) の \( K\) 上の最小多項式を \( f\) とする</li>
+    <li> \( f\) の最小分解体を \( M(\subset L)\) とする</li>
+    <li> \( f\) の係数を \( \varphi \) で移した \( \varphi (K)\) 上の多項式を \( f^\varphi \) とする. </li>
+  </ul>
+  </p>
+  <p> \( \psi _1(M), \psi _2(M)\) は \( f^\varphi \) の最小分解体なので, <span style="font-size: 0.8em;">（最小分解体の像は最小分解体になる. <a data-article-id="math-20210531-01" href="../../../../../out/articles/math/2021/05/math-20210531-01.html" target="_blank">こちら</a>を参照）</span> \( \Omega \) 上で一致して<span style="font-size: 0.8em;">（最小分解体は同じ体の中には一つしかない. <a data-article-id="math-20210531-01" href="../../../../../out/articles/math/2021/05/math-20210531-01.html" target="_blank">こちら</a>を参照）</span>, \( \psi _1(M) = \psi _2(M)\) となる. </p>
+  <p> \( L = M(a_2,\cdots ,a_n)\) なので, \( K\) を \( M\) に置き換えて同様の議論を繰り返すことにより, \( \psi _1(L) = \psi _2(L)\) であることがわかる. </p><br>
+  <p> \( 3 \Rightarrow 1:\) </p>
+  <p> \( L\) を含む十分大きな体 \( \Omega \) を取る. 任意の元 \( a\in L\) , およびその共役 \( a'\in \Omega \) に対して, \( K\) 上の埋め込み \( \psi :L\hookrightarrow \Omega \) で \( \psi (a) = a'\) となるものが存在する（TODO 証明記事？）. </p>
+  <p>3.の仮定から, \( \psi \) の像は自明な埋め込みの像 \( =L\) と一致するから, \( a'\in L\) となる. </p>
+  <p>（証明終）</p>
+  <h4>参考</h4>
+  <p>可換体論〔新版〕裳華房 永田雅宜 (著) p60-61 §2.6. 正規拡大</p>
+  <h4>関連</h4>
+  <ul>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210531-01.html" data-article-id="math-20210531-01">分解体</a></li>
+  </ul>
+</div></div>
+</div>
+</body>
+</html>

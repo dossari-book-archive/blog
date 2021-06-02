@@ -8,7 +8,7 @@ MultipePlatformBlogData.register(doc => {
         , prod = tex.d("Π_{i=1}^n r_i")
         , Kσ = tex("K^σ")
 
-    doc.title("代数拡大における埋め込みの個数")
+    doc.title("分離拡大と埋め込み")
     doc.tags("可換体論", "ガロア理論")
     doc.body(
         style("width", "720px")
@@ -35,34 +35,38 @@ MultipePlatformBlogData.register(doc => {
         )
         , h4("命題")
         , ol(
-            li(p(
+            li(
                 "埋め込み", tex("L ↪ Ω"), "は丁度", prod, "個存在する。"
                 , "（したがって、埋め込みの個数", tex("<= [L : K]"), "）"
-            ))
-            , li(p(
+            )
+            , li(
                 tex("L/K"), "が分離拡大"
                 , tex("⇔"), "埋め込み", tex("L↪Ω"), "の個数", tex(" = [L : K]")
-            ))
-            , li(p(
+            )
+            , li(
                 tex("a_1,…,a_n"), "が分離的であれば、", tex("K(a_1,…,a_n)/K"), "は分離拡大となる。"
                 , br(), "（したがって", L, "の分離的な元全体の集合は", L, "の部分体を成す）"
-            ))
-            , li(p(
+            )
+            , li(
                 tex("M"), "を", tex("L/K"), "の中間体とすると、"
                 , "埋め込み", tex("L↪K"), "の個数は"
                 , p(textCenter
                     , "（", M, "上の埋め込み", tex("L↪Ω"), "の個数）"
                     , "×（", K, "上の埋め込み", tex("M↪Ω"), "の個数）"
                 )
-            ))
-            , li(p(
+            )
+            , li(
+                tex("M"), "を", tex("L/K"), "の中間体とすると、"
+                , p(textCenter, tex("L/M, M/K"), "がそれぞれ分離的", tex("⇔ L/K"), "が分離的")
+            )
+            , li(
                 tex("L/K"), "を分離拡大、"
                 , tex("M"), "を", tex("L/K"), "の中間体とすると、"
                 , "埋め込み", tex("φ,φ':L ↪ Ω"), "は", M, "への制限で"
                 , p(textCenter, tex("φ～φ' ⇔ φ|_M = φ'|_M"))
                 , "という同値関係によって", tex("[L:M]")
                 , "個の元を含む", tex("[M:K]"), "個の同値類に分けられる。"
-            ))
+            )
         )
         , h4("証明")
         , h5("1.")

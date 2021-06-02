@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>代数拡大における埋め込みの個数</title>
+    <title>分離拡大と埋め込み</title>
     <link rel="stylesheet" href="../../../../../libs/reset.css" />
     <link rel="stylesheet" href="../../../../../articles/article.css" />
     <script src="../../../../../libs/dialogs.js"></script>
@@ -12,7 +12,7 @@
 
 <body>
 <div class="fade-in-hidden article-main">
-  <h1 id="articleTitle" style="text-align: center;">代数拡大における埋め込みの個数</h1>
+  <h1 id="articleTitle" style="text-align: center;">分離拡大と埋め込み</h1>
   <div id="articleBody" style="box-sizing: content-box; width:max-content;"><div style="width: 720px;">
   <h4>前提</h4>
   <div style="display: flex; justify-content: center;">
@@ -50,24 +50,14 @@
   </div>
   <h4>命題</h4>
   <ol>
-    <li>
-      <p>埋め込み \( L \hookrightarrow \Omega \) は丁度 \( \displaystyle \prod_{i=1}^n r_i\) 個存在する. （したがって, 埋め込みの個数 \( \le [L : K]\) ）</p>
+    <li>埋め込み \( L \hookrightarrow \Omega \) は丁度 \( \displaystyle \prod_{i=1}^n r_i\) 個存在する. （したがって, 埋め込みの個数 \( \le [L : K]\) ）</li>
+    <li> \( L/K\) が分離拡大 \( \Leftrightarrow \) 埋め込み \( L\hookrightarrow \Omega \) の個数 \( = [L : K]\) </li>
+    <li> \( a_1,\cdots ,a_n\) が分離的であれば, \( K(a_1,\cdots ,a_n)/K\) は分離拡大となる. <br>（したがって \( L\) の分離的な元全体の集合は \( L\) の部分体を成す）</li>
+    <li> \( M\) を \( L/K\) の中間体とすると, 埋め込み \( L\hookrightarrow K\) の個数は<p style="text-align: center;">（ \( M\) 上の埋め込み \( L\hookrightarrow \Omega \) の個数）×（ \( K\) 上の埋め込み \( M\hookrightarrow \Omega \) の個数）</p>
     </li>
-    <li>
-      <p> \( L/K\) が分離拡大 \( \Leftrightarrow \) 埋め込み \( L\hookrightarrow \Omega \) の個数 \( = [L : K]\) </p>
+    <li> \( M\) を \( L/K\) の中間体とすると, <p style="text-align: center;"> \( L/M, M/K\) がそれぞれ分離的 \( \Leftrightarrow L/K\) が分離的</p>
     </li>
-    <li>
-      <p> \( a_1,\cdots ,a_n\) が分離的であれば, \( K(a_1,\cdots ,a_n)/K\) は分離拡大となる. <br>（したがって \( L\) の分離的な元全体の集合は \( L\) の部分体を成す）</p>
-    </li>
-    <li>
-      <p> \( M\) を \( L/K\) の中間体とすると, 埋め込み \( L\hookrightarrow K\) の個数は
-      <p style="text-align: center;">（ \( M\) 上の埋め込み \( L\hookrightarrow \Omega \) の個数）×（ \( K\) 上の埋め込み \( M\hookrightarrow \Omega \) の個数）</p>
-      </p>
-    </li>
-    <li>
-      <p> \( L/K\) を分離拡大, \( M\) を \( L/K\) の中間体とすると, 埋め込み \( \varphi ,\varphi ':L \hookrightarrow \Omega \) は \( M\) への制限で
-      <p style="text-align: center;"> \( \varphi \sim \varphi ' \Leftrightarrow \varphi |_M = \varphi '|_M\) </p>という同値関係によって \( [L:M]\) 個の元を含む \( [M:K]\) 個の同値類に分けられる. </p>
-    </li>
+    <li> \( L/K\) を分離拡大, \( M\) を \( L/K\) の中間体とすると, 埋め込み \( \varphi ,\varphi ':L \hookrightarrow \Omega \) は \( M\) への制限で<p style="text-align: center;"> \( \varphi \sim \varphi ' \Leftrightarrow \varphi |_M = \varphi '|_M\) </p>という同値関係によって \( [L:M]\) 個の元を含む \( [M:K]\) 個の同値類に分けられる. </li>
   </ol>
   <h4>証明</h4>
   <h5>1.</h5>

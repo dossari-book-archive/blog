@@ -25,11 +25,29 @@
         <td style="text-align: right;"> \( K_1, K_2\) </td>
         <td> \( L/K\) の中間体</td>
       </tr>
+      <tr>
+        <td style="text-align: right;"> \( L_s\) </td>
+        <td> \( L/K\) の分離閉包</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( L_i\) </td>
+        <td> \( L/K\) の純非分離閉包</td>
+      </tr>
+      <tr>
+        <td style="text-align: right;"> \( L_iL_s\) </td>
+        <td> \( L_i, L_s\) を含む最小の部分体</td>
+      </tr>
     </table>
   </div>
   <h4>定理</h4>
   <p> \( K_1/K\) を純非分離的拡大, \( K_2/K\) を分離拡大とする. </p>
-  <p> \( K_1K_2/K_1\) は純非分離的拡大で, \( [K_1K_2:K_1] = [K_2:K1\cap K2]\) </p>
+  <p> \( K_1K_2/K_1\) は純非分離的拡大で, </p>
+  <p>
+  <ul>
+    <li> \( [K_1K_2:K_1] = [K_2:K1\cap K2]\) </li>
+    <li> \( [K_1K_2:K_2] = [K_1:K1\cap K2]\) </li>
+  </ul>
+  </p>
   <p>図解すると</p>
   <div style="display: flex; justify-content: center;">
     <div style="position: relative; width: 300px; height: 250px;">
@@ -43,14 +61,35 @@
         <div style="position: absolute; top: 180px; left: 0px; font-size: 0.5em;">純非分離的拡大</div>
         <div style="position: absolute; top: 180px; left: 160px; font-size: 0.5em;">分離拡大</div>
         <div style="position: absolute; top: 210px; left: 100px;"> \( K\) </div>
-        <div style="position: absolute; top: 105px; left: 30px; width: 67.082px; transform-origin: left top; transform: rotate(-27deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 105px; left: 30px; width: 67.082px; transform-origin: left top; transform: rotate(-27deg); border-top: 2px solid goldenrod;"></div>
         <div style="position: absolute; top: 115px; left: 30px; width: 72.111px; transform-origin: left top; transform: rotate(33deg); border-top: 2px solid green;"></div>
         <div style="position: absolute; top: 75px; left: 125px; width: 71.5891px; transform-origin: left top; transform: rotate(24deg); border-top: 2px solid green;"></div>
-        <div style="position: absolute; top: 155px; left: 125px; width: 76.3217px; transform-origin: left top; transform: rotate(-32deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 155px; left: 125px; width: 76.3217px; transform-origin: left top; transform: rotate(-32deg); border-top: 2px solid goldenrod;"></div>
         <div style="position: absolute; top: 20px; left: 108px; width: 25px; transform-origin: left top; transform: rotate(90deg); border-top: 1px solid rgb(153, 153, 153);"></div>
         <div style="position: absolute; top: 180px; left: 108px; width: 25px; transform-origin: left top; transform: rotate(90deg); border-top: 1px solid rgb(153, 153, 153);"></div>
         <div style="position: absolute; top: 130px; left: 20px; width: 102.591px; transform-origin: left top; transform: rotate(46deg); border-top: 1px solid rgb(153, 153, 153);"></div>
         <div style="position: absolute; top: 130px; left: 200px; width: 106.066px; transform-origin: left top; transform: rotate(135deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+      </div>
+    </div>
+  </div><br>
+  <p>特に, \( K_1 = L_i, \,K_2 = L_s\) とすると \( K = K_1\cap K_2\) で</p>
+  <div style="display: flex; justify-content: center;">
+    <div style="position: relative; width: 300px; height: 200px;">
+      <div>
+        <div style="position: absolute; top: 100px; left: 0px;"> \( L_i\) </div>
+        <div style="position: absolute; top: 100px; left: 200px;"> \( L_s\) </div>
+        <div style="position: absolute; top: 160px; left: 60px;"> \( K = L_i\cap L_s\) </div>
+        <div style="position: absolute; top: 90px; left: 130px; font-size: 0.5em;"> \( [L_i:K]\) </div>
+        <div style="position: absolute; top: 0px; left: 100px;"> \( L\) </div>
+        <div style="position: absolute; top: 50px; left: 90px;"> \( L_iL_s\) </div>
+        <div style="position: absolute; top: 0px; left: 100px;"> \( L\) </div>
+        <div style="position: absolute; top: 30px; left: 150px; font-size: 0.5em;"> \( [L:K]_i\) </div>
+        <div style="position: absolute; top: 105px; left: 25px; width: 71.5891px; transform-origin: left top; transform: rotate(-25deg); border-top: 2px solid goldenrod;"></div>
+        <div style="position: absolute; top: 115px; left: 25px; width: 76.3217px; transform-origin: left top; transform: rotate(31deg); border-top: 2px solid green;"></div>
+        <div style="position: absolute; top: 75px; left: 125px; width: 71.5891px; transform-origin: left top; transform: rotate(24deg); border-top: 2px solid green;"></div>
+        <div style="position: absolute; top: 155px; left: 125px; width: 76.3217px; transform-origin: left top; transform: rotate(-32deg); border-top: 2px solid goldenrod;"></div>
+        <div style="position: absolute; top: 100px; left: 190px; width: 106.301px; transform-origin: left top; transform: rotate(-132deg); border-top: 1px solid rgb(153, 153, 153);"></div>
+        <div style="position: absolute; top: 20px; left: 108px; width: 25px; transform-origin: left top; transform: rotate(90deg); border-top: 1px solid rgb(153, 153, 153);"></div>
       </div>
     </div>
   </div>
@@ -59,16 +98,16 @@
     <li> \( K_1/K_1\cap K_2\) は純非分離的拡大</li>
     <li> \( K_2/K_1\cap K_2\) は分離拡大</li>
   </ul>
-  <p>なので, \( K = K_1\cap K_2\) としてOK. </p>
+  <p>なので, \( K = K_1\cap K_2\) としても結論は変わらない. </p>
   <p> \( K_1/K\) の中間体で</p>
   <p style="text-align: center;"> \( K = M_0 \subset M_1\subset M_2\subset \cdots \subset M_n = K_1\) </p>
   <p style="text-align: center;"> \( [M_i:M_{i-1}] = p\) </p>
   <p>を満たすものが存在する. （<a data-article-id="math-20210429-01" href="../../../../../out/articles/math/2021/04/math-20210429-01.html" target="_blank">こちら</a>を参照）</p><br>
-  <p>また, \( K_2/K\) は単純拡大なので, \( K_2 = K(\alpha )\) と置くと（<a data-article-id="math-20210418-01" href="../../../../../out/articles/math/2021/04/math-20210418-01.html" target="_blank">こちら</a>を参照）</p>
+  <p>また, \( K_2/K\) は単純拡大なので<span style="font-size: 0.8em;">（<a data-article-id="math-20210418-01" href="../../../../../out/articles/math/2021/04/math-20210418-01.html" target="_blank">こちら</a>を参照）</span>, \( K_2 = K(\alpha )\) と置くと</p>
   <p style="text-align: center;"> \( K_2 = K(\alpha ) = M_0(\alpha ) \subset M_1(\alpha )\subset M_2(\alpha )\subset \cdots \subset M_n(\alpha ) = K_1K_2\) </p>
   <p>という \( K_1K_2/K_2\) の部分体の列ができる. </p><br>
   <p>これらにより, \( [K_1:K] = p\) の場合の証明に帰着できる：</p>
-  <p>（TODO 純非分離拡大に関する推移律の証明）</p>
+  <p><span style="font-size: 0.8em;">（純非分離拡大は推移律が成り立つ. <a data-article-id="math-20210429-01" href="../../../../../out/articles/math/2021/04/math-20210429-01.html" target="_blank">こちら</a>を参照）</span></p>
   <div style="display: flex; justify-content: center;">
     <div style="position: relative; width: 300px; height: 250px;">
       <div>
@@ -100,7 +139,7 @@
   <ul>
     <li><a href="../../../../../out/articles/math/2021/04/math-20210429-01.html" data-article-id="math-20210429-01">純非分離拡大</a></li>
     <li><a href="../../../../../out/articles/math/2021/04/math-20210418-01.html" data-article-id="math-20210418-01">分離拡大と単純拡大</a></li>
-    <li><a href="../../../../../out/articles/math/2021/05/math-20210503-01.html" data-article-id="math-20210503-01">分離閉包と純非分離閉包の合成</a></li>
+    <li><a href="../../../../../out/articles/math/2021/05/math-20210505-01.html" data-article-id="math-20210505-01">分離閉包、純非分離閉包と分離次数、非分離次数</a></li>
   </ul>
 </div></div>
 </div>
