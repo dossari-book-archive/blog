@@ -6,7 +6,7 @@ MultipePlatformBlogData.register(doc => {
         , textCenter = style("text-align", "center")
         , contentCenter = style({ display: "flex", "justify-content": "center" })
 
-    doc.tags("可換体論")
+    doc.tags("可換体論", "ガロア理論", "楕円曲線と保型形式")
     doc.title("完全体と")
     doc.body(
         style("width", "720px")

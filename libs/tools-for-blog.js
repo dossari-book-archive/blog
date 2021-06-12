@@ -199,19 +199,14 @@ const MultipePlatformBlogData = (() => {
         }
     }
 
-    const enabledTagNames = ("section nav article aside h1 h2 h3 h4 h5 h6 header footer address"
-        + " p hr pre blockquote ol ul li dl dt dd figure figcaption div main"
-        + " a em strong small s cite q dfn abbr time code var samp kdb sub sup i b mark ruby rt rp bdo span br wbr"
-        + " ins del img table caption colgroup col tbody thead tfoot tr td th fieldset legend label"
-    ).split(" ").map(name => name.trim()).filter(name => name != "")
-
-    /**
-     * @type {{
-     *  
-     * }}
-     */
     const Elems = (() => {
         const result = {}
+        const enabledTagNames = ("section nav article aside h1 h2 h3 h4 h5 h6 header footer address"
+            + " p hr pre blockquote ol ul li dl dt dd figure figcaption div main iframe"
+            + " a em strong small s cite q dfn abbr time code var samp kdb sub sup i b mark ruby rt rp bdo span br wbr"
+            + " ins del img table caption colgroup col tbody thead tfoot tr td th fieldset legend label"
+        ).split(" ").map(name => name.trim()).filter(name => name != "")
+
         enabledTagNames.forEach(tagName => {
             result[tagName] = (...values) => new Elem(tagName, values)
         })
@@ -223,6 +218,16 @@ const MultipePlatformBlogData = (() => {
                 return value
             }
         }))
+
+        // /**
+        //  * @param {(builder: {
+        //  *   circle: () => void
+        //  *   ellipse: () => void
+        //  * }) => Elem} callback 
+        //  */
+        // result.svg = (callback) => {
+
+        // }
 
         return result
     })()
@@ -257,6 +262,9 @@ const MultipePlatformBlogData = (() => {
      *     rm: GetTex, bf: GetTex, it: GetTex, sf: GetTex,
      *     sl: GetTex, sc: GetTex, tt: GetTex, gt: GetTex, mc: GetTex,
      *   }
+     *   sin: (...values) => Tex
+     *   cos: (...values) => Tex
+     *   tan: (...values) => Tex
      * }
      * } TexFunc
      */
@@ -271,6 +279,7 @@ const MultipePlatformBlogData = (() => {
         "<=": "\\le ",
         ">=": "\\ge ",
         "/｜": "\\nmid ",
+        "°": "^\\circ "
     }
 
     const greekLetters = {
@@ -388,6 +397,9 @@ const MultipePlatformBlogData = (() => {
             // K(a_1, …, a_i) & (i = 1,…,n)
             // \\end{cases}
         )
+        // 
+        "sin cos tan".split(" ").forEach(name => tex[name] = (...values) => tex("\\" + name + " ", ...values, " "))
+
         // 標準シンボル（a, b,c, ..., A, B, C, ...）
         const symbols = tex.canonicalSymbols = {}
         // 数値
@@ -437,6 +449,19 @@ const MultipePlatformBlogData = (() => {
     const Util = {
         small(...values) {
             return new Elem("span", [new Style("font-size", ".8em"), ...values])
+        },
+        youtube(id) {
+            const attrs = {
+                width: 560,
+                height: 315,
+                frameborder: "0",
+                src: "https://www.youtube.com/embed/" + id,
+                allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+                allowfullscreen: "",
+            }
+            return new Elem("iframe",
+                Object.keys(attrs).map(k => new Attr(k, attrs[k]))
+            )
         }
     }
 

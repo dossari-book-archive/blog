@@ -10,6 +10,7 @@ html, body {
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", "Helvetica Neue", HelveticaNeue, YuGothic, "Yu Gothic Medium", "Yu Gothic", Verdana, Meiryo, sans-serif;
+    background-color: #eee;
 }
 
 a, a:visited {
@@ -52,6 +53,10 @@ h5 {
     transition: .5s;
 }
 
+#articleTitle {
+    padding: 10px 0;
+}
+
 #articleBody h4 {
     margin: 20px 10px 10px 10px;
 }
@@ -84,6 +89,10 @@ h5 {
 .article-main {
     width: max-content;
     margin: auto;
+    box-shadow: 0 0 10px 10px rgba(0,0,0,0.1);
+    background-color: white;
+    margin-top: 20px;
+    padding: 20px;
 }
 
 .center {
