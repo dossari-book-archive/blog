@@ -7,13 +7,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const params = new URLSearchParams(document.location.search.substring(1));
     const targetScriptUrl = getTargetScriptUrl(params.get("article"))
+    const isPresentationMode = params.get("pres") == "true"
     let prevHTML
+        , prevTitle
     if (!targetScriptUrl) {
         return notFound()
     }
     exec()
     {
-        if (location.protocol == "file:" || location.hostname == "localhost") {
+        if (!isPresentationMode && location.protocol == "file:" || location.hostname == "localhost") {
             console.log("start live preview!!")
             setInterval(exec, 1000)
         }
@@ -29,6 +31,9 @@ window.addEventListener("DOMContentLoaded", () => {
                 elem.classList.remove("fade-in-hidden")
                 elem.classList.add("fade-in-show")
             })
+            if (isPresentationMode) {
+                startPresentation()
+            }
         }
     })()
 
@@ -40,6 +45,39 @@ window.addEventListener("DOMContentLoaded", () => {
         Dialogs.showDialog(e.target.href)
     })
 
+    function startPresentation() {
+        const hiddenElems = []
+        const visibleElems = []
+        articleBody.querySelectorAll("h4,h5,p,li,img,iframe").forEach(elem => {
+            console.log(elem)
+            elem.style.visibility = "hidden"
+            elem.style.transitionProperty = "opacity"
+            elem.style.transitionDuration = ".2s"
+            elem.style.opacity = 0
+            hiddenElems.push(elem)
+        })
+        hiddenElems.reverse()
+        document.addEventListener("keydown", e => {
+            console.log(e.key)
+            if (e.altKey) { return }
+            if (e.key == "ArrowRight") {
+                e.preventDefault()
+                if (hiddenElems.length == 0) { return }
+                const elem = hiddenElems.pop()
+                elem.style.visibility = "visible"
+                elem.style.opacity = 1
+                visibleElems.push(elem)
+            } else if (e.key == "ArrowLeft") {
+                e.preventDefault()
+                if (visibleElems.length == 0) { return }
+                const elem = visibleElems.pop()
+                elem.style.visibility = "hidden"
+                elem.style.opacity = 0
+                hiddenElems.push(elem)
+            }
+        })
+    }
+
     /////////////////////////////////////////////////////////////
     function exec() {
 
@@ -50,6 +88,7 @@ window.addEventListener("DOMContentLoaded", () => {
             notFound()
         }
         script.onload = () => {
+            script.remove()
             const errorInfo = document.getElementById("errorInfo")
             // 成功したのでmathjax呼び出し
             const onerror = e => {
@@ -67,7 +106,8 @@ window.addEventListener("DOMContentLoaded", () => {
                         tex: {
                             texStart: " \\( ",
                             texEnd: "\\) "
-                        }
+                        },
+                        replacePunctuation: MultipePlatformBlogData.get().existsTex
                     },
                     id2Url: id => {
                         if (!getTargetScriptUrl(id)) {
@@ -80,8 +120,11 @@ window.addEventListener("DOMContentLoaded", () => {
                 return onerror(e)
             }
             errorInfo.innerText = ""
-            document.title = doc.title
-            articleTitle.textContent = doc.title
+            if (prevTitle != doc.title) {
+                document.title = doc.title
+                articleTitle.textContent = doc.title
+            }
+            prevTitle = doc.title
             if (prevHTML == doc.body.outerHTML) {
                 showContent()
                 return

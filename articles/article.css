@@ -30,16 +30,26 @@ td {
 
 h3 {
     font-size: 1.7em;
-    border-bottom: solid 2px #ccc;
+    padding: .25em .5em;
+    border-left: solid 5px #7db4e6;
+    background-color: #f4f4f4;/*背景色*/
+    /* border-bottom: solid 2px #ccc; */
 }
 
 h4 {
     font-size: 1.5em;
-    border-bottom: solid 1px #ccc;
+    padding: .25em .5em;
+    border-left: solid 5px #7db4e6;
+    background-color: #f4f4f4;/*背景色*/
+    /* border-bottom: solid 1px #ccc; */
 }
 
 h5 {
     font-size: 1.3em;
+}
+
+h6 {
+    font-size: 1.1em;
 }
 
 .fade-in-hidden {
@@ -58,10 +68,10 @@ h5 {
 }
 
 #articleBody h4 {
-    margin: 20px 10px 10px 10px;
+    margin: 1.5em 0px 10px 0px;
 }
 
-#articleBody h5 {
+#articleBody h5, #articleBody h6 {
     margin: 10px 10px 5px 10px;
 }
 

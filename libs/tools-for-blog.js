@@ -4,6 +4,7 @@
  *   texStart: string
  *   texEnd: string
  *  }
+ *  replacePunctuation: boolean
  * }} Tools4BlogFormatter
  */
 
@@ -21,6 +22,7 @@
  *   title: string,
  *   tags: string[],
  *   links: string[],
+ *   existsTex: boolean
  * }} DocumentData
  */
 
@@ -77,8 +79,9 @@ const MultipePlatformBlogData = (() => {
         data.children.forEach(child => {
             if (typeof child == "string") {
                 htmlElem.append(document.createTextNode(
-                    child.replace(/、/g, ", ").replace(/。/g, ". ")) // TODO
-                )
+                    outputProps.formatter.replacePunctuation !== false ? // TODO
+                        child.replace(/、/g, ", ").replace(/。/g, ". ") : child
+                ))
             } else if (child instanceof Tex) {
                 htmlElem.append(document.createTextNode(
                     outputProps.formatter.tex.texStart
@@ -500,7 +503,8 @@ const MultipePlatformBlogData = (() => {
              * @type {DocumentData}
              */
             const doc = {
-                tags: []
+                tags: [],
+                get existsTex() { return existsTex(doc.rootElem)}
             }
             try {
                 callback({
@@ -526,7 +530,7 @@ const MultipePlatformBlogData = (() => {
                             ...values
                         ]),
                     tags(...tags) { doc.tags.push(...tags) },
-                    util: Util
+                    util: Util,
                 })
                 doc.links = findLinks(doc.rootElem)
                 latestDoc = doc
